@@ -1,0 +1,27 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  line-height: 1.7;
+  color: #111;
+}
+
+header {
+  padding: 80px 20px 40px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+section {
+  max-width: 750px;
+  margin: auto;
+  padding: 50px 20px;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  margin-top: 40px;
+  font-size: 20px;
+}
