@@ -17,11 +17,12 @@ header {
 /* MAIN SECTIONS = cognition blocks */
 section {
   max-width: 760px;
-  margin: 40px auto;
-  padding: 40px 24px;
+  margin: 50px auto;
+  padding: 50px 30px;
   background: #ffffff;
-  border: 1px solid #e6e6e6;
-  border-radius: 10px;
+  border-left: 5px solid #2f6fed;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 /* HEADINGS */
