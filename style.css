@@ -23,7 +23,7 @@
 body {
   font-family: Arial, sans-serif;
   color: var(--text);
-  background: var(--background);
+  background: #fafafa;
   line-height: 1.75;
   font-size: 16px;
 }
@@ -39,8 +39,9 @@ body {
 }
 
 .hero h1 {
-  font-size: 34px;
+  font-size: 36px;
   font-weight: 700;
+  letter-spacing: -0.5px;
   margin-bottom: 16px;
 }
 
@@ -71,8 +72,14 @@ body {
 
 .section {
   max-width: 820px;
-  margin: 0 auto;
-  padding: 70px 20px;
+  margin: 0 auto 28px auto;
+  padding: 72px 22px;
+
+  background: #ffffff;
+  border: 1px solid #f2f2f2;
+  border-radius: 10px;
+
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03);
 }
 
 .section h2 {
@@ -82,8 +89,10 @@ body {
 }
 
 .section p {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   color: #222;
+  line-height: 1.75;
+  font-size: 16px;
 }
 
 /* ========================= */
@@ -151,4 +160,8 @@ footer {
   border-top: 1px solid var(--border);
   font-size: 13px;
   color: var(--muted);
+}
+
+.section + .section {
+  margin-top: 24px;
 }
