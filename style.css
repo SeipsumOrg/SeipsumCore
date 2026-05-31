@@ -82,10 +82,7 @@ body {
   background: #ffffff;
   border: 1px solid rgba(0,0,0,0.06);
   border-radius: 10px;
-
   box-shadow: 0 1px 6px rgba(0,0,0,0.04);
-
-  opacity: 0.96;
 }
 
 .section h2 {
