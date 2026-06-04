@@ -387,33 +387,38 @@
     Pentru solicitarea unei sesiuni, completează informațiile de mai jos:
   </p>
 
-  <form action="mailto:contact@seipsum.org" method="post" enctype="text/plain">
+ <form action="https://formspree.io/f/mwvjpewn" method="POST">
 
-    <label for="situatie">Descrierea situației</label><br>
-    <textarea id="situatie" name="situatie" rows="5" required></textarea>
+  <!-- EMAIL -->
+  <label>Email</label>
+  <input type="email" name="email" required>
 
-    <br><br>
+  <!-- SITUAȚIE -->
+  <label>Descriere situație</label>
+  <textarea name="message" required></textarea>
 
-    <label for="decizie">Tipul deciziei sau clarificării necesare</label><br>
-    <input type="text" id="decizie" name="decizie" required>
+  <!-- COMPLEXITATE -->
+  <label>Grad de complexitate perceput</label>
+  <select name="complexity" required>
+    <option value="scazut">Scăzut</option>
+    <option value="mediu">Mediu</option>
+    <option value="ridicat">Ridicat</option>
+  </select>
 
-    <br><br>
+  <!-- GDPR CONSENT -->
+  <div style="margin-top:12px;">
+    <input type="checkbox" name="consent" required>
+    <label>
+      Sunt de acord ca datele mele să fie procesate pentru a primi un răspuns de clarificare cognitivă.
+    </label>
+  </div>
 
-    <label for="complexitate">Nivelul de complexitate percepută</label><br>
-    <select id="complexitate" name="complexitate" required>
-      <option value="">Selectează</option>
-      <option value="scazut">Scăzut</option>
-      <option value="mediu">Mediu</option>
-      <option value="ridicat">Ridicat</option>
-    </select>
+  <!-- SUBMIT -->
+  <button type="submit">
+    Trimite solicitarea
+  </button>
 
-    <br><br>
-
-    <button type="submit">
-      Trimite solicitarea
-    </button>
-
-  </form>
+</form>
 
 </section>
 
