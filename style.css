@@ -28,6 +28,45 @@ body {
   font-size: 16px;
 }
 
+/* ===================== */
+/* HEADER / HOME BUTTON */
+/* ===================== */
+
+.site-header {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 15px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.main-nav {
+  display: flex;
+  justify-content: flex-start; /* sus stânga */
+  align-items: center;
+}
+
+.main-nav .home-btn {
+  font-weight: 700;
+  font-size: 16px;
+  color: #000000;
+  text-decoration: none;
+
+  padding: 8px 14px;
+  border: 2px solid #000000;
+  border-radius: 4px;
+
+  transition: all 0.25s ease;
+}
+
+.main-nav .home-btn:hover {
+  background-color: #000000;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
 .container {
   max-width: 820px;
   margin: 0 auto;
