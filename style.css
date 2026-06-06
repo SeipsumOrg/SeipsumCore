@@ -88,15 +88,6 @@ body {
   text-decoration: underline;
 }
 
-.theme-btn {
-  background: transparent;
-  border: 1px solid var(--text);
-  color: var(--text);
-  padding: 6px 10px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
 .container {
   max-width: 820px;
   margin: 0 auto;
