@@ -278,6 +278,10 @@ button:hover {
   }
 }
 
+/* ========================= */
+/* HERO RESPONSIVE TITLE      */
+/* ========================= */
+
 @media (max-width: 768px) {
 
   body {
@@ -289,7 +293,7 @@ button:hover {
     margin-right: 10px;
   }
 
-  /* ADD THIS */
+  /* MOBILE */
   .hero h1 {
     font-size: 1.8rem;
     line-height: 1.25;
