@@ -89,9 +89,23 @@ body {
 }
 
 .container {
-  max-width: 820px;
+  max-width: 980px;   /* desktop mai aerisit */
   margin: 0 auto;
-  padding: 0 22px;
+  padding: 0 24px;
+}
+
+/* ecrane mari */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1100px;
+  }
+}
+
+/* foarte mare (ultrawide) */
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1200px;
+  }
 }
 
 /* ========================= */
