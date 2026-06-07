@@ -277,3 +277,24 @@ button:hover {
     margin-right: 10px;
   }
 }
+
+@media (max-width: 768px) {
+
+  body {
+    background: #f2f2f2;
+  }
+
+  .section {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  /* ADD THIS */
+  .hero h1 {
+    font-size: 1.8rem;
+    line-height: 1.25;
+    text-align: center;
+    padding: 0 10px;
+    word-break: keep-all;
+  }
+}
