@@ -149,12 +149,12 @@ body {
 .core-main {
   font-size: 20px;
   font-weight: 600;
-  line-height: 1.4;
 }
 
 .core-sub {
   font-size: 18px;
   opacity: 0.85;
+  margin-bottom: 24px;
 }
 
 /* ========================= */
