@@ -146,6 +146,16 @@ body {
   margin: 0 auto;
 }
 
+.core-main {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.core-sub {
+  font-size: 18px;
+  opacity: 0.85;
+}
+
 /* ========================= */
 /* SECTIONS                 */
 /* ========================= */
