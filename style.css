@@ -308,6 +308,35 @@ button:hover {
 }
 
 /* ========================= */
+/* COLABORATION     */
+/* ========================= */
+
+.footer-collaboration {
+  text-align: center;
+  padding: 30px 20px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.footer-collaboration p {
+  font-size: 16px;   /* puțin mai mare decât footer-ul normal */
+  color: var(--text);
+  font-weight: 500;
+}
+
+.footer-collaboration a {
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 2px solid var(--accent);
+}
+
+.footer-collaboration a:hover {
+  opacity: 0.8;
+}
+
+/* ========================= */
 /* HERO RESPONSIVE TITLE      */
 /* ========================= */
 
