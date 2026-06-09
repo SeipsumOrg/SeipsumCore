@@ -238,6 +238,7 @@ li {
 }
 
 .contact-email a {
+  display: inline-block;
   font-weight: 600;
   font-size: 16px;
   color: var(--accent);
