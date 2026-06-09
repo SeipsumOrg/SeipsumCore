@@ -229,6 +229,10 @@ li {
 /* CONTACT                 */
 /* ========================= */
 
+.contact-form {
+  text-align: center;
+}
+
 .contact-email {
   text-align: center;
 }
