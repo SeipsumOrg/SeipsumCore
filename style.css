@@ -249,9 +249,7 @@ li {
 }
 
 .contact-email a:hover {
-  color: #000000;
-  border-bottom: 2px solid #000000;
-  transform: translateY(-1px);
+  opacity: 0.8;
 }
 
 /* ========================= */
