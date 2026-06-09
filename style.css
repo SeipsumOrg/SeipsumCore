@@ -229,14 +229,20 @@ li {
 /* CONTACT                 */
 /* ========================= */
 
-.contact {
-  text-align: center;
+.contact-email a {
+  font-weight: 600;
+  font-size: 16px;        /* puțin mai mare decât textul normal */
+  color: var(--accent);   /* folosește accentul Seipsum */
+  text-decoration: none;
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 2px;
+  transition: all 0.3s ease;
 }
 
-.email {
-  font-size: 18px;
-  margin-top: 10px;
-  font-weight: 600;
+.contact-email a:hover {
+  color: #000000;           /* devine mai vizibil la hover */
+  border-bottom: 2px solid #000000;
+  transform: translateY(-1px);
 }
 
 /* ========================= */
