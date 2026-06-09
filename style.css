@@ -94,6 +94,10 @@ body {
   padding: 0 24px;
 }
 
+.contact-email {
+  text-align: center;
+}
+
 /* ecrane mari */
 @media (min-width: 1200px) {
   .container {
@@ -234,7 +238,6 @@ li {
 }
 
 .contact-email a {
-  text-align: center;
   font-weight: 600;
   font-size: 16px;
   color: var(--accent);
