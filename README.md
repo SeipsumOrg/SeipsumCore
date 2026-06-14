@@ -1,6 +1,6 @@
 # SeipsumCore
 
-v0.1 - Initial release (baseline structure)
+Initial release (baseline structure)
 
 
 SeipsumCore is a minimal structured repository related to systems modeling, cognition, and informational structure.
@@ -18,9 +18,6 @@ Stable reference definitions and axioms.
 /website
 Minimal website implementation for seipsum.org
 
-## Status
-
-Early-stage structural baseline.
 
 ## External Link
 
