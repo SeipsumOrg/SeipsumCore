@@ -189,8 +189,9 @@ body {
 }
 
 .conclusion {
-  margin-top: 32px;
+  margin-top: 36px;
   font-weight: 600;
+  margin-bottom: 20px;
 }
 
 /* ========================= */
