@@ -174,8 +174,8 @@ body {
   box-shadow: 0 1px 6px rgba(0,0,0,0.04);
 }
 
-.section + .section {
-  margin-top: 200px;
+.section {
+  margin-bottom: 200px;
 }
 
 .section h2 {
