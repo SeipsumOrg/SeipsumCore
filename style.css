@@ -89,7 +89,7 @@ body {
 }
 
 .container {
-  max-width: 980px;   /* desktop mai aerisit */
+  max-width: 850px;   /* desktop mai aerisit */
   margin: 0 auto;
   padding: 0 24px;
 }
