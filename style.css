@@ -188,6 +188,11 @@ body {
   font-size: 16px;
 }
 
+.conclusion {
+  margin-top: 32px;
+  font-weight: 600;
+}
+
 /* ========================= */
 /* LISTS                   */
 /* ========================= */
