@@ -176,7 +176,7 @@ body {
 
 .section h2 {
   font-size: 24px;
-  margin-bottom: 20px;
+  margin-bottom: 26px;
   font-weight: 600;
   color: var(--accent);
 }
@@ -186,6 +186,10 @@ body {
   color: #1a1a1a;
   line-height: 1.75;
   font-size: 16px;
+}
+
+.section p + p {
+  margin-top: 6px;
 }
 
 .conclusion {
