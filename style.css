@@ -46,6 +46,34 @@ body {
 }
 }
 
+/* ========================= */
+/* STICKY IDENTITY NAME      */
+/* ========================= */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  position: sticky;
+}
+
+.site-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: #111;
+  pointer-events: none; /* important */
+}
+
+
+
 .main-nav {
   display: flex;
   justify-content: flex-start; /* sus stânga */
