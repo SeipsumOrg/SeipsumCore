@@ -67,7 +67,7 @@ body {
   transform: translateX(-50%);
 
   font-weight: 700;
-  font-size: 28px;
+  font-size: 30px;
   letter-spacing: 1px;
   color: #111;
   pointer-events: none; /* important */
