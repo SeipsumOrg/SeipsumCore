@@ -344,5 +344,47 @@
 
 </div>
 
+<!-- COOKIES BANNER -->
+  
+</div>
+
+  <div id="cookie-banner" class="cookie-banner">
+
+  <p>
+    Seipsum uses minimal analytics technologies to improve clarity, structure, and website experience.
+  </p>
+
+  <div class="cookie-actions">
+
+    <button id="cookie-accept">
+      Accept
+    </button>
+
+    <a href="/privacy-policy.html">
+      Learn More
+    </a>
+
+  </div>
+
+</div>
+  
+<!-- JAVASCRIPT COOKIES BANNER -->
+  
+  <script>
+
+  const banner = document.getElementById('cookie-banner');
+  const button = document.getElementById('cookie-accept');
+
+  if (localStorage.getItem('seipsum_cookie_accept')) {
+    banner.style.display = 'none';
+  }
+
+  button.addEventListener('click', () => {
+    localStorage.setItem('seipsum_cookie_accept', 'true');
+    banner.style.display = 'none';
+  });
+
+</script>
+  
 </body>
 </html>
