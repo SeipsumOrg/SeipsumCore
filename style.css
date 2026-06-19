@@ -355,6 +355,71 @@ button:hover {
   }
 }
 
+
+/* ========================= */
+/* COLABORATION     */
+/* ========================= */
+
+.cookie-banner {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: calc(100% - 40px);
+  max-width: 720px;
+
+  padding: 14px 18px;
+
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(8px);
+
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+
+  z-index: 9999;
+}
+
+.cookie-banner p {
+  margin: 0;
+
+  font-size: 14px;
+  line-height: 1.5;
+
+  color: #222;
+}
+
+.cookie-banner button {
+  flex-shrink: 0;
+
+  padding: 10px 18px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #111;
+  color: white;
+
+  cursor: pointer;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition: opacity 0.2s ease;
+}
+
+.cookie-banner button:hover {
+  opacity: 0.88;
+}
+
+
 /* ========================= */
 /* COLABORATION     */
 /* ========================= */
