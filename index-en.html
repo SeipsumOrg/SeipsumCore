@@ -782,6 +782,25 @@
 
 </div>
 
+  
+<!-- JAVASCRIPT COOKIES BANNER -->
+  
+  <script>
+
+  const banner = document.getElementById('cookie-banner');
+  const button = document.getElementById('cookie-accept');
+
+  if (localStorage.getItem('seipsum_cookie_accept')) {
+    banner.style.display = 'none';
+  }
+
+  button.addEventListener('click', () => {
+    localStorage.setItem('seipsum_cookie_accept', 'true');
+    banner.style.display = 'none';
+  });
+
+</script>
+
 </body>
 
 </html>
