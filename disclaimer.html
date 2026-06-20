@@ -204,8 +204,12 @@ Pentru întrebări privind acest disclaimer, ne puteți contacta la
   
   <script>
 
+document.addEventListener('DOMContentLoaded', () => {
+
   const banner = document.getElementById('cookie-banner');
   const button = document.getElementById('cookie-accept');
+
+  if (!banner || !button) return;
 
   if (localStorage.getItem('seipsum_cookie_accept')) {
     banner.style.display = 'none';
@@ -215,6 +219,8 @@ Pentru întrebări privind acest disclaimer, ne puteți contacta la
     localStorage.setItem('seipsum_cookie_accept', 'true');
     banner.style.display = 'none';
   });
+
+});
 
 </script>
   
