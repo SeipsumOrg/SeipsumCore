@@ -1,12 +1,27 @@
-// analytics.js
+// Seipsum Analytics v2
 
 (function () {
+
+  // =========================
+  // SESSION ID
+  // =========================
 
   const sessionId =
     localStorage.getItem("seipsum_sid") ||
     crypto.randomUUID();
 
   localStorage.setItem("seipsum_sid", sessionId);
+
+  // =========================
+  // STATE
+  // =========================
+
+  let maxScroll = 0;
+  let activeTime = 0;
+
+  // =========================
+  // EVENT LOGGER
+  // =========================
 
   function logEvent(type, data = {}) {
 
@@ -20,14 +35,19 @@
 
     console.log("Seipsum Analytics:", payload);
 
-    // AICI va veni backend-ul mai târziu
+    // BACKEND COMES LATER
+
   }
 
+  // =========================
   // PAGE VIEW
+  // =========================
+
   logEvent("page_view");
 
+  // =========================
   // SCROLL DEPTH
-  let maxScroll = 0;
+  // =========================
 
   window.addEventListener("scroll", () => {
 
@@ -40,12 +60,45 @@
       scrollPercent > maxScroll &&
       scrollPercent % 25 === 0
     ) {
+
       maxScroll = scrollPercent;
 
       logEvent("scroll_depth", {
         depth: scrollPercent
       });
+
     }
+
+  });
+
+  // =========================
+  // ATTENTION TRACKING
+  // =========================
+
+  setInterval(() => {
+
+    if (!document.hidden) {
+
+      activeTime += 15;
+
+      logEvent("attention_ping", {
+        active_time_seconds: activeTime
+      });
+
+    }
+
+  }, 15000);
+
+  // =========================
+  // PAGE EXIT
+  // =========================
+
+  window.addEventListener("beforeunload", () => {
+
+    logEvent("page_exit", {
+      active_time_seconds: activeTime,
+      max_scroll: maxScroll
+    });
 
   });
 
