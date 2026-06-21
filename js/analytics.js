@@ -25,12 +25,13 @@
 
  function logEvent(type, data = {}) {
 
-  const payload = {
+ const payload = {
   version: "v4",
   type,
   page: window.location.pathname,
   timestamp: Date.now(),
   session_id: sessionId,
+  referrer: document.referrer,
   user_agent: navigator.userAgent,
   language: navigator.language,
   viewport: {
