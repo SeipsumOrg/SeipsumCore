@@ -2,6 +2,7 @@
 
 (function () {
 
+  
   console.log("Seipsum Analytics: script loaded");
   
   // =========================
