@@ -26,12 +26,19 @@
  function logEvent(type, data = {}) {
 
   const payload = {
-    type,
-    page: window.location.pathname,
-    timestamp: Date.now(),
-    session_id: sessionId,
-    ...data
-  };
+  version: "v4",
+  type,
+  page: window.location.pathname,
+  timestamp: Date.now(),
+  session_id: sessionId,
+  user_agent: navigator.userAgent,
+  language: navigator.language,
+  viewport: {
+    width: window.innerWidth,
+    height: window.innerHeight
+  },
+  ...data
+};
 
   console.log("Seipsum Analytics:", payload);
 
