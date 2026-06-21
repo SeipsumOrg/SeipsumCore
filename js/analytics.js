@@ -23,21 +23,32 @@
   // EVENT LOGGER
   // =========================
 
-  function logEvent(type, data = {}) {
+ function logEvent(type, data = {}) {
 
-    const payload = {
-      type,
-      page: window.location.pathname,
-      timestamp: Date.now(),
-      session_id: sessionId,
-      ...data
-    };
+  const payload = {
+    type,
+    page: window.location.pathname,
+    timestamp: Date.now(),
+    session_id: sessionId,
+    ...data
+  };
 
-    console.log("Seipsum Analytics:", payload);
+  console.log("Seipsum Analytics:", payload);
 
-    // BACKEND COMES LATER
+  // BACKEND CLOUDFLARE WORKER
 
-  }
+  fetch("https://seipsum-analytics.silvernpaper.workers.dev/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  })
+  .catch(error => {
+    console.error("Analytics Error:", error);
+  });
+
+} // <- ASTA ESTE ÎNCHIDEREA CORECTĂ
 
   // =========================
   // PAGE VIEW
