@@ -13,6 +13,19 @@
   localStorage.setItem("seipsum_sid", sessionId);
 
   // =========================
+  // SESSION ID.DEV-EXCLUSION
+  // =========================
+  
+  const isDev =
+  localStorage.getItem("seipsum_dev") === "true";
+
+if (isDev) {
+  console.log("Seipsum Analytics: DEV MODE (no tracking)");
+} else {
+  logEvent("page_view");
+}
+
+  // =========================
   // STATE
   // =========================
 
