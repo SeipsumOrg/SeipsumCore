@@ -75,13 +75,6 @@ if (isDev) {
   
 
   // =========================
-  // PAGE VIEW
-  // =========================
-
-  logEvent("page_view");
-  
-
-  // =========================
   // SCROLL DEPTH
   // =========================
 
@@ -94,14 +87,14 @@ if (isDev) {
 
     if (
       scrollPercent > maxScroll &&
-      scrollPercent % 25 === 0
+     if (scrollPercent - maxScroll >= 10) {
     ) {
 
       maxScroll = scrollPercent;
 
-      logEvent("scroll_depth", {
-        depth: scrollPercent
-      });
+     logEvent("scroll_depth", {
+     scroll_percent: scrollPercent
+     });
 
     }
 
