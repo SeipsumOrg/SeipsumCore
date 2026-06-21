@@ -3,8 +3,6 @@
 (function () {
 
   
-  console.log("Seipsum Analytics: script loaded");
-  
   // =========================
   // SESSION ID
   // =========================
@@ -90,7 +88,7 @@ if (isDev) {
 
     if (
       scrollPercent > maxScroll &&
-     if (scrollPercent - maxScroll >= 10) {
+      scrollPercent - maxScroll >= 10
     ) {
 
       maxScroll = scrollPercent;
