@@ -38,15 +38,16 @@
   // BACKEND CLOUDFLARE WORKER
 
   fetch("https://seipsum-analytics.silvernpaper.workers.dev/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(payload)
-  })
-  .catch(error => {
-    console.error("Analytics Error:", error);
-  });
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(payload),
+  keepalive: true
+})
+.catch(error => {
+  console.error("Analytics Error:", error);
+});
 
 } // <- ASTA ESTE ÎNCHIDEREA CORECTĂ
   
