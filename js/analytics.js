@@ -142,22 +142,40 @@ if (!document.hidden) {
 
 document.addEventListener("click", (e) => {
 
-const link = e.target.closest("a");
+  try {
 
-// external or internal link click
-if (link && link.href) {
+    const target =
+      e.target instanceof Element
+        ? e.target
+        : null;
 
-  logEvent("external_click", {
-    url: link.href
-  });
+    if (!target) return;
 
-} else {
+    const link = target.closest("a");
 
-  logEvent("click", {
-    target: e.target.tagName
-  });
+    // external or internal link click
+    if (link && link.href) {
 
-}
+      logEvent("external_click", {
+        url: link.href
+      });
+
+    } else {
+
+      logEvent("click", {
+        target: target.tagName
+      });
+
+    }
+
+  } catch(error) {
+
+    console.error(
+      "Click tracking error:",
+      error
+    );
+
+  }
 
 });
 
