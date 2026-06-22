@@ -1,5 +1,7 @@
 // TEST MINIMAL
 
+console.log("analytics file loaded");
+
 (function () {
   
 
