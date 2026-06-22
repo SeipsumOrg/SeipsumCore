@@ -1,4 +1,4 @@
-// Seipsum Analytics v5.1 CLEAN
+// Seipsum Analytics v5.1
 
 (function () {
 
