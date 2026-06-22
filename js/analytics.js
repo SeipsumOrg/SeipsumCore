@@ -224,6 +224,7 @@ sections.forEach(sec => {
 // PAGE EXIT
 // =========================
 
+  
 window.addEventListener("beforeunload", () => {
 
 logEvent("page_exit", {
