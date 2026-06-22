@@ -1,8 +1,8 @@
-// Seipsum Analytics v5.1
+// Seipsum Analytics v5.2
 
 (function () {
 
-  console.log("Seipsum Analytics v5.1 booted");
+  console.log("Seipsum Analytics v5.2 booted");
 
 // =========================
 // SESSION ID
@@ -15,14 +15,15 @@ const sessionId =
 localStorage.setItem("seipsum_sid", sessionId);
 
 // =========================
-// DEV MODE (SAFE)
+// DEV MODE 
 // =========================
 
 const isDev =
   localStorage.getItem("seipsum_dev") === "true";
 
 if (isDev) {
-  console.log("Seipsum Analytics: DEV MODE (tracking disabled except page_view)");
+  console.log("Seipsum Analytics: DEV MODE (tracking disabled)");
+  return;
 }
 
 // =========================
@@ -47,7 +48,7 @@ function logEvent(type, data = {}) {
   try {
 
     const payload = {
-      version: "v5.1",
+      version: "v5.2",
 
       type,
       page: window.location.pathname,
@@ -83,13 +84,6 @@ function logEvent(type, data = {}) {
   }
 
 }
-
-// =========================
-// PAGE VIEW
-// =========================
-
-// IMPORTANT: always send page_view even in dev mode
-logEvent("page_view");
 
 // =========================
 // SCROLL DEPTH
