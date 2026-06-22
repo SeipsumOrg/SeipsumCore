@@ -2,6 +2,8 @@
 
 (function () {
 
+  console.log("Seipsum Analytics v5.1 booted");
+
 // =========================
 // SESSION ID
 // =========================
@@ -165,21 +167,25 @@ if (link && link.href) {
 
 document.addEventListener("mouseup", () => {
 
-const selection =
-  window.getSelection().toString().trim();
+  const selectedText = window.getSelection();
 
-if (
-  selection.length > 0 &&
-  selection !== lastSelection
-) {
+  if (!selectedText) return;
 
-  lastSelection = selection;
+  const selection =
+    selectedText.toString().trim();
 
-  logEvent("text_select", {
-    length: selection.length
-  });
+  if (
+    selection.length > 0 &&
+    selection !== lastSelection
+  ) {
 
-}
+    lastSelection = selection;
+
+    logEvent("text_select", {
+      length: selection.length
+    });
+
+  }
 
 });
 
