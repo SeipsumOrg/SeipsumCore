@@ -1,66 +1,74 @@
-// Seipsum Analytics v2
+// Seipsum Analytics v5.1 CLEAN
 
 (function () {
 
-  
-  // =========================
-  // SESSION ID
-  // =========================
+// =========================
+// SESSION ID
+// =========================
 
-  const sessionId =
-    localStorage.getItem("seipsum_sid") ||
-    crypto.randomUUID();
+const sessionId =
+localStorage.getItem("seipsum_sid") ||
+crypto.randomUUID();
 
-  localStorage.setItem("seipsum_sid", sessionId);
-  
+localStorage.setItem("seipsum_sid", sessionId);
 
-  // =========================
-  // SESSION ID.DEV-EXCLUSION
-  // =========================
-  
-  const isDev =
-  localStorage.getItem("seipsum_dev") === "true";
+// =========================
+// DEV MODE
+// =========================
+
+const isDev =
+localStorage.getItem("seipsum_dev") === "true";
 
 if (isDev) {
-  console.log("Seipsum Analytics: DEV MODE (no tracking)");
-} else {
-  logEvent("page_view");
+console.log("Seipsum Analytics: DEV MODE (no tracking)");
+return;
 }
 
-  // =========================
-  // STATE
-  // =========================
+// =========================
+// STATE
+// =========================
 
-  let maxScroll = 0;
-  let activeTime = 0;
+let maxScroll = 0;
+let activeTime = 0;
 
-  // =========================
-  // EVENT LOGGER
-  // =========================
+let lastFocusedSection = null;
+let lastSelection = "";
 
- function logEvent(type, data = {}) {
+// cache sections once
+const sections = document.querySelectorAll("section");
 
- const payload = {
-  version: "v4",
+// =========================
+// EVENT LOGGER
+// =========================
+
+function logEvent(type, data = {}) {
+
+const payload = {
+  version: "v5.1",
+
   type,
   page: window.location.pathname,
   timestamp: Date.now(),
+
   session_id: sessionId,
+
   referrer: document.referrer,
   user_agent: navigator.userAgent,
   language: navigator.language,
+
   viewport: {
     width: window.innerWidth,
     height: window.innerHeight
   },
+
   ...data
 };
 
-  console.log("Seipsum Analytics:", payload);
-
   // BACKEND CLOUDFLARE WORKER
 
-  fetch("https://seipsum-analytics.silvernpaper.workers.dev/", {
+console.log("Seipsum Analytics:", payload);
+
+fetch("https://seipsum-analytics.silvernpaper.workers.dev/", {
   method: "POST",
   headers: {
     "Content-Type": "application/json"
@@ -72,64 +80,151 @@ if (isDev) {
   console.error("Analytics Error:", error);
 });
 
-} // <- ASTA ESTE ÎNCHIDEREA CORECTĂ
-  
+}
 
-  // =========================
-  // SCROLL DEPTH
-  // =========================
+// =========================
+// PAGE VIEW
+// =========================
 
-  window.addEventListener("scroll", () => {
+logEvent("page_view");
 
-    const scrollPercent = Math.round(
-      ((window.scrollY + window.innerHeight) /
-      document.body.scrollHeight) * 100
-    );
+// =========================
+// SCROLL DEPTH
+// =========================
 
-    if (
-      scrollPercent > maxScroll &&
-      scrollPercent - maxScroll >= 10
-    ) {
+window.addEventListener("scroll", () => {
 
-      maxScroll = scrollPercent;
+const scrollPercent = Math.round(
+  (
+    (window.scrollY + window.innerHeight) /
+    document.body.scrollHeight
+  ) * 100
+);
 
-     logEvent("scroll_depth", {
-     scroll_percent: scrollPercent
-     });
+if (
+  scrollPercent > maxScroll &&
+  scrollPercent - maxScroll >= 10
+) {
 
-    }
+  maxScroll = scrollPercent;
 
+  logEvent("scroll_depth", {
+    scroll_percent: scrollPercent
   });
 
-  // =========================
-  // ATTENTION TRACKING
-  // =========================
+}
 
-  setInterval(() => {
+});
 
-    if (!document.hidden) {
+// =========================
+// ATTENTION TRACKING
+// =========================
 
-      activeTime += 15;
+setInterval(() => {
 
-      logEvent("attention_ping", {
-        active_time_seconds: activeTime
-      });
+if (!document.hidden) {
 
-    }
+  activeTime += 15;
 
-  }, 15000);
+  logEvent("attention_ping", {
+    active_time_seconds: activeTime
+  });
 
-  // =========================
-  // PAGE EXIT
-  // =========================
+}
 
-  window.addEventListener("beforeunload", () => {
+}, 15000);
 
-    logEvent("page_exit", {
-      active_time_seconds: activeTime,
-      max_scroll: maxScroll
+// =========================
+// CLICK + EXTERNAL LINK TRACKING
+// =========================
+
+document.addEventListener("click", (e) => {
+
+const link = e.target.closest("a");
+
+// external or internal link click
+if (link && link.href) {
+
+  logEvent("external_click", {
+    url: link.href
+  });
+
+} else {
+
+  logEvent("click", {
+    target: e.target.tagName
+  });
+
+}
+
+});
+
+// =========================
+// TEXT SELECTION TRACKING
+// =========================
+
+document.addEventListener("mouseup", () => {
+
+const selection =
+  window.getSelection().toString().trim();
+
+if (
+  selection.length > 0 &&
+  selection !== lastSelection
+) {
+
+  lastSelection = selection;
+
+  logEvent("text_select", {
+    length: selection.length
+  });
+
+}
+
+});
+
+// =========================
+// SECTION FOCUS TRACKING
+// =========================
+
+window.addEventListener("scroll", () => {
+
+sections.forEach(sec => {
+
+  const rect = sec.getBoundingClientRect();
+
+  const inView =
+    rect.top < window.innerHeight * 0.4 &&
+    rect.bottom > window.innerHeight * 0.2;
+
+  if (
+    inView &&
+    sec.id !== lastFocusedSection
+  ) {
+
+    lastFocusedSection = sec.id;
+
+    logEvent("section_focus", {
+      section: sec.id || "unknown"
     });
 
-  });
+  }
+
+});
+
+});
+
+// =========================
+// PAGE EXIT
+// =========================
+
+window.addEventListener("beforeunload", () => {
+
+logEvent("page_exit", {
+  active_time_seconds: activeTime,
+  max_scroll: maxScroll
+});
+
+});
 
 })();
