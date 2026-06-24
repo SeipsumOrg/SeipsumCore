@@ -1,5 +1,6 @@
 // Seipsum Analytics v5.2
 
+
 (function () {
 
   console.log("Seipsum Analytics v5.2 booted");
