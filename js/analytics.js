@@ -79,7 +79,7 @@ function logEvent(type, data = {}) {
 
     fetch("https://seipsum-analytics.silvernpaper.workers.dev") 
       method: "POST",
-      headers: {
+      headers {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(payload),
