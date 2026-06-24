@@ -75,21 +75,19 @@ function logEvent(type, data = {}) {
       ...data
     };
 
-    console.log("Seipsum Analytics:", payload);
+   console.log("Seipsum Analytics:", payload);
 
-    fetch("https://seipsum-analytics.silvernpaper.workers.dev") 
-      method: "POST",
-      headers {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(payload),
-      keepalive: true
-    }).catch(() => {});
+fetch("https://seipsum-analytics.silvernpaper.workers.dev/", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(payload),
+  keepalive: true
+}).catch(() => {});
 
-  } catch (error) {
-    console.error("Analytics logEvent error:", error);
-  }
-
+} catch (error) {
+  console.error("Analytics logEvent error:", error);
 }
 
 // =========================
