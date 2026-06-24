@@ -89,6 +89,8 @@ fetch("https://seipsum-analytics.silvernpaper.workers.dev/", {
 } catch (error) {
   console.error("Analytics logEvent error:", error);
 }
+  
+}
 
 // =========================
 // SCROLL DEPTH
