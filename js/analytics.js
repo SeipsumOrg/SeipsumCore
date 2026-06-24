@@ -77,7 +77,7 @@ function logEvent(type, data = {}) {
 
     console.log("Seipsum Analytics:", payload);
 
-    fetch("https://seipsum-analytics.silvernpaper.workers.dev"/, {
+    fetch("https://seipsum-analytics.silvernpaper.workers.dev"/ {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
