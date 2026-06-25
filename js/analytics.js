@@ -1,9 +1,9 @@
-// Seipsum Analytics v5.4
+// Seipsum Analytics v5.5
 
 
 (function () {
 
-  console.log("Seipsum Analytics v5.4 booted");
+  console.log("Seipsum Analytics v5.5 booted");
 
 // =========================
 // SESSION ID
@@ -83,6 +83,16 @@ const sections = document.querySelectorAll("section");
   }
 }
 
+  function getExperienceCluster(page, lang) {
+  const p = normalizePage(page);
+  const l = normalizeLanguage(lang);
+
+  if (l === "ro") return "RO_EXPERIENCE";
+  if (l === "en") return "EN_EXPERIENCE";
+
+  return "UNKNOWN_EXPERIENCE";
+}
+
 // =========================
 // EVENT LOGGER
 // =========================
@@ -92,7 +102,7 @@ function logEvent(type, data = {}) {
   try {
 
     const payload = {
-      version: "v5.4",
+      version: "v5.5",
 
       type,
       page_raw: window.location.pathname,
@@ -100,6 +110,7 @@ function logEvent(type, data = {}) {
       canonical_page: normalizePage(window.location.pathname),
       language_raw: navigator.language,
       language: normalizeLanguage(navigator.language),
+      experience_cluster: getExperienceCluster(window.location.pathname, navigator.language),
       timestamp: Date.now(),
       
       session_id: sessionId,
