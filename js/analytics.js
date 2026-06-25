@@ -67,6 +67,11 @@ const sections = document.querySelectorAll("section");
   return page;
 }
 
+  function normalizeLanguage(lang) {
+  if (!lang) return null;
+  return lang.split('-')[0].toLowerCase();
+}
+
 // =========================
 // EVENT LOGGER
 // =========================
@@ -79,10 +84,14 @@ function logEvent(type, data = {}) {
       version: "v5.3",
 
       type,
+      page_raw: window.location.pathname,
       page: normalizePage(window.location.pathname),
       canonical_page: normalizePage(window.location.pathname),
+      language_raw: navigator.language,
+      language: normalizeLanguage(navigator.language),
+      locale: navigator.language,
       timestamp: Date.now(),
-
+      
       session_id: sessionId,
 
       referrer: (() => {
