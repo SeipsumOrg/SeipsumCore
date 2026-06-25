@@ -100,7 +100,6 @@ function logEvent(type, data = {}) {
       canonical_page: normalizePage(window.location.pathname),
       language_raw: navigator.language,
       language: normalizeLanguage(navigator.language),
-      locale: navigator.language,
       timestamp: Date.now(),
       
       session_id: sessionId,
@@ -115,7 +114,6 @@ function logEvent(type, data = {}) {
 })(),
       user_agent: navigator.userAgent,
       
-      locale: navigator.language,
 
       viewport: {
         width: window.innerWidth,
