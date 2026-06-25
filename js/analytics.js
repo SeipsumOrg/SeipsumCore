@@ -1,9 +1,9 @@
-// Seipsum Analytics v5.3
+// Seipsum Analytics v5.4
 
 
 (function () {
 
-  console.log("Seipsum Analytics v5.3 booted");
+  console.log("Seipsum Analytics v5.4 booted");
 
 // =========================
 // SESSION ID
@@ -81,7 +81,7 @@ function logEvent(type, data = {}) {
   try {
 
     const payload = {
-      version: "v5.3",
+      version: "v5.4",
 
       type,
       page_raw: window.location.pathname,
