@@ -113,7 +113,6 @@ function logEvent(type, data = {}) {
   }
 })(),
       user_agent: navigator.userAgent,
-      
 
       viewport: {
         width: window.innerWidth,
