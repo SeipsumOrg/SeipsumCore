@@ -1,9 +1,9 @@
-// Seipsum Analytics v5.2
+// Seipsum Analytics v5.3
 
 
 (function () {
 
-  console.log("Seipsum Analytics v5.2 booted");
+  console.log("Seipsum Analytics v5.3 booted");
 
 // =========================
 // SESSION ID
@@ -45,6 +45,27 @@ let lastSelection = "";
 
 // cache sections once
 const sections = document.querySelectorAll("section");
+  
+
+   function normalizePage(page) {
+  if (!page) return "/";
+
+  page = page.split("?")[0];
+
+  if (page === "/" || page === "/index.html" || page === "/index-en.html") {
+    return "/";
+  }
+
+  if (page.endsWith("-en.html")) {
+    return page.replace("-en.html", "") + "-en";
+  }
+
+  if (page.endsWith(".html")) {
+    return page.replace(".html", "");
+  }
+
+  return page;
+}
 
 // =========================
 // EVENT LOGGER
@@ -55,17 +76,26 @@ function logEvent(type, data = {}) {
   try {
 
     const payload = {
-      version: "v5.2",
+      version: "v5.3",
 
       type,
-      page: window.location.pathname,
+      page: normalizePage(window.location.pathname),
+      canonical_page: normalizePage(window.location.pathname),
       timestamp: Date.now(),
 
       session_id: sessionId,
 
-      referrer: document.referrer,
+      referrer: (() => {
+  try {
+    if (!document.referrer) return "/";
+    return normalizePage(new URL(document.referrer).pathname);
+  } catch {
+    return "/";
+  }
+})(),
       user_agent: navigator.userAgent,
       language: navigator.language,
+      locale: navigator.language,
 
       viewport: {
         width: window.innerWidth,
