@@ -67,9 +67,20 @@ const sections = document.querySelectorAll("section");
   return page;
 }
 
-  function normalizeLanguage(lang) {
-  if (!lang) return null;
-  return lang.split('-')[0].toLowerCase();
+ function normalizeLanguage(lang) {
+  if (!lang) return "unknown";
+
+  const base = lang.split('-')[0].toLowerCase();
+
+  // explicit language mapping layer
+  switch (base) {
+    case "ro":
+      return "ro";
+    case "en":
+      return "en";
+    default:
+      return base;
+  }
 }
 
 // =========================
@@ -103,7 +114,7 @@ function logEvent(type, data = {}) {
   }
 })(),
       user_agent: navigator.userAgent,
-      language: navigator.language,
+      
       locale: navigator.language,
 
       viewport: {
