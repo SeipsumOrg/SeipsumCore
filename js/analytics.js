@@ -1,8 +1,8 @@
-// Seipsum Analytics v5.5
+// Seipsum Analytics v5.6
 
 (function () {
 
-  console.log("Seipsum Analytics v5.5 booted");
+  console.log("Seipsum Analytics v5.6 booted");
 
 // =========================
 // SESSION ID
@@ -92,6 +92,8 @@ const sections = document.querySelectorAll("section");
   return "UNKNOWN_EXPERIENCE";
 }
 
+  
+
 // =========================
 // EVENT LOGGER
 // =========================
@@ -100,37 +102,48 @@ function logEvent(type, data = {}) {
 
   try {
 
-    const payload = {
-      version: "v5.5",
-      event_id: crypto.randomUUID(),
-      type,
-      page_raw: window.location.pathname,
-      page: normalizePage(window.location.pathname),
-      canonical_page: normalizePage(window.location.pathname),
-      language_raw: navigator.language,
-      language: normalizeLanguage(navigator.language),
-      experience_cluster: getExperienceCluster(window.location.pathname, navigator.language),
-      timestamp: Date.now(),
-      
-      session_id: sessionId,
+   const page_language = getPageLanguage(window.location.pathname);
+const browser_language = getBrowserLanguage();
 
-      referrer: (() => {
-  try {
-    if (!document.referrer) return "/";
-    return normalizePage(new URL(document.referrer).pathname);
-  } catch {
-    return "/";
-  }
-})(),
-      user_agent: navigator.userAgent,
+const payload = {
+  version: "v5.6",
+  event_id: crypto.randomUUID(),
+  type,
 
-      viewport: {
-        width: window.innerWidth,
-        height: window.innerHeight
-      },
+  page_raw: window.location.pathname,
+  page: normalizePage(window.location.pathname),
+  canonical_page: normalizePage(window.location.pathname),
 
-      ...data
-    };
+  // 1. WEBSITE LANGUAGE (source: URL / routing logic)
+  page_language,
+
+  // 2. BROWSER LANGUAGE (secondary signal)
+  browser_language,
+
+  // 3. EXPERIENCE CLUSTER (derived business logic)
+  experience_cluster: getExperienceCluster(page_language),
+
+  timestamp: Date.now(),
+  session_id: sessionId,
+
+  referrer: (() => {
+    try {
+      if (!document.referrer) return "/";
+      return normalizePage(new URL(document.referrer).pathname);
+    } catch {
+      return "/";
+    }
+  })(),
+
+  user_agent: navigator.userAgent,
+
+  viewport: {
+    width: window.innerWidth,
+    height: window.innerHeight
+  },
+
+  ...data
+};
 
    console.log("Seipsum Analytics:", payload);
 
