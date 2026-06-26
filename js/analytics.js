@@ -103,7 +103,7 @@ function logEvent(type, data = {}) {
 
     const payload = {
       version: "v5.5",
-
+      event_id: crypto.randomUUID(),
       type,
       page_raw: window.location.pathname,
       page: normalizePage(window.location.pathname),
