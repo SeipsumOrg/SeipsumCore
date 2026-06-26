@@ -96,6 +96,14 @@ function getPageLanguage(pathname) {
 
   return "ro";
 }
+
+  function getBrowserLanguage() {
+
+  return (
+    navigator.language ||
+    "unknown"
+  ).toLowerCase();
+}
   
   function getExperienceCluster(page, lang) {
   const p = normalizePage(page);
