@@ -57,7 +57,7 @@ const sections = document.querySelectorAll("section");
   }
 
   if (page.endsWith("-en.html")) {
-    return page.replace("-en.html", "") + "-en";
+    return page.replace("-en.html", "") + "_en";
   }
 
   if (page.endsWith(".html")) {
