@@ -82,6 +82,21 @@ const sections = document.querySelectorAll("section");
   }
 }
 
+function getPageLanguage(pathname) {
+
+  if (!pathname) return "ro";
+
+  if (
+    pathname.includes("-en") ||
+    pathname.includes("_en") ||
+    pathname.startsWith("/en")
+  ) {
+    return "en";
+  }
+
+  return "ro";
+}
+  
   function getExperienceCluster(page, lang) {
   const p = normalizePage(page);
   const l = normalizeLanguage(lang);
