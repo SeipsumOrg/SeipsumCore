@@ -105,11 +105,12 @@ function getPageLanguage(pathname) {
   ).toLowerCase();
 }
   
-  function getExperienceCluster(page, lang) {
-  const p = normalizePage(page);
-  const l = normalizeLanguage(lang);
+  function getExperienceCluster(language) {
+
+  const l = normalizeLanguage(language);
 
   if (l === "ro") return "RO_EXPERIENCE";
+
   if (l === "en") return "EN_EXPERIENCE";
 
   return "UNKNOWN_EXPERIENCE";
