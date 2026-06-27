@@ -144,9 +144,6 @@ const payload = {
   // 2. BROWSER LANGUAGE (secondary signal)
   browser_language,
 
-  // 3. EXPERIENCE CLUSTER (derived business logic)
-  experience_cluster: getExperienceCluster(page_language),
-
   timestamp: Date.now(),
   session_id: sessionId,
 
