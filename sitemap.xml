@@ -5,7 +5,11 @@
   <url>
     <loc>https://seipsum.org/</loc>
   </url>
-
+  
+  <url>
+   https://seipsum.org/index.html</loc>
+  </url>
+  
   <url>
     <loc>https://seipsum.org/index-en.html</loc>
   </url>
