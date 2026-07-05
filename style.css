@@ -29,6 +29,7 @@ body {
 }
 
 
+
 /* ===================== */
 /* HEADER / HOME BUTTON */
 /* ===================== */
@@ -49,7 +50,6 @@ body {
 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 
 /* ========================= */
 /* STICKY IDENTITY NAME      */
@@ -466,6 +466,7 @@ button:hover {
   opacity: 0.8;
 }
 
+
 /* ========================= */
 /* HERO RESPONSIVE TITLE      */
 /* ========================= */
@@ -481,6 +482,7 @@ button:hover {
     margin-right: 10px;
   }
 
+  
   /* MOBILE */
   .hero h1 {
     font-size: 1.8rem;
