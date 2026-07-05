@@ -155,6 +155,7 @@ body {
   margin-bottom: 22px;
 }
 
+
 .subtitle {
   font-size: 18px;
   color: var(--muted);
@@ -186,6 +187,7 @@ body {
   opacity: 0.85;
   margin-bottom: 16px;
 }
+
 
 /* ========================= */
 /* SECTIONS                 */
@@ -223,6 +225,7 @@ body {
   font-weight: 600;
   margin-bottom: 30px;
 }
+
 
 /* ========================= */
 /* LISTS                   */
