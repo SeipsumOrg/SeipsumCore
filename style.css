@@ -53,6 +53,7 @@ body {
 /* ========================= */
 
 .site-title {
+   position: absolute;
   left: 52%;
   transform: translateX(-50%);
 
