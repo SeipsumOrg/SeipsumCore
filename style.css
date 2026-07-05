@@ -28,6 +28,7 @@ body {
   font-size: 16px;
 }
 
+
 /* ===================== */
 /* HEADER / HOME BUTTON */
 /* ===================== */
@@ -67,7 +68,6 @@ body {
 }
 
 
-
 .main-nav {
   display: flex;
   justify-content: flex-start; /* sus stânga */
@@ -93,6 +93,7 @@ body {
   transform: translateY(-1px);
 }
 
+
 .language-switch {
   display: flex;
   align-items: center;
@@ -110,15 +111,18 @@ body {
   text-decoration: underline;
 }
 
+
 .container {
   max-width: 850px;   /* desktop mai aerisit */
   margin: 0 auto;
   padding: 0 24px;
 }
 
+
 .contact-email {
   text-align: center;
 }
+
 
 /* ecrane mari */
 @media (min-width: 1200px) {
