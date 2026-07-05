@@ -42,8 +42,9 @@ body {
   display: flex;
   align-items: center;
 
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(10px);
+   background: rgba(200,200,255,0.5);
+  backdrop-filter: blur(7px);
+
 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
