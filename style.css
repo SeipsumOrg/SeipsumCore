@@ -34,32 +34,25 @@ body {
 
 .site-header {
   width: 100%;
-  background-color: #ffffff;
   padding: 15px 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 1000;
 
   display: flex;
   align-items: center;
+
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 
 
 /* ========================= */
 /* STICKY IDENTITY NAME      */
 /* ========================= */
-
-.site-header {
-  top: 0;
-  z-index: 1000;
-  background: rgba(200,200,255,0.3);
-  backdrop-filter: blur(6px);
-
-  display: flex;
-  align-items: center;
-  position: sticky;
-}
 
 .site-title {
   position: absolute;
