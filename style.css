@@ -64,7 +64,6 @@ body {
 }
 
 
-
 .main-nav {
   display: flex;
   justify-content: flex-start; /* sus stânga */
@@ -89,6 +88,8 @@ body {
   color: #ffffff;
   transform: translateY(-1px);
 }
+
+
 
 /* ========================= */
 /* STICKY BAR MENU BUTTON     */
@@ -163,9 +164,11 @@ body {
 }
 
 
+
 .menu-wrapper:hover .menu-dropdown {
   display: block;
 }
+
 
 
 /* ========================= */
