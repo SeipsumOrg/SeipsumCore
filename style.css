@@ -28,7 +28,6 @@ body {
   font-size: 16px;
 }
 
-
 /* ===================== */
 /* HEADER / HOME BUTTON */
 /* ===================== */
@@ -46,9 +45,9 @@ body {
    background: rgba(200,200,255,0.3);
   backdrop-filter: blur(6px);
 
-
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 
 /* ========================= */
 /* STICKY IDENTITY NAME      */
@@ -130,13 +129,13 @@ body {
   }
 }
 
+
 /* foarte mare (ultrawide) */
 @media (min-width: 1600px) {
   .container {
     max-width: 1200px;
   }
 }
-
 
 /* ========================= */
 /* HERO                     */
@@ -240,6 +239,7 @@ li {
   margin-bottom: 12px;
   color: #222;
 }
+
 
 /* ========================= */
 /* SERVICES                */
