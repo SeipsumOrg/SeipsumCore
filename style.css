@@ -28,37 +28,25 @@ body {
   font-size: 16px;
 }
 
-/* ===================== */
-/* HEADER / HOME BUTTON */
-/* ===================== */
+/* ========================= */
+/* SITE HEADER     */
+/* ========================= */
 
 .site-header {
   width: 100%;
-  background-color: #ffffff;
   padding: 15px 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
   position: sticky;
   top: 0;
   z-index: 1000;
 
   display: flex;
   align-items: center;
-}
 
-
-/* ========================= */
-/* STICKY IDENTITY NAME      */
-/* ========================= */
-
-.site-header {
-  top: 0;
-  z-index: 1000;
   background: rgba(200,200,255,0.3);
   backdrop-filter: blur(6px);
 
-  display: flex;
-  align-items: center;
-  position: sticky;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .site-title {
@@ -73,7 +61,9 @@ body {
   pointer-events: none; /* important */
 }
 
-
+/* ========================= */
+/* NAVIGATION     */
+/* ========================= */
 
 .main-nav {
   display: flex;
