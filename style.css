@@ -113,8 +113,6 @@ body {
   align-items: center;
 
   gap: 5px;
-
- text-decoration: none;
   
   transition: all 0.25s ease;
 }
@@ -180,10 +178,10 @@ padding-top: 4px;
 }
 
 
-.menu-wrapper:hover .menu-dropdown,
-.menu-wrapper:focus-within .menu-dropdown {
+.menu-dropdown.show {
   display: block;
 }
+
 
 
 /* ========================= */
