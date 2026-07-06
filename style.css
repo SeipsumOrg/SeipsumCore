@@ -154,9 +154,10 @@ body {
 }
 
 
+
 .menu-wrapper {
   position: relative;
-  top: -3px;
+  top: -4px;
 }
 
 
@@ -182,6 +183,7 @@ body {
 .menu-wrapper:hover .menu-dropdown {
   display: block;
 }
+
 
 
 /* ========================= */
