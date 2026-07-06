@@ -17,9 +17,7 @@ document.querySelectorAll(".menu-wrapper").forEach((menu) => {
 
 
 document.addEventListener("click", () => {
-
   document.querySelectorAll(".js-menu-dropdown").forEach((dropdown) => {
-
     dropdown.classList.remove("show");
 
   });
