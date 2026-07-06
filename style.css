@@ -10,7 +10,6 @@
   --accent: #0f172a;
 }
 
-
 /* ========================= */
 /* GLOBAL RESET              */
 /* ========================= */
@@ -28,7 +27,6 @@ body {
   line-height: 1.75;
   font-size: 16px;
 }
-
 
 /* ===================== */
 /* HEADER / HOME BUTTON */
@@ -49,7 +47,6 @@ body {
 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 
 /* ========================= */
 /* STICKY IDENTITY NAME      */
@@ -92,7 +89,6 @@ body {
   color: #ffffff;
   transform: translateY(-1px);
 }
-
 
 /* ========================= */
 /* HAMBURGER BUTTON     */
