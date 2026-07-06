@@ -6,16 +6,24 @@ document.querySelectorAll(".menu-wrapper").forEach((menu) => {
   if (!toggle || !dropdown) return;
 
   toggle.addEventListener("click", (e) => {
+
     e.stopPropagation();
+
     dropdown.classList.toggle("show");
+
   });
 
 });
-  
+
+
 document.addEventListener("click", () => {
+
   document.querySelectorAll(".js-menu-dropdown").forEach((dropdown) => {
+
     dropdown.classList.remove("show");
+
   });
+
 });
 
 
