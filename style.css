@@ -156,8 +156,9 @@ body {
 
 .menu-wrapper {
   position: relative;
-  top: -2px;
+  top: -3px;
 }
+
 
 .menu-dropdown {
   display: none;
