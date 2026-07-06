@@ -593,3 +593,16 @@ button:hover {
     word-break: keep-all;
   }
 }
+
+
+/* ========================= */
+/* MOBILE HEADER */
+/* ========================= */
+
+@media (max-width: 768px) {
+
+  .home-btn {
+    display: none;
+  }
+
+}
