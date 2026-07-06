@@ -99,6 +99,9 @@ body {
 
 .hamburger-btn {
 
+  width: 46px;
+  height: 46px;
+  
   margin-left: 10px;
 
   background: transparent;
@@ -115,7 +118,7 @@ body {
 
   gap: 5px;
 
-  padding: 11px 10px;
+ text-decoration: none;
   
   transition: all 0.25s ease;
 }
@@ -140,7 +143,6 @@ body {
 .hamburger-btn:hover span {
   background-color: #ffffff;
 }
-
 
 
 .menu-wrapper {
