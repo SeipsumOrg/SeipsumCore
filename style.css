@@ -56,7 +56,7 @@ body {
   transform: translateX(-50%);
 
   font-weight: 800;
-  font-size: 36px;
+  font-size: 38px;
   letter-spacing: 1px;
   color: #111;
   pointer-events: none; /* important */
@@ -262,7 +262,7 @@ display: block;
 
 
 .subtitle {
-  font-size: 18px;
+  font-size: 20px;
   color: var(--muted);
   max-width: 800px;
   margin: 0 auto 20px auto;
@@ -273,6 +273,7 @@ display: block;
   color: #333;
   max-width: 700px;
   margin: 0 auto 25px auto;
+  font-weight: 500;
 }
 
 .core-idea {
@@ -283,7 +284,7 @@ display: block;
 }
 
 .core-main {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 600;
 }
 
