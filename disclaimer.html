@@ -31,12 +31,59 @@
 
 <body>
 
-  <header class="site-header">
-  <nav class="main-nav">
-    <a href="index.html" class="home-btn">Home</a>
-  </nav>
+<header class="site-header">
 
-  <div class="site-title">Seipsum</div>
+  <nav class="main-nav">
+
+    <a href="index.html"
+       onclick="location.reload()"
+       class="home-btn">
+
+      Home
+
+    </a>
+
+
+    <div class="menu-wrapper">
+
+      <a href="#"
+         class="hamburger-btn js-menu-toggle">
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+      </a>
+
+
+      <div class="menu-dropdown js-menu-dropdown">
+
+        <a href="index.html"
+           class="mobile-home-link">
+
+          Home
+
+        </a>
+
+        <a href="origin.html">
+
+          Fondator & Origine
+
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="site-title">
+
+      Seipsum
+
+    </div>
+
+
+  </nav>
 
 <div class="language-switch">
 
@@ -223,6 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   
 <script src="js/analytics.js"></script>
-
+ <script src="js/ui-menu.js"></script>
+  
 </body>
 </html>
