@@ -60,7 +60,11 @@ body {
   font-size: 38px;
   letter-spacing: 1px;
   color: #111;
-  pointer-events: none; /* important */
+  pointer-events: auto;
+}
+
+.site-title:visited {
+  color: #111;
 }
 
 /* ========================= */
@@ -73,24 +77,6 @@ body {
   align-items: center;
 }
 
-.main-nav .home-btn {
-  font-weight: 700;
-  font-size: 16px;
-  color: #000000;
-  text-decoration: none;
-
-  padding: 8px 14px;
-  border: 2px solid #000000;
-  border-radius: 4px;
-
-  transition: all 0.25s ease;
-}
-
-.main-nav .home-btn:hover {
-  background-color: #000000;
-  color: #ffffff;
-  transform: translateY(-1px);
-}
 
 .language-switch {
   display: flex;
