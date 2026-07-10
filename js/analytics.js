@@ -1,15 +1,20 @@
-// Seipsum Analytics v5.6
+// Seipsum Analytics v5.6.1
 
 (function () {
 
-  console.log("Seipsum Analytics v5.6 booted");
+  console.log("Seipsum Analytics v5.6.1 booted");
 
 // =========================
 // SESSION ID
 // =========================
 
+const existingSession =
+  localStorage.getItem("seipsum_sid");
+
+const isNewSession = !existingSession;
+
 const sessionId =
-  localStorage.getItem("seipsum_sid") ||
+  existingSession ||
   crypto.randomUUID();
 
 localStorage.setItem("seipsum_sid", sessionId);
@@ -29,6 +34,10 @@ if (isDev) {
  // =========================
 // PAGE VIEW
 // =========================
+
+if (isNewSession) {
+  logEvent("session_start");
+}
 
 logEvent("page_view");
 
@@ -130,7 +139,7 @@ function logEvent(type, data = {}) {
 const browser_language = getBrowserLanguage();
 
 const payload = {
-  version: "v5.6",
+  version: "v5.6.1",
   event_id: crypto.randomUUID(),
   type,
 
