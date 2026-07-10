@@ -51,6 +51,7 @@ body {
 }
 
 .site-title {
+  text-decoration: none;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
