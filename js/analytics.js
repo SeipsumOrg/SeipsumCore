@@ -1,8 +1,8 @@
-// Seipsum Analytics v5.6.4
+// Seipsum Analytics v5.6.5
 
 (function () {
 
-  console.log("Seipsum Analytics v5.6.4 booted");
+  console.log("Seipsum Analytics v5.6.5 booted");
 
 // =========================
 // SESSION ID
@@ -139,7 +139,7 @@ function logEvent(type, data = {}) {
 const browser_language = getBrowserLanguage();
 
 const payload = {
-  version: "v5.6.4",
+  version: "v5.6.5",
   event_id: crypto.randomUUID(),
   type,
 
@@ -307,6 +307,13 @@ document.addEventListener("mouseup", () => {
   .replace(/\s+/g, " ")
   .trim();
 
+  const node = window.getSelection().anchorNode;
+
+const section =
+  node instanceof Element
+    ? node.closest("section")
+    : node?.parentElement?.closest("section");
+
   if (
     selection.length > 0 &&
     selection !== lastSelection
@@ -316,7 +323,7 @@ document.addEventListener("mouseup", () => {
 
     logEvent("text_select", {
 
-      section: lastFocusedSection,
+      section: section?.id || null,
 
       length: cleanedSelection.length,
 
@@ -327,6 +334,39 @@ document.addEventListener("mouseup", () => {
   }
 
 });
+
+
+// =========================
+// COPY TRACKING
+// =========================
+
+document.addEventListener("copy", () => {
+
+  const selection =
+    window.getSelection().toString().trim();
+
+  if (!selection) return;
+
+  const node =
+    window.getSelection().anchorNode;
+
+  const section =
+    node instanceof Element
+      ? node.closest("section")
+      : node?.parentElement?.closest("section");
+
+  logEvent("copy", {
+
+    section: section?.id || null,
+
+    length: selection.length,
+
+    text: selection.substring(0,300)
+
+  });
+
+});
+  
 
 // =========================
 // SECTION FOCUS TRACKING
