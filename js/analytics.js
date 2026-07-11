@@ -1,8 +1,14 @@
-// Seipsum Analytics v5.6.5
+// Seipsum Analytics v5.6.6
 
 (function () {
+  
+const ANALYTICS_VERSION = "v5.6.6";
 
-  console.log("Seipsum Analytics v5.6.5 booted");
+console.log(
+    "Seipsum Analytics",
+    ANALYTICS_VERSION,
+    "booted"
+);
 
 // =========================
 // SESSION ID
@@ -18,6 +24,28 @@ const sessionId =
   crypto.randomUUID();
 
 localStorage.setItem("seipsum_sid", sessionId);
+
+
+  // =========================
+// VISITOR TYPE
+// =========================
+
+const firstVisit =
+  localStorage.getItem("seipsum_first_visit");
+
+const visitorType =
+  firstVisit
+    ? "returning_visitor"
+    : "new_visitor";
+
+if (!firstVisit) {
+
+  localStorage.setItem(
+    "seipsum_first_visit",
+    Date.now()
+  );
+
+}
 
 // =========================
 // DEV MODE 
@@ -48,6 +76,7 @@ logEvent("page_view");
 let maxScroll = 0;
 let activeTime = 0;
 
+const pageEnterTime = Date.now();  
 let lastFocusedSection = null;
 let lastSelection = "";
 
@@ -139,7 +168,7 @@ function logEvent(type, data = {}) {
 const browser_language = getBrowserLanguage();
 
 const payload = {
-  version: "v5.6.5",
+  version: ANALYTICS_VERSION,
   event_id: crypto.randomUUID(),
   type,
 
@@ -147,14 +176,24 @@ const payload = {
   page: normalizePage(window.location.pathname),
   canonical_page: normalizePage(window.location.pathname),
 
+  page_title: document.title,
+
   // 1. WEBSITE LANGUAGE (source: URL / routing logic)
   page_language,
 
   // 2. BROWSER LANGUAGE (secondary signal)
   browser_language,
 
+  experience_cluster:
+  getExperienceCluster(page_language),
+
   timestamp: Date.now(),
   session_id: sessionId,
+
+  visitor_type: visitorType,
+
+  first_visit_timestamp:
+  firstVisit,
 
   referrer: (() => {
     try {
@@ -167,6 +206,12 @@ const payload = {
 
   user_agent: navigator.userAgent,
 
+   environment:
+
+   isDev
+   ? "development"
+   : "production",
+  
   viewport: {
     width: window.innerWidth,
     height: window.innerHeight
@@ -184,9 +229,17 @@ fetch("https://seipsum-analytics.silvernpaper.workers.dev/", {
   },
   body: JSON.stringify(payload),
   keepalive: true
-}).catch(() => {});
+}).catch(error => {
 
-} catch (error) {
+  console.error(
+    "Analytics POST failed",
+    error
+  );
+
+});
+
+} 
+  catch (error) {
   console.error("Analytics logEvent error:", error);
 }
   
@@ -279,9 +332,20 @@ document.addEventListener("click", (e) => {
 
     } else {
 
-      logEvent("click", {
-        target: target.tagName
-      });
+      logEvent("click",{
+
+        tag: target.tagName,
+
+        text:
+        target.innerText?.trim().substring(0,100),
+
+        id:
+        target.id || null,
+
+        class:
+        target.className || null
+
+       });
 
     }
 
@@ -307,13 +371,6 @@ document.addEventListener("mouseup", () => {
   .replace(/\s+/g, " ")
   .trim();
 
-  const node = window.getSelection().anchorNode;
-
-const section =
-  node instanceof Element
-    ? node.closest("section")
-    : node?.parentElement?.closest("section");
-
   if (
     selection.length > 0 &&
     selection !== lastSelection
@@ -323,7 +380,8 @@ const section =
 
     logEvent("text_select", {
 
-      section: section?.id || null,
+      section:
+      lastFocusedSection,
 
       length: cleanedSelection.length,
 
@@ -347,17 +405,11 @@ document.addEventListener("copy", () => {
 
   if (!selection) return;
 
-  const node =
-    window.getSelection().anchorNode;
-
-  const section =
-    node instanceof Element
-      ? node.closest("section")
-      : node?.parentElement?.closest("section");
 
   logEvent("copy", {
 
-    section: section?.id || null,
+    section:
+    lastFocusedSection,
 
     length: selection.length,
 
@@ -407,8 +459,18 @@ window.addEventListener("beforeunload", () => {
 
   logEvent("page_exit", {
     active_time_seconds: activeTime,
-    max_scroll: maxScroll
-  });
+   
+    max_scroll: maxScroll,
+
+    duration_ms:
+    Date.now() - pageEnterTime,
+
+    page_height:
+    document.documentElement.scrollHeight,
+
+    viewport_height:
+    window.innerHeight,
+    });
 
 });
 
