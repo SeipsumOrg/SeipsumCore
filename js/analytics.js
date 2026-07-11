@@ -1,8 +1,8 @@
-// Seipsum Analytics v5.6.3
+// Seipsum Analytics v5.6.4
 
 (function () {
 
-  console.log("Seipsum Analytics v5.6.3 booted");
+  console.log("Seipsum Analytics v5.6.4 booted");
 
 // =========================
 // SESSION ID
@@ -139,7 +139,7 @@ function logEvent(type, data = {}) {
 const browser_language = getBrowserLanguage();
 
 const payload = {
-  version: "v5.6.3",
+  version: "v5.6.4",
   event_id: crypto.randomUUID(),
   type,
 
@@ -257,9 +257,16 @@ document.addEventListener("click", (e) => {
 
       if (url.origin === window.location.origin) {
 
-       logEvent("internal_click", {
-         url: normalizePage(url.pathname),
-         hash: url.hash || null
+      logEvent("internal_click", {
+
+         url: normalizePage(new URL(link.href).pathname),
+
+         text: link.innerText.trim(),
+
+         id: link.id || null,
+
+         class: link.className || null
+
         });
 
       } else {
@@ -296,6 +303,10 @@ document.addEventListener("mouseup", () => {
 
   const selection = selectedText.toString().trim();
 
+  const cleanedSelection = selection
+  .replace(/\s+/g, " ")
+  .trim();
+
   if (
     selection.length > 0 &&
     selection !== lastSelection
@@ -304,7 +315,13 @@ document.addEventListener("mouseup", () => {
     lastSelection = selection;
 
     logEvent("text_select", {
-      length: selection.length
+
+      section: lastFocusedSection,
+
+      length: cleanedSelection.length,
+
+      text: cleanedSelection.substring(0, 300)
+
     });
 
   }
