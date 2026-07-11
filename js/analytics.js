@@ -1,8 +1,8 @@
-// Seipsum Analytics v5.6.2
+// Seipsum Analytics v5.6.3
 
 (function () {
 
-  console.log("Seipsum Analytics v5.6.2 booted");
+  console.log("Seipsum Analytics v5.6.3 booted");
 
 // =========================
 // SESSION ID
@@ -139,7 +139,7 @@ function logEvent(type, data = {}) {
 const browser_language = getBrowserLanguage();
 
 const payload = {
-  version: "v5.6.2",
+  version: "v5.6.3",
   event_id: crypto.randomUUID(),
   type,
 
@@ -257,8 +257,9 @@ document.addEventListener("click", (e) => {
 
       if (url.origin === window.location.origin) {
 
-        logEvent("internal_click", {
-         url: normalizePage(url.pathname)
+       logEvent("internal_click", {
+         url: normalizePage(url.pathname),
+         hash: url.hash || null
         });
 
       } else {
