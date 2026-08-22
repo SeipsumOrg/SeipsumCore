@@ -1,8 +1,8 @@
-// Seipsum Analytics v5.6.6
+// Seipsum Analytics v6
 
 (function () {
   
-const ANALYTICS_VERSION = "v5.6.6";
+const ANALYTICS_VERSION = "v6";
 
 console.log(
     "Seipsum Analytics",
