@@ -333,6 +333,13 @@ display: block;
   margin-bottom: 25px;
 }
 
+.paragraph-group p {
+  margin-bottom: 20px; /* Space between paragraphs */
+}
+.paragraph-group {
+  margin-bottom: 30px; /* Space after the group */
+}
+
 /* ========================= */
 /* LISTS                   */
 /* ========================= */
