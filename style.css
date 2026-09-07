@@ -308,10 +308,10 @@ display: block;
 
 .section h3 {
     font-size: 20px; /* Adjust as needed */
-    margin-bottom: 20px; /* Adjust as needed */
+    margin-bottom: 24px; /* Adjust as needed */
     font-weight: 600; /* Match or adjust */
     color: var(--accent); /* Match or adjust */
-    line-height: 1.75; /* Adjust this value to control the gap between lines */
+    line-height: 3; /* Adjust this value to control the gap between lines */
 }
 
 .section p {
