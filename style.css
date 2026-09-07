@@ -306,6 +306,14 @@ display: block;
   color: var(--accent);
 }
 
+.section h3 {
+    font-size: 20px; /* Adjust as needed */
+    margin-bottom: 20px; /* Adjust as needed */
+    font-weight: 600; /* Match or adjust */
+    color: var(--accent); /* Match or adjust */
+    line-height: 1.75; /* Adjust this value to control the gap between lines */
+}
+
 .section p {
   margin-bottom: 12px;
   color: #1a1a1a;
