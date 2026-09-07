@@ -8,6 +8,7 @@
   --background: #ffffff;
   --border: #eaeaea;
   --accent: #0f172a;
+  --paragraph-gap: 20px; /* Add this line */
 }
 
 /* ========================= */
@@ -18,6 +19,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+/* Add the global paragraph rule here */
+p {
+  margin-bottom: var(--paragraph-gap);
 }
 
 body {
@@ -326,7 +332,6 @@ display: block;
   font-weight: 600;
   margin-bottom: 30px;
 }
-
 
 /* ========================= */
 /* LISTS                   */
