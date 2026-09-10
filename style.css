@@ -11,6 +11,25 @@
   --paragraph-gap: 20px; /* Add this line */
 }
 
+/* Dark theme overrides */
+.dark-theme {
+  --text: #f0f0f0;
+  --muted: #aaa;
+  --background: #1a1a1a;
+  --border: #444;
+  --accent: #0f172a;
+}
+
+/* Apply dark theme to specific elements */
+.dark-theme .site-header {
+  background: rgba(30, 30, 50, 0.3);
+}
+
+.dark-theme .section {
+  background: var(--background);
+  border: 1px solid var(--border);
+}
+
 /* ========================= */
 /* GLOBAL RESET              */
 /* ========================= */
