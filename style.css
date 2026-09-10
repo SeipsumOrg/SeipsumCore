@@ -121,7 +121,14 @@ body {
   text-decoration: underline;
 }
 
-
+/* Style the "Light/Dark" toggle button */
+.theme-toggle {
+  font-size: 34px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 20px;
+}
 
 /* ========================= */
  /* HAMBURGER BUTTON */ 
