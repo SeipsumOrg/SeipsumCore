@@ -86,10 +86,11 @@ body {
 
 .language-switch {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column; /* Stack vertically */
+  align-items: center; /* Center the links horizontally */
+  gap: 4px; /* Adjust spacing between RO and EN */
   font-size: 14px;
-  margin-left: auto;
+  margin-left: auto; /* Keep it aligned to the right */
 }
 
 .language-switch a {
