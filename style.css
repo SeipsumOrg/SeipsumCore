@@ -76,6 +76,14 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Right-side container for theme toggle and language switch */
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Spacing between theme toggle and language switch */
+  margin-left: auto; /* Pushes the entire group to the right */
+}
+
 .site-title {
   text-decoration: none;
   position: absolute;
@@ -93,18 +101,20 @@ body {
   color: #111;
 }
 
-/* Style the "Light/Dark" toggle button */
+/* ========================= */
+/* NAVIGATION     */
+/* ========================= */
+
+/* ========================= */
+ /* THEME TOGGLE BUTTON        */
+ /* ========================= */
+
 .theme-toggle {
   font-size: 34px;
   background: none;
   border: none;
   cursor: pointer;
-  margin-right: 10px; /* Add spacing between theme toggle and language switch */
 }
-
-/* ========================= */
-/* NAVIGATION     */
-/* ========================= */
 
 .main-nav {
   display: flex;
