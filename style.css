@@ -22,6 +22,10 @@
   --accent: #0f172a;
 }
 
+body { color: var(--text); background: var(--background); }
+.section, .card { background: var(--section-bg); border: 1px solid var(--border); }
+.hamburger-btn { border: 2px solid var(--hamburger-border); }
+
 /* Apply dark theme to specific elements */
 .dark-theme .site-header {
   background: rgba(30, 30, 50, 0.3);
