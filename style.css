@@ -722,20 +722,20 @@ button:hover {
 }
 
 /* ======================================== */
- /* COMPLETE DARK THEME FIX - ADD THIS ONLY */
+ /* FINAL DARK THEME FIX - ALL ISSUES        */
  /* ======================================== */
 
- /* Body background */
+ /* 1. Body background: DARK */
 .dark-theme body {
   background: #1a1a1a !important;
 }
 
-/* Sections */
+/* 2. Sections: DARK */
 .dark-theme .section {
   background: #2a2a2a !important;
 }
 
-/* ALL TEXT ELEMENTS: Make white in dark mode */
+/* 3. ALL TEXT: WHITE IN DARK MODE (includes h2, hero, footer, etc.) */
 .dark-theme,
 .dark-theme body,
 .dark-theme h1,
@@ -743,15 +743,15 @@ button:hover {
 .dark-theme h3,
 .dark-theme p,
 .dark-theme li,
-.dark-theme .site-title,
 .dark-theme a,
+.dark-theme .site-title,
 .dark-theme .subtitle,
 .dark-theme .micro-statement,
 .dark-theme .core-idea,
 .dark-theme .core-main,
 .dark-theme .core-sub,
-.dark-theme .section h2,
 .dark-theme .section p,
+.dark-theme .section h2,
 .dark-theme .card,
 .dark-theme .card p,
 .dark-theme .card h3,
@@ -760,6 +760,9 @@ button:hover {
 .dark-theme textarea,
 .dark-theme select,
 .dark-theme button,
+.dark-theme footer,
+.dark-theme footer p,
+.dark-theme footer a,
 .dark-theme .footer-collaboration,
 .dark-theme .footer-collaboration p,
 .dark-theme .footer-collaboration a,
@@ -770,20 +773,12 @@ button:hover {
   color: #f0f0f0 !important;
 }
 
-/* Hero section text (override for contrast) */
-.dark-theme .hero h1,
-.dark-theme .hero .subtitle,
-.dark-theme .hero .micro-statement,
-.dark-theme .hero .core-idea {
-  color: #f0f0f0 !important;
-}
-
-/* Site header */
+/* 4. Site header: DARK */
 .dark-theme .site-header {
   background: rgba(30, 30, 50, 0.3) !important;
 }
 
-/* Theme toggle button */
+/* 5. Theme toggle button: WHITE MOON */
 .dark-theme .theme-toggle {
   border: 2px solid #ffffff !important;
   color: #ffffff !important;
@@ -794,12 +789,12 @@ button:hover {
   color: #000000 !important;
 }
 
-/* Accent color (for h2 and other elements using --accent) */
+/* 6. Accent color: LIGHTER BLUE FOR DARK MODE */
 .dark-theme {
-  --accent: #6d8ee8 !important; /* Lighter blue for dark mode readability */
+  --accent: #6d8ee8 !important;
 }
 
-/* Mobile body background */
+/* 7. Mobile body: DARK */
 @media (max-width: 768px) {
   .dark-theme body {
     background: #1a1a1a !important;
