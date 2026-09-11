@@ -22,7 +22,6 @@
   --accent: #0f172a;
 }
 
-
 /* Apply dark theme to specific elements */
 .dark-theme .site-header {
   background: rgba(30, 30, 50, 0.3);
@@ -717,3 +716,47 @@ button:hover {
   }
 
 }
+
+/* ======================================== */
+ /* DARK THEME OVERRIDES - ADD THESE ONLY    */
+ /* ======================================== */
+
+ /* Body background in dark mode */
+.dark-theme body {
+  background: #1a1a1a;
+  color: #f0f0f0;
+}
+
+/* Text elements in dark mode */
+.dark-theme .section p {
+  color: #f0f0f0;
+}
+
+.dark-theme li {
+  color: #f0f0f0;
+}
+
+.dark-theme .micro-statement {
+  color: #f0f0f0;
+}
+
+.dark-theme .core-idea {
+  color: #f0f0f0;
+}
+
+.dark-theme .site-title {
+  color: #f0f0f0;
+}
+
+/* Theme toggle button in dark mode (already in your CSS, but included for clarity) */
+.dark-theme .theme-toggle {
+  border: 2px solid #ffffff;
+  color: #ffffff;
+}
+
+.dark-theme .theme-toggle:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+
