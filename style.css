@@ -722,45 +722,58 @@ button:hover {
 }
 
 /* ======================================== */
- /* DARK THEME OVERRIDES - ADD THESE ONLY    */
+ /* DARK THEME OVERRIDES - COMPLETE SET      */
  /* ======================================== */
 
- /* Body background in dark mode */
+ /* Body background */
 .dark-theme body {
-  background: #1a1a1a;
-  color: #f0f0f0;
+  background: #1a1a1a !important;
+  color: #f0f0f0 !important;
 }
 
-/* Text elements in dark mode */
-.dark-theme .section p {
-  color: #f0f0f0;
+/* Sections */
+.dark-theme .section {
+  background: #2a2a2a !important;
+  border: 1px solid #444 !important;
 }
 
-.dark-theme li {
-  color: #f0f0f0;
+/* Text elements */
+.dark-theme .section p,
+.dark-theme li,
+.dark-theme .micro-statement,
+.dark-theme .core-idea,
+.dark-theme .site-title,
+.dark-theme a,
+.dark-theme .card,
+.dark-theme .card p,
+.dark-theme label,
+.dark-theme input,
+.dark-theme textarea,
+.dark-theme select {
+  color: #f0f0f0 !important;
 }
 
-.dark-theme .micro-statement {
-  color: #f0f0f0;
+/* Site header */
+.dark-theme .site-header {
+  background: rgba(30, 30, 50, 0.3) !important;
 }
 
-.dark-theme .core-idea {
-  color: #f0f0f0;
-}
-
-.dark-theme .site-title {
-  color: #f0f0f0;
-}
-
-/* Theme toggle button in dark mode (already in your CSS, but included for clarity) */
+/* Theme toggle button */
 .dark-theme .theme-toggle {
-  border: 2px solid #ffffff;
-  color: #ffffff;
+  border: 2px solid #ffffff !important;
+  color: #ffffff !important;
 }
 
 .dark-theme .theme-toggle:hover {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Mobile body background */
+@media (max-width: 768px) {
+  .dark-theme body {
+    background: #1a1a1a !important;
+  }
 }
 
 
