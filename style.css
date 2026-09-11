@@ -722,34 +722,59 @@ button:hover {
 }
 
 /* ======================================== */
- /* DARK THEME OVERRIDES - COMPLETE SET      */
+ /* COMPLETE DARK THEME FIX - ADD THIS ONLY */
  /* ======================================== */
 
  /* Body background */
 .dark-theme body {
   background: #1a1a1a !important;
-  color: #f0f0f0 !important;
 }
 
 /* Sections */
 .dark-theme .section {
   background: #2a2a2a !important;
-  border: 1px solid #444 !important;
 }
 
-/* Text elements */
-.dark-theme .section p,
+/* ALL TEXT ELEMENTS: Make white in dark mode */
+.dark-theme,
+.dark-theme body,
+.dark-theme h1,
+.dark-theme h2,
+.dark-theme h3,
+.dark-theme p,
 .dark-theme li,
-.dark-theme .micro-statement,
-.dark-theme .core-idea,
 .dark-theme .site-title,
 .dark-theme a,
+.dark-theme .subtitle,
+.dark-theme .micro-statement,
+.dark-theme .core-idea,
+.dark-theme .core-main,
+.dark-theme .core-sub,
+.dark-theme .section h2,
+.dark-theme .section p,
 .dark-theme .card,
 .dark-theme .card p,
+.dark-theme .card h3,
 .dark-theme label,
 .dark-theme input,
 .dark-theme textarea,
-.dark-theme select {
+.dark-theme select,
+.dark-theme button,
+.dark-theme .footer-collaboration,
+.dark-theme .footer-collaboration p,
+.dark-theme .footer-collaboration a,
+.dark-theme .cookie-banner,
+.dark-theme .cookie-banner p,
+.dark-theme .cookie-actions,
+.dark-theme .cookie-actions a {
+  color: #f0f0f0 !important;
+}
+
+/* Hero section text (override for contrast) */
+.dark-theme .hero h1,
+.dark-theme .hero .subtitle,
+.dark-theme .hero .micro-statement,
+.dark-theme .hero .core-idea {
   color: #f0f0f0 !important;
 }
 
@@ -767,6 +792,11 @@ button:hover {
 .dark-theme .theme-toggle:hover {
   background-color: #ffffff !important;
   color: #000000 !important;
+}
+
+/* Accent color (for h2 and other elements using --accent) */
+.dark-theme {
+  --accent: #6d8ee8 !important; /* Lighter blue for dark mode readability */
 }
 
 /* Mobile body background */
