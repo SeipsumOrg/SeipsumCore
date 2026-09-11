@@ -5,7 +5,6 @@
 :root {
   --text: #111; /* Dark gray for light mode */
   --muted: #555;
-  --body-background: #f5f5f5;    /* Body background (light mode) */
   --section-background: #ffffff; /* Section background (light mode) */
   --border: #eaeaea;
   --accent: #0f172a;
