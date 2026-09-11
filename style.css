@@ -5,7 +5,8 @@
 :root {
   --text: #111; /* Dark gray for light mode */
   --muted: #555;
-  --background: #ffffff;
+  --body-background: #f5f5f5;    /* Body background (light mode) */
+  --section-background: #ffffff; /* Section background (light mode) */
   --border: #eaeaea;
   --accent: #0f172a;
   --paragraph-gap: 20px; /* Add this line */
@@ -15,7 +16,8 @@
 .dark-theme {
   --text: #f0f0f0; /* Almost white for dark mode */
   --muted: #aaa;
-  --background: #1a1a1a; /* Very dark gray for dark mode */
+  --body-background: #1a1a1a;    /* Body background (dark mode) */
+  --section-background: #2a2a2a; /* Section background (dark mode) */
   --border: #444; /* Medium gray for dark mode */
   --accent: #0f172a;
 }
