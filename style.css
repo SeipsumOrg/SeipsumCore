@@ -797,4 +797,20 @@ body.dark-theme {
   }
 }
 
+/* Dark mode for hamburger button */
+.dark-theme .hamburger-btn {
+  border: 2px solid #ffffff !important;
+}
+
+.dark-theme .hamburger-btn span {
+  background-color: #ffffff !important;
+}
+
+.dark-theme .hamburger-btn:hover {
+  background-color: #ffffff !important;
+}
+
+.dark-theme .hamburger-btn:hover span {
+  background-color: #000000 !important;
+}
 
