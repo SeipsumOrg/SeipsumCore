@@ -16,13 +16,14 @@
 .dark-theme {
   --text: #f0f0f0; /* Almost white for dark mode */
   --muted: #aaa;
+  --background: #2a2a2a; /* ADD THIS: Overrides the light mode --background */
   --body-background: #1a1a1a;    /* Body background (dark mode) */
   --section-background: #2a2a2a; /* Section background (dark mode) */
   --border: #444; /* Medium gray for dark mode */
-  --accent: #0f172a;
+  --accent: #6d8ee8; /* Lighter blue for readability */
 }
 
-body { color: var(--text); background: var(--background); }
+body { color: var(--text); }
 .section, .card { background: var(--section-bg); border: 1px solid var(--border); }
 .hamburger-btn { border: 2px solid var(--hamburger-border); }
 
@@ -725,19 +726,19 @@ button:hover {
  /* FINAL DARK THEME FIX - ALL ISSUES        */
  /* ======================================== */
 
- /* 1. Body background: DARK */
+/* Body background in dark mode */
 .dark-theme body {
   background: #1a1a1a !important;
+  color: #f0f0f0 !important;
 }
 
-/* 2. Sections: DARK */
+/* Sections in dark mode */
 .dark-theme .section {
   background: #2a2a2a !important;
 }
 
-/* 3. ALL TEXT: WHITE IN DARK MODE (includes h2, hero, footer, etc.) */
+/* ALL TEXT: White in dark mode */
 .dark-theme,
-.dark-theme body,
 .dark-theme h1,
 .dark-theme h2,
 .dark-theme h3,
@@ -773,12 +774,12 @@ button:hover {
   color: #f0f0f0 !important;
 }
 
-/* 4. Site header: DARK */
+/* Site header in dark mode */
 .dark-theme .site-header {
   background: rgba(30, 30, 50, 0.3) !important;
 }
 
-/* 5. Theme toggle button: WHITE MOON */
+/* Theme toggle button in dark mode */
 .dark-theme .theme-toggle {
   border: 2px solid #ffffff !important;
   color: #ffffff !important;
@@ -789,12 +790,7 @@ button:hover {
   color: #000000 !important;
 }
 
-/* 6. Accent color: LIGHTER BLUE FOR DARK MODE */
-.dark-theme {
-  --accent: #6d8ee8 !important;
-}
-
-/* 7. Mobile body: DARK */
+/* Mobile body background in dark mode */
 @media (max-width: 768px) {
   .dark-theme body {
     background: #1a1a1a !important;
