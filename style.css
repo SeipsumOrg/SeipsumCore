@@ -728,7 +728,7 @@ button:hover {
 
 /* Body background in dark mode */
 body.dark-theme {
-  background: red !important; /* If this turns red, the issue is elsewhere */
+  background: #1a1a1a !important; /* If this turns red, the issue is elsewhere */
   color: #f0f0f0 !important;
 }
 
