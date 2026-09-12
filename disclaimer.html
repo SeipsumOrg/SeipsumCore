@@ -96,10 +96,14 @@
    </a>
   </nav>
 
-<div class="language-switch">
-  <a href="disclaimer.html">RO</a>
-  <a href="disclaimer-en.html">EN</a>
-</div>
+  <!-- NEW: Group theme toggle and language switch in .right-section -->
+   <div class="right-section">
+    <!-- Replace: <button class="theme-toggle">🌙</button> -->
+    <a class="theme-toggle" href="javascript:void(0)">🌙</a>
+ <div class="language-switch">
+    <a href="disclaimer.html">RO</a>
+    <a href="disclaimer-en.html">EN</a>
+ </div>
 
   
 </header>
@@ -119,6 +123,9 @@
    </p>
 
   </header>
+
+  <br>
+  <br>
   
 
   <section class="section">
@@ -282,6 +289,8 @@ document.addEventListener('DOMContentLoaded', () => {
   
 <script src="js/analytics.js"></script>
  <script src="js/ui-menu.js"></script>
-  
+  <script src="js/theme-toggle.js"></script>
+    
 </body>
+  
 </html>
