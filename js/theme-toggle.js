@@ -1,9 +1,21 @@
 // Apply theme IMMEDIATELY (before page renders)
-const savedTheme = localStorage.getItem('theme') ||
-                  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-if (savedTheme === 'dark') {
-  document.body.classList.add('dark-theme');
-}
+(function() {
+  const savedTheme = localStorage.getItem('theme') ||
+                    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+  function applyTheme() {
+    if (document.body) {
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+      }
+    } else {
+      // Retry if body doesn't exist yet
+      setTimeout(applyTheme, 10);
+    }
+  }
+
+  applyTheme();
+})();
 
 // Set up click handler after DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
