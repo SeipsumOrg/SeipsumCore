@@ -814,3 +814,15 @@ body.dark-theme {
   background-color: #000000 !important;
 }
 
+/* Dark mode for dropdown menu */
+.dark-theme .menu-dropdown {
+  background: #2a2a2a !important;
+}
+
+.dark-theme .menu-dropdown a {
+  color: #f0f0f0 !important;
+}
+
+.dark-theme .menu-dropdown a:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
