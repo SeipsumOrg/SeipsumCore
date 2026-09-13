@@ -155,9 +155,8 @@ body {
  /* HAMBURGER BUTTON */ 
 /* ========================= */
 
-
 .hamburger-btn { 
-position: relative;
+position: absolute; /* 👈 ADD THIS LINE */
 width: 46px; 
 height: 46px; 
 
