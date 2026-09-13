@@ -37,6 +37,7 @@ body { color: var(--text); }
   border: 1px solid var(--border);
 }
 
+
 /* ========================= */
 /* GLOBAL RESET              */
 /* ========================= */
@@ -150,7 +151,6 @@ body {
   text-decoration: underline;
 }
 
-
 /* ========================= */
  /* HAMBURGER BUTTON */ 
 /* ========================= */
@@ -247,7 +247,6 @@ background: rgba(0,0,0,0.06);
 display: block;
 }
 
-
 /* ========================= */
  /* THEME TOGGLE BUTTON        */
  /* ========================= */
@@ -284,6 +283,7 @@ display: block;
   color: #000000; /* Black moon on hover in dark mode */
 }
 
+
 /* ========================= */
 /* CONTAINER START   */
 /* ========================= */
@@ -314,6 +314,7 @@ display: block;
     max-width: 1200px;
   }
 }
+
 
 /* ========================= */
 /* HERO                     */
