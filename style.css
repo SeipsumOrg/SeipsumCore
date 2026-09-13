@@ -209,9 +209,8 @@ position: absolute; /* 👈 ADD THIS */
 display: none; 
 padding-top: 4px; 
 
-max-height: 70vh;       
-overflow-y: scroll; /* Always show scrollbar */
-  
+    
+overflow-y: auto;
 
 top: 100%; 
 left: 0; 
