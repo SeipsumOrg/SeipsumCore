@@ -1,7 +1,15 @@
+// Apply theme IMMEDIATELY (no DOMContentLoaded needed)
+const savedTheme = localStorage.getItem('theme') ||
+                  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+if (savedTheme === 'dark') {
+  document.body.classList.add('dark-theme');
+}
+
+// Set up click handler after DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelector('.theme-toggle').addEventListener('click', () => {
-    document.documentElement.classList.toggle('dark-theme');
-    const currentTheme = document.documentElement.classList.contains('dark-theme') ? 'dark' : 'light';
+    document.body.classList.toggle('dark-theme');
+    const currentTheme = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
     localStorage.setItem('theme', currentTheme);
   });
 });
