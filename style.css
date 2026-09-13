@@ -162,12 +162,10 @@ width: 46px;
 height: 46px; 
 
 margin-left: 3px; 
-
 background: transparent; 
 
 border: 2px solid #000000; 
 border-radius: 4px; 
-
 cursor: pointer; 
 
 display: flex; 
@@ -186,9 +184,7 @@ width: 20px;
 height: 2px; 
 
 background-color: #000000; 
-
 border-radius: 2px; 
-
 transition: all 0.25s ease; 
 
 } 
@@ -204,7 +200,7 @@ background-color: #000000;
 } 
 
 .menu-wrapper { 
-position: relative; 
+position: absolute; 
 display: inline-block; 
 
 } 
@@ -220,7 +216,6 @@ min-width: 220px;
 background: rgba(255,255,255,0.95); 
 
 backdrop-filter: blur(8px); 
-
 border-radius: 8px; 
 
 box-shadow: 0 6px 18px rgba(0,0,0,0.12); 
