@@ -840,3 +840,9 @@ html.dark-theme body {
 .dark-theme .cookie-actions a {
   color: #aaa !important;
 }
+
+/* Dark mode: Blue links and underlines */
+html.dark-theme a {
+  color: #6d8ee8 !important;
+  border-bottom-color: #6d8ee8 !important;
+}
