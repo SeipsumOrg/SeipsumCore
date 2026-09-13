@@ -15,12 +15,14 @@
   
 
    <!-- Add this RIGHT HERE (critical dark theme CSS) -->
-  <style>
-    body.dark-theme {
-      background: #1a1a1a !important;
-      color: #f0f0f0 !important;
+ <script>
+  (function() {
+    const theme = localStorage.getItem('theme') || 'light';
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark-theme');
     }
-  </style>
+  })();
+</script>
   
   
   <meta charset="UTF-8">
