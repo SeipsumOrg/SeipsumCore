@@ -200,7 +200,7 @@ background-color: #000000;
 } 
 
 .menu-wrapper { 
-position: absolute; 
+position: relative; 
 display: inline-block; 
 
 } 
