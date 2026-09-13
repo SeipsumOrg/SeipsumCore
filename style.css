@@ -825,3 +825,18 @@ body.dark-theme {
 .dark-theme .menu-dropdown a:hover {
   background: rgba(255, 255, 255, 0.1) !important;
 }
+
+/* Dark mode for cookie banner */
+.dark-theme .cookie-banner {
+  background: rgba(30, 30, 50, 0.96) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+.dark-theme .cookie-banner p {
+  color: #f0f0f0 !important;
+}
+
+.dark-theme .cookie-actions a {
+  color: #aaa !important;
+}
