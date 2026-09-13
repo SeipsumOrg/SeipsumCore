@@ -212,7 +212,7 @@ display: inline-block;
 display: none; 
 padding-top: 4px; 
 
-position: absolute; 
+position: relative; /* or remove the position property entirely */
 top: 100%; 
 left: 0; 
 
