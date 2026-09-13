@@ -86,9 +86,10 @@ body {
 /* Right-side container for theme toggle and language switch */
 .right-section {
   display: flex;
-  align-items: center;
-  gap: 10px; /* Spacing between theme toggle and language switch */
-  margin-left: auto; /* Pushes the entire group to the right */
+  flex-direction: column; /* Stack vertically */
+  align-items: flex-end;   /* Align to the right */
+  gap: 10px;              /* Vertical spacing */
+  margin-left: auto;  /* Pushes the entire group to the right */
 }
 
 .site-title {
