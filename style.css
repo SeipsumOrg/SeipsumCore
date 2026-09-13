@@ -209,9 +209,9 @@ position: absolute; /* 👈 ADD THIS */
 display: none; 
 padding-top: 4px; 
 
-max-height: 700px;       /* Set a fixed height for the dropdown */
-overflow-y: auto;       /* Enable vertical scrolling */
-  /* Keep all your existing properties */
+max-height: 70vh;       
+overflow-y: scroll; /* Always show scrollbar */
+  
 
 top: 100%; 
 left: 0; 
