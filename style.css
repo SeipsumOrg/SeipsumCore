@@ -173,9 +173,7 @@ justify-content: center;
 align-items: center; 
 
 gap: 5px; 
-
 text-decoration: none; 
-
 transition: all 0.25s ease; 
 
 } 
@@ -212,7 +210,6 @@ display: inline-block;
 display: none; 
 padding-top: 4px; 
 
-position: relative; /* or remove the position property entirely */
 top: 100%; 
 left: 0; 
 
