@@ -853,3 +853,7 @@ html.dark-theme .language-switch a {
   color: #f0f0f0 !important;
   border-bottom-color: #f0f0f0 !important;
 }
+
+.section, .card {
+  border: 3px solid red !important; /* Temporary test */
+}
