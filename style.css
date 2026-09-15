@@ -6,7 +6,7 @@
   --text: #111; /* Dark gray for light mode */
   --muted: #555;
   --background: #ffffff; /* Section background (light mode) */
-  --body-background: #b8e0b8;  /* Body background (light mode) */
+  --body-background: #f0f8f0;  /* Body background (light mode) */
   --border: rgba(0, 0, 0, 0.2); /* For light mode */
   --border-dark: rgba(255, 255, 255, 0.2); /* For dark mode */
 
