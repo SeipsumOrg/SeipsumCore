@@ -1,8 +1,8 @@
-// Seipsum Analytics v6
+// Seipsum Analytics v7
 
 (function () {
   
-const ANALYTICS_VERSION = "v6";
+const ANALYTICS_VERSION = "v7";
 
 console.log(
     "Seipsum Analytics",
@@ -164,10 +164,14 @@ function logEvent(type, data = {}) {
 
   try {
 
-   const page_language = getPageLanguage(window.location.pathname);
-const browser_language = getBrowserLanguage();
+    const page_language = getPageLanguage(window.location.pathname);
+    const browser_language = getBrowserLanguage();
 
-const payload = {
+    // Extract the 'ref' parameter from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const url_ref = urlParams.get('ref') || null; // <-- Add this line
+
+  const payload = {
   version: ANALYTICS_VERSION,
   event_id: crypto.randomUUID(),
   type,
@@ -203,7 +207,8 @@ const payload = {
       return "/";
     }
   })(),
-
+  url_ref: url_ref, // <-- Add this line to include the ref in the payload
+  
   user_agent: navigator.userAgent,
 
    environment:
