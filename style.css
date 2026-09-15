@@ -859,5 +859,5 @@ html.dark-theme .language-switch a {
 }
 
 .section, .card {
-  border: 3px solid black !important; /* Temporary test */
+  border: 1px solid black !important; /* Temporary test */
 }
