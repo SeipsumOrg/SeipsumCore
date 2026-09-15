@@ -27,7 +27,7 @@
 }
 
 body { color: var(--text); }
-.section, .card { background: var(--section-bg); border: 1px solid var(--border); }
+.section, .card { background: var(--background); border: 1px solid var(--border); }
 .hamburger-btn { border: 2px solid var(--hamburger-border); }
 
 /* Apply dark theme to specific elements */
