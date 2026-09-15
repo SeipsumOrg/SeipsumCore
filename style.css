@@ -858,6 +858,6 @@ html.dark-theme .language-switch a {
   border: 1px solid var(--border) !important;
 }
 
-.section, .card {
-  border: 1px solid black !important; /* Temporary test */
+body .section, body .card {
+  border: 1px solid var(--border) !important; /* Force override */
 }
