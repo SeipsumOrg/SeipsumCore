@@ -14,6 +14,7 @@
   --paragraph-gap: 20px; /* Add this line */
 }
 
+
 /* Dark theme overrides */
 .dark-theme {
   --text: #f0f0f0; /* Almost white for dark mode */
@@ -39,7 +40,6 @@ body { color: var(--text); }
   border: 1px solid var(--border);
 }
 
-
 /* ========================= */
 /* GLOBAL RESET              */
 /* ========================= */
@@ -62,7 +62,6 @@ body {
   line-height: 1.75;
   font-size: 16px;
 }
-
 
 /* ========================= */
 /* SITE HEADER     */
@@ -113,7 +112,6 @@ body {
   color: #111;
 }
 
-
 /* ========================= */
 /* NAVIGATION     */
 /* ========================= */
@@ -152,6 +150,7 @@ body {
 .language-switch a:hover {
   text-decoration: underline;
 }
+
 
 /* ========================= */
  /* HAMBURGER BUTTON */ 
@@ -249,6 +248,7 @@ background: rgba(0,0,0,0.06);
 display: block;
 }
 
+
 /* ========================= */
  /* THEME TOGGLE BUTTON        */
  /* ========================= */
@@ -285,7 +285,6 @@ display: block;
   color: #000000; /* Black moon on hover in dark mode */
 }
 
-
 /* ========================= */
 /* CONTAINER START   */
 /* ========================= */
@@ -316,7 +315,6 @@ display: block;
     max-width: 1200px;
   }
 }
-
 
 /* ========================= */
 /* HERO                     */
@@ -368,7 +366,6 @@ display: block;
   opacity: 0.85;
   margin-bottom: 16px;
 }
-
 
 /* ========================= */
 /* SECTIONS                 */
@@ -436,7 +433,6 @@ li {
   color: #222;
 }
 
-
 /* ========================= */
 /* SERVICES                */
 /* ========================= */
@@ -463,7 +459,6 @@ li {
 .card p {
   color: var(--muted);
 }
-
 
 /* ========================= */
 /* CONTACT                 */
