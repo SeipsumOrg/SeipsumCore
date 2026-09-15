@@ -22,7 +22,7 @@
   --background: #2a2a2a; /* ADD THIS: Overrides the light mode --background */
   --body-background: #1a1a1a;    /* Body background (dark mode) */
   --section-background: #2a2a2a; /* Section background (dark mode) */
-  --border: #444; /* Medium gray for dark mode */
+  --border: rgba(255, 255, 255, 0.3); /* 30% opacity white */
   --accent: #6d8ee8; /* Lighter blue for readability */
 }
 
