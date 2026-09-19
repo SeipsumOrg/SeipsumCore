@@ -397,7 +397,7 @@ display: block;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 
   flex-wrap: wrap;        /* Allows images to wrap to next line */
-  gap: 30px;             /* Space between images */
+  gap: 25px;             /* Space between images */
   margin: 20px 0;
   align-items: flex-start; /* Prevents stretching */
 }
