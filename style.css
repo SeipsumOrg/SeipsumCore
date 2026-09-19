@@ -455,6 +455,7 @@ display: block;
 
 .review-text-card {
   align-items: flex-start; /* Left-aligns all content */
+  text-align: left;       /* Left-aligns text */
 }
 
 .section h3 {
