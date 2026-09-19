@@ -416,6 +416,7 @@ display: block;
 }
 
 .review-text-card {
+  position: relative;       /* For date/stars positioning */
   width: 100%;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -423,16 +424,12 @@ display: block;
   padding: 5px;
   box-sizing: border-box;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  flex-direction: column;   /* Stacks title/text vertically */
+  align-items: flex-start;   /* Left-aligns all content */
+  text-align: left;         /* Left-aligns text */
   font-size: 14px;
   line-height: 1.5;
   color: #333;
-}
-
-.review-text-card {
-  position: relative; /* Positioning context for date/stars */
 }
 
 /* Date: top-left corner */
@@ -450,12 +447,7 @@ display: block;
   top: 5px;
   right: 5px;
   font-size: 16px;
-  color: #000; /* Black stars */
-}
-
-.review-text-card {
-  align-items: flex-start; /* Left-aligns all content */
-  text-align: left;       /* Left-aligns text */
+  color: #000;
 }
 
 .section h3 {
