@@ -431,10 +431,6 @@ display: block;
   color: #333;
 }
 
-.review-text-card {
-  position: relative; /* Positioning context for date/stars */
-}
-
 /* Date: top-left corner */
 .review-text-card .date {
   position: absolute;
