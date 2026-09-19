@@ -374,7 +374,7 @@ display: block;
 .section {
   max-width: 1100px;  /* NEW: Controls width of all sections */
   margin: 0 auto;     /* NEW: Centers them horizontally */
-  padding: 80px 22px;
+  padding: 60px 22px;
   background: var(--background);
   border: 1px solid var(--border);
   border-radius: 10px;
