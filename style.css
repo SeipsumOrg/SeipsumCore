@@ -737,13 +737,6 @@ button:hover {
 
 }
 
- /* NEW: Widen the container for mobile */
-  .container {
-    max-width: 95%; /* Uses 95% of viewport width */
-    padding: 0 15px; /* Reduce padding slightly for more space */
-  }
-}
-
 /* ======================================== */
  /* FINAL DARK THEME FIX - ALL ISSUES        */
  /* ======================================== */
