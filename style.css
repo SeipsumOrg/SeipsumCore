@@ -290,7 +290,7 @@ display: block;
 /* ========================= */
 
 .container {
-  max-width: 1200px;   /* desktop mai aerisit */
+  max-width: 850px;   /* desktop mai aerisit */
   margin: 0 auto;
   padding: 0 15px;
 }
@@ -372,9 +372,10 @@ display: block;
 /* ========================= */
 
 .section {
+  max-width: 1100px;  /* NEW: Controls width of all sections */
+  margin: 0 auto;     /* NEW: Centers them horizontally */
   padding: 80px 22px;
-
-  background: var(--background); /* Changed from #ffffff */
+  background: var(--background);
   border: 1px solid var(--border);
   border-radius: 10px;
   box-shadow: 0 1px 6px rgba(0,0,0,0.04);
