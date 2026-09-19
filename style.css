@@ -290,7 +290,7 @@ display: block;
 /* ========================= */
 
 .container {
-  max-width: 850px;   /* desktop mai aerisit */
+  max-width: 900px;   /* desktop mai aerisit */
   margin: 0 auto;
   padding: 0 24px;
 }
