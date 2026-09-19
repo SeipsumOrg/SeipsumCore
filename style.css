@@ -454,7 +454,7 @@ display: block;
 }
 
 .review-text-card {
-  text-align: left;       /* Left-aligns text */
+  align-items: flex-start; /* Left-aligns all content */
 }
 
 .section h3 {
