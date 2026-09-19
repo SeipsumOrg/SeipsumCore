@@ -431,6 +431,10 @@ display: block;
   color: #333;
 }
 
+.review-text-card {
+  position: relative; /* Positioning context for date/stars */
+}
+
 /* Date: top-left corner */
 .review-text-card .date {
   position: absolute;
@@ -450,7 +454,6 @@ display: block;
 }
 
 .review-text-card {
-  align-items: flex-start; /* Left-aligns all content */
   text-align: left;       /* Left-aligns text */
 }
 
