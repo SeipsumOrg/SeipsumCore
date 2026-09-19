@@ -431,6 +431,28 @@ display: block;
   color: #333;
 }
 
+.review-text-card {
+  position: relative; /* Positioning context for date/stars */
+}
+
+/* Date: top-left corner */
+.review-text-card .date {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 12px;
+  color: #666;
+}
+
+/* Stars: top-right corner */
+.review-text-card .stars {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 16px;
+  color: #FFD700;
+}
+
 .section h3 {
     font-size: 20px; /* Adjust as needed */
     margin-bottom: 20px; /* Adjust as needed */
