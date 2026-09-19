@@ -691,6 +691,13 @@ button:hover {
     background: #f2f2f2;
   }
 
+   /* NEW: Add these lines HERE (inside the media query) */
+  .container {
+    max-width: 95%;
+    padding: 0 15px;
+  }
+}
+
   .section {
     margin-left: 10px;
     margin-right: 10px;
