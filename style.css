@@ -393,6 +393,8 @@ display: block;
 
 /* ===== TaskRabbit Reviews Gallery ===== */
 .review-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   display: flex;          /* Flexbox for natural flow */
   flex-wrap: wrap;        /* Allows images to wrap to next line */
   gap: 40px;             /* Space between images */
