@@ -290,7 +290,7 @@ display: block;
 /* ========================= */
 
 .container {
-  max-width: 900px;   /* desktop mai aerisit */
+  max-width: 850px;   /* desktop mai aerisit */
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -558,7 +558,7 @@ button:hover {
   margin-top: 24px;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 768px) {
   body {
     background: #f2f2f2;
   }
@@ -685,7 +685,7 @@ button:hover {
 /* HERO RESPONSIVE TITLE      */
 /* ========================= */
 
-@media (max-width: 992px) {
+@media (max-width: 768px) {
 
   body {
     background: #f2f2f2;
@@ -721,7 +721,13 @@ button:hover {
 
 /* mobile layout */
 
-@media (max-width: 992px) {
+@media (max-width: 768px) {
+
+  .container, .section {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
 
   .home-btn {
     display: none;
@@ -806,7 +812,7 @@ html.dark-theme body {
 }
 
 /* Mobile body background in dark mode */
-@media (max-width: 992px) {
+@media (max-width: 768px) {
   .dark-theme body {
     background: #1a1a1a !important;
   }
