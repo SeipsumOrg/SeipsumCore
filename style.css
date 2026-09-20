@@ -206,7 +206,7 @@ display: inline-block;
 } 
 
 .menu-dropdown { 
-max-height: 10000px; /* Arbitrarily large (practically no limit) */  
+max-height: 100vh; /* Full screen height */ 
 overflow-y: auto;
 position: absolute; /* 👈 ADD THIS */
 display: none; 
