@@ -206,13 +206,15 @@ display: inline-block;
 } 
 
 .menu-dropdown { 
-max-height: 100vh; /* Full screen height */ 
+max-height: calc(100vh - 46px); /* 100vh minus hamburger button height (46px) */
+  
 overflow-y: auto;
 position: absolute; /* 👈 ADD THIS */
 display: none; 
 padding-top: 4px; 
 
-top: 100%; 
+top: auto;
+bottom: 0; /* Positions dropdown above the hamburger if near bottom of screen */
 left: 0; 
 
 min-width: 220px; 
