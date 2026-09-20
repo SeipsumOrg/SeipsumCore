@@ -206,12 +206,11 @@ display: inline-block;
 } 
 
 .menu-dropdown { 
+max-height: 10000px; /* Arbitrarily large (practically no limit) */  
+overflow-y: auto;
 position: absolute; /* 👈 ADD THIS */
 display: none; 
 padding-top: 4px; 
-
-    
-overflow-y: auto;
 
 top: 100%; 
 left: 0; 
