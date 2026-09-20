@@ -214,7 +214,6 @@ display: none;
 padding-top: 4px; 
 
 top: auto;
-bottom: 0; /* Positions dropdown above the hamburger if near bottom of screen */
 left: 0; 
 
 min-width: 220px; 
