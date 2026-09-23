@@ -21,4 +21,4 @@ Minimal website implementation for seipsum.org
 
 ## External Link
 
-https://seipsum.org
+https://seipsum.org/?ref=github_t0
