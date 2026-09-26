@@ -1,14 +1,77 @@
-// Seipsum Analytics v7
+// Seipsum Analytics v8
 
 (function () {
   
-const ANALYTICS_VERSION = "v7";
+const ANALYTICS_VERSION = "v8";
 
 console.log(
     "Seipsum Analytics",
     ANALYTICS_VERSION,
     "booted"
 );
+
+// =========================
+// BOT / AI AGENT DETECTION
+// =========================
+
+function detectBot() {
+  const ua = navigator.userAgent || "";
+  const uaLower = ua.toLowerCase();
+
+  // Known AI crawlers (some do render JS)
+  const aiBots = [
+    "gptbot", "chatgpt-user", "oai-searchbot",
+    "claudebot", "claude-web", "anthropic-ai",
+    "perplexitybot", "perplexity-user",
+    "google-extended", "googleother",
+    "ccbot",          // Common Crawl
+    "bytespider",     // ByteDance / TikTok AI
+    "amazonbot",
+    "applebot-extended",
+    "meta-externalagent", "facebookexternalhit",
+    "omgilibot", "omgili",
+    "diffbot", "youbot", "pinterestbot",
+    "semrushbot", "ahrefsbot", "mj12bot", "dotbot" // SEO crawlers
+  ];
+
+  for (const bot of aiBots) {
+    if (uaLower.includes(bot)) {
+      return { is_bot: true, bot_name: bot, bot_category: "ai_crawler" };
+    }
+  }
+
+  // Generic search engine bots
+  const searchBots = [
+    "googlebot", "bingbot", "yandexbot",
+    "duckduckbot", "slurp", "baiduspider", "sogou"
+  ];
+  for (const bot of searchBots) {
+    if (uaLower.includes(bot)) {
+      return { is_bot: true, bot_name: bot, bot_category: "search_crawler" };
+    }
+  }
+
+  // Headless browser hints (JS-executing scrapers pretending to be human)
+  const headlessHints = [
+    "headlesschrome", "phantomjs", "electron",
+    "puppeteer", "playwright", "selenium"
+  ];
+  for (const hint of headlessHints) {
+    if (uaLower.includes(hint)) {
+      return { is_bot: true, bot_name: hint, bot_category: "headless_scraper" };
+    }
+  }
+
+  // WebDriver flag (Selenium/Puppeteer)
+  if (navigator.webdriver === true) {
+    return { is_bot: true, bot_name: "webdriver", bot_category: "headless_scraper" };
+  }
+
+  return { is_bot: false, bot_name: null, bot_category: null };
+}
+
+const botInfo = detectBot();
+  
 
 // =========================
 // SESSION ID
@@ -26,7 +89,7 @@ const sessionId =
 localStorage.setItem("seipsum_sid", sessionId);
 
 
-  // =========================
+// =========================
 // VISITOR TYPE
 // =========================
 
@@ -59,7 +122,7 @@ if (isDev) {
   return;
 }
 
- // =========================
+// =========================
 // PAGE VIEW
 // =========================
 
@@ -72,7 +135,11 @@ logEvent("page_view");
 // =========================
 // STATE
 // =========================
-
+  
+// Put near the top (state section)
+let hasMouseMoved = false;
+window.addEventListener("mousemove", () => { hasMouseMoved = true; }, { once: true });
+  
 let maxScroll = 0;
 let activeTime = 0;
 
@@ -154,7 +221,6 @@ function getPageLanguage(pathname) {
   return "UNKNOWN_EXPERIENCE";
 }
 
-  
 
 // =========================
 // EVENT LOGGER
@@ -208,6 +274,11 @@ function logEvent(type, data = {}) {
     }
   })(),
   url_ref: url_ref, // <-- Add this line to include the ref in the payload
+  
+  is_bot: botInfo.is_bot,
+  bot_name: botInfo.bot_name,
+  bot_category: botInfo.bot_category,
+  is_likely_human: botInfo.is_bot ? false : hasMouseMoved,
   
   user_agent: navigator.userAgent,
 
