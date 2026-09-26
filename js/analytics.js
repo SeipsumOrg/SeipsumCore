@@ -1,8 +1,8 @@
-// Seipsum Analytics v8
+// Seipsum Analytics v8.1
 
 (function () {
   
-const ANALYTICS_VERSION = "v8";
+const ANALYTICS_VERSION = "v8.1";
 
 console.log(
     "Seipsum Analytics",
@@ -240,6 +240,7 @@ function logEvent(type, data = {}) {
   const payload = {
   version: ANALYTICS_VERSION,
   event_id: crypto.randomUUID(),
+  source: "client",        // <-- ADD THIS LINE HERE
   type,
 
   page_raw: window.location.pathname,
