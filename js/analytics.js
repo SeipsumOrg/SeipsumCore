@@ -1,8 +1,8 @@
-// Seipsum Analytics v8.1
+// Seipsum Analytics v8.2
 
 (function () {
   
-const ANALYTICS_VERSION = "v8.1";
+const ANALYTICS_VERSION = "v8.2";
 
 console.log(
     "Seipsum Analytics",
@@ -123,6 +123,14 @@ if (isDev) {
 }
 
 // =========================
+// HUMAN SIGNAL (must be declared BEFORE any logEvent call)
+// =========================
+
+let hasMouseMoved = false;
+window.addEventListener("mousemove", () => { hasMouseMoved = true; }, { once: true });
+
+
+// =========================
 // PAGE VIEW
 // =========================
 
@@ -135,10 +143,6 @@ logEvent("page_view");
 // =========================
 // STATE
 // =========================
-  
-// Put near the top (state section)
-let hasMouseMoved = false;
-window.addEventListener("mousemove", () => { hasMouseMoved = true; }, { once: true });
   
 let maxScroll = 0;
 let activeTime = 0;
