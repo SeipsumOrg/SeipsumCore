@@ -3,8 +3,8 @@
  * Uses the browser's built-in Web Speech API (speechSynthesis).
  *
  * Features:
- *   - 🔊 Listen / ⏹ Stop button on every content section
- *   - ▶ "Listen to whole page" button (reads all sections in order)
+ *   - Listen / Stop button on every content section
+ *   - "Listen to whole page" button (reads all sections in order)
  *   - Voice picker dropdown (remembers the visitor's choice via localStorage)
  *
  * Usage:
@@ -23,21 +23,21 @@
 (function () {
   'use strict';
 
-  var SELECTOR = '.section';               // which page sections get a button
-  var BUTTON_LABEL = '\u{1F50A} Listen';   // shown before playback
-  var STOP_LABEL = '\u{26A0 Stop';          // shown during playback
-  var PAGE_LABEL = '\u{25B6} Listen to whole page';
-  var PAGE_STOP_LABEL = '\u{26A0} Stop playback';
-  var PREFERRED_LANG = 'en-US';            // voice language preference
-  var STORAGE_KEY = 'seipsum-tts-voice';   // localStorage key for voice choice
-  var BAR_ID = 'tts-bar';                  // id of the (optional) bar container
+  var SELECTOR = '.section';
+  var BUTTON_LABEL = '\uD83D\uDD0A Listen';        // loudspeaker emoji
+  var STOP_LABEL = '\u23F9 Stop';                   // stop button emoji
+  var PAGE_LABEL = '\u25B6 Listen to whole page';   // play triangle
+  var PAGE_STOP_LABEL = '\u23F9 Stop playback';
+  var PREFERRED_LANG = 'en-US';
+  var STORAGE_KEY = 'seipsum-tts-voice';
+  var BAR_ID = 'tts-bar';
 
   var synth = window.speechSynthesis;
-  var activeButton = null;   // section button currently showing "Stop"
-  var pageButton = null;     // "whole page" button
-  var pageMode = false;      // are we in sequential whole-page playback?
-  var pageQueue = [];        // remaining sections for whole-page mode
-  var chosenVoiceURI = null; // user-selected voice (voiceURI string)
+  var activeButton = null;
+  var pageButton = null;
+  var pageMode = false;
+  var pageQueue = [];
+  var chosenVoiceURI = null;
 
   // ---- voice selection: pick the best available, don't hardcode one ----
   function pickVoice(voices) {
