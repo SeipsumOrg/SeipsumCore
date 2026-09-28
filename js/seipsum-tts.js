@@ -3,105 +3,96 @@
  * Uses the browser's built-in Web Speech API (speechSynthesis).
  *
  * Features:
- *   - Listen / Stop button on every content section
+ *   - Play / Pause / Resume button on every content section
+ *   - Back 30s / Forward 30s buttons (sentence-level seeking)
+ *   - Reading speed selector (persisted per visitor)
  *   - "Listen to whole page" button (reads all sections in order)
- *   - Voice picker dropdown (remembers the visitor's choice via localStorage)
+ *   - Voice picker, auto-matched to the page language (html lang="...")
+ *     and remembered per language
  *
  * Usage:
  *   <script src="/js/seipsum-tts.js" defer></script>
  *
  * By default it adds buttons to every element with class "section".
- * Change SELECTOR below to match your markup, e.g.
- * 'section', 'article', '.post', 'main > div'.
+ * Change SELECTOR below to match your markup.
  *
- * The voice picker and "whole page" button are inserted in a bar
- * right above the first section. Alternatively, place
- *   <div id="tts-bar"></div>
- * anywhere on the page to choose the bar's location yourself.
+ * The control bar (voice + speed + whole page) is inserted right above
+ * the first section, or use <div id="tts-bar"></div> to place it yourself.
+ *
+ * NOTE on seeking: speechSynthesis has no real audio position, so
+ * "Back/Forward 30s" jumps by an estimated 30 seconds' worth of
+ * sentences (it lands on a sentence boundary, which reads naturally).
  */
 
 (function () {
   'use strict';
 
   var SELECTOR = '.section';
-  var BUTTON_LABEL = '\uD83D\uDD0A Listen';        // loudspeaker emoji
-  var STOP_LABEL = '\u23F9 Stop';                   // stop button emoji
-  var PAGE_LABEL = '\u25B6 Listen to whole page';   // play triangle
+
+  // --- labels ---
+  var PLAY_LABEL = '\u25B6 Listen';
+  var PAUSE_LABEL = '\u23F8 Pause';
+  var RESUME_LABEL = '\u25B6 Resume';
+  var STOP_LABEL = '\u23F9 Stop';
+  var BACK_LABEL = '\u23EA 30s';
+  var FWD_LABEL = '\u23E9 30s';
+  var PAGE_LABEL = '\u25B6 Listen to whole page';
+  var PAGE_PAUSE_LABEL = '\u23F8 Pause page';
   var PAGE_STOP_LABEL = '\u23F9 Stop playback';
+
   var BAR_ID = 'tts-bar';
 
-  // Map base language -> preferred full locale (add more here if needed)
-  var LANG_PREFS = {
-    en: 'en-US',
-    ro: 'ro-RO'
-  };
+  // --- language handling ---
+  var LANG_PREFS = { en: 'en-US', ro: 'ro-RO' };
   var DEFAULT_LANG = 'en';
 
-  // Current page language: from <html lang="...">, falling back to DEFAULT_LANG
   function pageLang() {
     var lang = (document.documentElement.lang || DEFAULT_LANG).toLowerCase();
     return LANG_PREFS[lang] ? lang : DEFAULT_LANG;
   }
 
+  function storageKey(kind, lang) {
+    return 'seipsum-tts-' + kind + '-' + lang;
+  }
+
+  // --- reading speed ---
+  var SPEEDS = [0.75, 0.9, 1, 1.1, 1.25, 1.5];
+  var rate = 0.95; // fallback; replaced by saved/default at init
+  var rateSelect = null;
+
+  // --- state ---
   var synth = window.speechSynthesis;
-  var activeButton = null;
+  var CUR_LANG = 'en';
+  var PREFERRED_LANG = 'en-US';
+  var chosenVoiceURI = {};  // per language: { en: 'voiceURI', ro: '...' }
+
+  // A playback session = ordered sentence chunks + a position.
+  // kind: 'section' | 'page'
+  var session = null;
+  // { kind, chunks:[{text, sectionEl}], idx, paused, playing,
+  //   button, isPageButton }
   var pageButton = null;
-  var pageMode = false;
-  var pageQueue = [];
-  var chosenVoiceURI = {};  // saved voice per language, e.g. { en: '...', ro: '...' }
-  var CUR_LANG = null;      // resolved once at init: 'en' or 'ro'
-  var PREFERRED_LANG = 'en-US'; // full locale for CUR_LANG, set at init
 
-  function storageKey(lang) {
-    return 'seipsum-tts-voice-' + lang;
-  }
+  // ---------- text preparation ----------
 
-  // ---- voice selection: pick the best available, don't hardcode one ----
-  function pickVoice(voices) {
-    var ranked = voices.filter(function (v) {
-      return v.lang && v.lang.toLowerCase().indexOf(CUR_LANG) === 0;
-    });
-    if (!ranked.length) ranked = voices.filter(function (v) {
-      return v.lang && v.lang.toLowerCase().indexOf(PREFERRED_LANG) === 0;
-    });
-    if (!ranked.length) return null;
-    var score = function (v) {
-      var s = 0;
-      if (v.lang === PREFERRED_LANG) s += 10;
-      if (/google/i.test(v.name)) s += 5;
-      if (/natural|neural|premium|enhanced/i.test(v.name)) s += 5;
-      if (v.localService) s += 3;
-      return s;
-    };
-    return ranked.slice().sort(function (a, b) { return score(b) - score(a); })[0];
-  }
-
-  // The voice to actually use: the user's saved pick for this language
-  // if valid, else the auto-selected best voice for this language.
-  function currentVoice() {
-    var voices = synth.getVoices();
-    if (!voices.length) return null;
-    var saved = chosenVoiceURI[CUR_LANG];
-    if (saved) {
-      for (var i = 0; i < voices.length; i++) {
-        if (voices[i].voiceURI === saved) return voices[i];
+  // Split text into sentence-ish chunks (with section reference).
+  function splitChunks(text, sectionEl) {
+    var parts = text
+      .replace(/([.!?])\s+/g, '$1\u0001')
+      .replace(/([:;])\s+/g, '$1\u0001')
+      .split('\u0001');
+    var chunks = [];
+    for (var i = 0; i < parts.length; i++) {
+      var t = parts[i].trim();
+      if (!t) continue;
+      // merge very short fragments into the previous chunk
+      if (chunks.length && t.length < 20) {
+        chunks[chunks.length - 1].text += ' ' + t;
+      } else {
+        chunks.push({ text: t, sectionEl: sectionEl });
       }
     }
-    return pickVoice(voices);
-  }
-
-  function resetButtonState() {
-    if (activeButton) {
-      activeButton.textContent = BUTTON_LABEL;
-      activeButton.dataset.speaking = 'false';
-      activeButton = null;
-    }
-    if (pageButton) {
-      pageButton.textContent = PAGE_LABEL;
-      pageButton.dataset.speaking = 'false';
-    }
-    pageMode = false;
-    pageQueue = [];
+    return chunks;
   }
 
   // Extract the readable text of a section (strip buttons/nav).
@@ -116,98 +107,199 @@
       .trim();
   }
 
-  function speak(text, onDone) {
-    // Stop anything already playing (one section at a time)
-    synth.cancel();
+  // ---------- voices ----------
 
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = PREFERRED_LANG;
+  function scoreVoice(v) {
+    var s = 0;
+    if (v.lang && v.lang.toLowerCase() === PREFERRED_LANG.toLowerCase()) s += 10;
+    if (/google/i.test(v.name)) s += 5;
+    if (/natural|neural|premium|enhanced/i.test(v.name)) s += 5;
+    if (v.localService) s += 3;
+    return s;
+  }
+
+  function pickVoice(voices) {
+    var ranked = voices.filter(function (v) {
+      return v.lang && v.lang.toLowerCase().indexOf(CUR_LANG) === 0;
+    });
+    if (!ranked.length) ranked = voices.filter(function (v) {
+      return v.lang && v.lang.toLowerCase().indexOf(PREFERRED_LANG) === 0;
+    });
+    if (!ranked.length) return null;
+    return ranked.slice().sort(function (a, b) {
+      return scoreVoice(b) - scoreVoice(a);
+    })[0];
+  }
+
+  function currentVoice() {
+    var voices = synth.getVoices();
+    if (!voices.length) return null;
+    var saved = chosenVoiceURI[CUR_LANG];
+    if (saved) {
+      for (var i = 0; i < voices.length; i++) {
+        if (voices[i].voiceURI === saved) return voices[i];
+      }
+    }
+    return pickVoice(voices);
+  }
+
+  // ---------- session engine ----------
+
+  function stopAll() {
+    synth.cancel();
+    session = null;
+    clearHighlight();
+    syncButtons();
+  }
+
+  function clearHighlight() {
+    var prev = document.querySelector('.tts-active');
+    if (prev) prev.classList.remove('tts-active');
+  }
+
+  function highlightSection(el) {
+    if (!el) return;
+    if (!el.classList.contains('tts-active')) {
+      clearHighlight();
+      el.classList.add('tts-active');
+    }
+  }
+
+  // Speak the chunk at session.idx, then advance.
+  function speakCurrent() {
+    if (!session) return;
+    if (session.idx >= session.chunks.length) {
+      // finished
+      var wasPage = session.kind === 'page';
+      stopAll();
+      return;
+    }
+    var chunk = session.chunks[session.idx];
+    highlightSection(chunk.sectionEl);
+
+    var u = new SpeechSynthesisUtterance(chunk.text);
     var voice = currentVoice();
     if (voice) {
       u.voice = voice;
       u.lang = voice.lang;
+    } else {
+      u.lang = PREFERRED_LANG;
     }
-    u.rate = 0.95; // slightly slower reads better for dense prose
-
-    u.onend = onDone || null;
-    u.onerror = onDone || null;
-
+    u.rate = rate;
+    u.onend = function () {
+      if (!session || session.paused) return;
+      session.idx++;
+      speakCurrent();
+    };
+    u.onerror = function () {
+      if (!session) return;
+      session.idx = session.chunks.length; // don't loop on error
+      stopAll();
+    };
     synth.speak(u);
   }
 
-  // ---------- section playback ----------
+  function startSession(chunks, kind, button) {
+    synth.cancel();
+    clearHighlight();
+    session = {
+      kind: kind,
+      chunks: chunks,
+      idx: 0,
+      paused: false,
+      playing: true,
+      button: button || null,
+      isPageButton: kind === 'page'
+    };
+    syncButtons();
+    speakCurrent();
+  }
 
   function playSection(section, button) {
-    synth.cancel();
-    resetButtonState();
-    activeButton = button;
-    button.textContent = STOP_LABEL;
-    button.dataset.speaking = 'true';
     var text = sectionText(section);
-    if (text) {
-      speak(text, resetButtonState);
-    } else {
-      resetButtonState();
-    }
+    if (!text) return;
+    startSession(splitChunks(text, section), 'section', button);
   }
-
-  function toggle(section, button) {
-    if (button.dataset.speaking === 'true' && synth.speaking) {
-      synth.cancel();
-      resetButtonState();
-    } else {
-      playSection(section, button);
-    }
-  }
-
-  // ---------- whole page playback ----------
 
   function playWholePage(sections) {
-    synth.cancel();
-    resetButtonState();
-    pageMode = true;
-    if (pageButton) {
-      pageButton.textContent = PAGE_STOP_LABEL;
-      pageButton.dataset.speaking = 'true';
-    }
-    pageQueue = Array.prototype.slice.call(sections);
-
-    function next() {
-      if (!pageMode || !pageQueue.length) {
-        resetButtonState();
-        return;
-      }
-      var section = pageQueue.shift();
-      // highlight the section currently being read
-      var prev = document.querySelector('.tts-active');
-      if (prev) prev.classList.remove('tts-active');
-      section.classList.add('tts-active');
+    var chunks = [];
+    sections.forEach(function (section) {
       var text = sectionText(section);
-      if (text) {
-        speak(text, next);
-      } else {
-        next();
+      if (text) chunks = chunks.concat(splitChunks(text, section));
+    });
+    if (!chunks.length) return;
+    startSession(chunks, 'page', pageButton);
+  }
+
+  // Pause / resume
+  function togglePause() {
+    if (!session) return;
+    if (session.paused) {
+      session.paused = false;
+      synth.resume();
+      // Some browsers forget the queue on resume; if nothing is
+      // speaking, re-speak the current chunk from its start.
+      if (!synth.speaking) speakCurrent();
+    } else {
+      session.paused = true;
+      synth.pause();
+    }
+    syncButtons();
+  }
+
+  // Seek by ~seconds worth of sentences (estimated at ~15 chars/sec * rate).
+  function seek(seconds) {
+    if (!session) return;
+    var wasPaused = session.paused;
+    var budget = Math.round(seconds * 15 * rate); // chars to skip
+    var idx = session.idx;
+    if (seconds > 0) {
+      var acc = 0;
+      while (idx < session.chunks.length - 1) {
+        acc += session.chunks[idx].text.length + 1;
+        idx++;
+        if (acc >= budget) break;
+      }
+    } else {
+      var acc2 = 0;
+      while (idx > 0) {
+        idx--;
+        acc2 += session.chunks[idx].text.length + 1;
+        if (acc2 >= budget) break;
       }
     }
-    next();
+    session.idx = idx;
+    session.paused = false;
+    synth.cancel();
+    speakCurrent();
+    if (wasPaused) { /* stay playing after a seek */ }
+    syncButtons();
   }
 
-  function togglePage(sections) {
-    if (pageMode) {
-      synth.cancel();
-      resetButtonState();
-    } else {
-      playWholePage(sections);
+  // ---------- button labels ----------
+
+  function syncButtons() {
+    // Section buttons: reset everything first
+    document.querySelectorAll('.tts-btn.tts-play').forEach(function (b) {
+      b.textContent = PLAY_LABEL;
+    });
+    if (session && session.button && !session.isPageButton) {
+      session.button.textContent = session.paused ? RESUME_LABEL
+        : (session.idx >= session.chunks.length ? PLAY_LABEL : PAUSE_LABEL);
+    }
+    if (pageButton) {
+      pageButton.textContent = PAGE_LABEL;
+    }
+    if (session && session.isPageButton && pageButton) {
+      pageButton.textContent = session.paused ? RESUME_LABEL : PAGE_PAUSE_LABEL;
     }
   }
 
-  // ---------- control bar (voice picker + whole page button) ----------
+  // ---------- control bar ----------
 
   function buildVoicePicker(select) {
     function fill() {
       var voices = synth.getVoices();
-      // Show only voices for the current page language first,
-      // then any other voices below a separator.
       var mine = voices.filter(function (v) {
         return v.lang && v.lang.toLowerCase().indexOf(CUR_LANG) === 0;
       });
@@ -236,25 +328,48 @@
       if (cur) select.value = cur.voiceURI;
     }
     fill();
-    // Chrome populates the voice list asynchronously
     if (typeof synth.onvoiceschanged !== 'undefined') {
       synth.onvoiceschanged = fill;
     }
     select.addEventListener('change', function () {
       chosenVoiceURI[CUR_LANG] = select.value;
       try {
-        localStorage.setItem(storageKey(CUR_LANG), select.value);
-      } catch (e) { /* private mode etc. */ }
-      // stop current playback; press Listen again for the new voice
-      if (synth.speaking) {
+        localStorage.setItem(storageKey('voice', CUR_LANG), select.value);
+      } catch (e) {}
+      if (session) {
+        // re-speak the current sentence with the new voice
         synth.cancel();
-        resetButtonState();
+        speakCurrent();
       }
     });
   }
 
+  function buildRateSelect() {
+    rateSelect = document.createElement('select');
+    rateSelect.className = 'tts-rate-select';
+    rateSelect.setAttribute('aria-label', 'Reading speed');
+    SPEEDS.forEach(function (s) {
+      var opt = document.createElement('option');
+      opt.value = String(s);
+      opt.textContent = s + '\u00D7';
+      rateSelect.appendChild(opt);
+    });
+    rateSelect.value = String(rate);
+    rateSelect.addEventListener('change', function () {
+      rate = parseFloat(rateSelect.value);
+      try {
+        localStorage.setItem('seipsum-tts-rate', String(rate));
+      } catch (e) {}
+      if (session && !session.paused) {
+        // apply immediately: re-speak the current sentence at new speed
+        synth.cancel();
+        speakCurrent();
+      }
+    });
+    return rateSelect;
+  }
+
   function buildBar(sections) {
-    // Use an existing <div id="tts-bar"> if present, else create one
     var bar = document.getElementById(BAR_ID);
     if (!bar) {
       bar = document.createElement('div');
@@ -273,33 +388,57 @@
     buildVoicePicker(select);
     bar.appendChild(select);
 
+    var rateLabel = document.createElement('span');
+    rateLabel.className = 'tts-voice-label';
+    rateLabel.textContent = 'Speed:';
+    bar.appendChild(rateLabel);
+    bar.appendChild(buildRateSelect());
+
     pageButton = document.createElement('button');
     pageButton.type = 'button';
     pageButton.className = 'tts-btn tts-page-btn';
     pageButton.textContent = PAGE_LABEL;
     pageButton.setAttribute('aria-label', 'Listen to the whole page');
-    pageButton.dataset.speaking = 'false';
-    pageButton.addEventListener('click', function () { togglePage(sections); });
+    pageButton.addEventListener('click', function () {
+      if (!session) {
+        playWholePage(sections);
+      } else if (session.isPageButton) {
+        // playing the whole page: first click pauses, second stops
+        if (session.paused) {
+          togglePause();
+        } else if (session.stopArmed) {
+          stopAll();
+        } else {
+          togglePause();
+          session.stopArmed = true;
+          pageButton.textContent = STOP_LABEL;
+        }
+      } else {
+        // a section is playing; switch to whole page
+        playWholePage(sections);
+      }
+    });
     bar.appendChild(pageButton);
   }
 
-  function init() {
-    if (!('speechSynthesis' in window)) return; // browser too old: hide feature
+  // ---------- init ----------
 
-    // Resolve the page language once (from <html lang="...">)
+  function init() {
+    if (!('speechSynthesis' in window)) return;
+
     CUR_LANG = pageLang();
     PREFERRED_LANG = LANG_PREFS[CUR_LANG];
 
-    // Restore the visitor's saved voice choice for this language
     try {
-      chosenVoiceURI[CUR_LANG] = localStorage.getItem(storageKey(CUR_LANG));
-    } catch (e) { chosenVoiceURI[CUR_LANG] = null; }
+      chosenVoiceURI[CUR_LANG] =
+        localStorage.getItem(storageKey('voice', CUR_LANG));
+      var savedRate = parseFloat(localStorage.getItem('seipsum-tts-rate'));
+      rate = SPEEDS.indexOf(savedRate) !== -1 ? savedRate : 0.95;
+    } catch (e) { rate = 0.95; }
 
-    // Some browsers load voices asynchronously; prime the list early.
     synth.getVoices();
 
-    // Only top-level sections: skip sections nested inside another section,
-    // so a "section in section" gets exactly one button and is read once.
+    // Only top-level sections (skip sections nested in sections)
     var all = document.querySelectorAll(SELECTOR);
     var sections = [];
     for (var i = 0; i < all.length; i++) {
@@ -311,19 +450,52 @@
     if (!sections.length) return;
 
     sections.forEach(function (section) {
-      var btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'tts-btn';
-      btn.textContent = BUTTON_LABEL;
-      btn.setAttribute('aria-label', 'Listen to this section');
-      btn.dataset.speaking = 'false';
-      btn.addEventListener('click', function () { toggle(section, btn); });
-      section.insertBefore(btn, section.firstChild);
+      var controls = document.createElement('div');
+      controls.className = 'tts-controls';
+
+      var back = document.createElement('button');
+      back.type = 'button';
+      back.className = 'tts-btn tts-seek';
+      back.textContent = BACK_LABEL;
+      back.setAttribute('aria-label', 'Go back 30 seconds');
+      back.addEventListener('click', function () {
+        if (session && !session.isPageButton) seek(-30);
+      });
+
+      var play = document.createElement('button');
+      play.type = 'button';
+      play.className = 'tts-btn tts-play';
+      play.textContent = PLAY_LABEL;
+      play.setAttribute('aria-label', 'Listen to this section');
+      play.addEventListener('click', function () {
+        if (session && !session.isPageButton && session.button === play) {
+          if (session.idx >= session.chunks.length) {
+            playSection(section, play); // finished: start over
+          } else {
+            togglePause();
+          }
+        } else {
+          playSection(section, play);
+        }
+      });
+
+      var fwd = document.createElement('button');
+      fwd.type = 'button';
+      fwd.className = 'tts-btn tts-seek';
+      fwd.textContent = FWD_LABEL;
+      fwd.setAttribute('aria-label', 'Forward 30 seconds');
+      fwd.addEventListener('click', function () {
+        if (session && !session.isPageButton) seek(30);
+      });
+
+      controls.appendChild(play);
+      controls.appendChild(back);
+      controls.appendChild(fwd);
+      section.insertBefore(controls, section.firstChild);
     });
 
     buildBar(sections);
 
-    // Stop reading if the visitor leaves the page
     window.addEventListener('beforeunload', function () { synth.cancel(); });
   }
 
