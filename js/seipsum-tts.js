@@ -253,7 +253,16 @@
     // Some browsers load voices asynchronously; prime the list early.
     synth.getVoices();
 
-    var sections = document.querySelectorAll(SELECTOR);
+    // Only top-level sections: skip sections nested inside another section,
+    // so a "section in section" gets exactly one button and is read once.
+    var all = document.querySelectorAll(SELECTOR);
+    var sections = [];
+    for (var i = 0; i < all.length; i++) {
+      if (!all[i].parentElement ||
+          !all[i].parentElement.closest(SELECTOR)) {
+        sections.push(all[i]);
+      }
+    }
     if (!sections.length) return;
 
     sections.forEach(function (section) {
