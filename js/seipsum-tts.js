@@ -4,7 +4,6 @@
  *
  * Features:
  *   - Play / Pause / Resume button on every content section
- *   - Back 30s / Forward 30s buttons (sentence-level seeking)
  *   - Reading speed selector (persisted per visitor)
  *   - "Listen to whole page" button (reads all sections in order)
  *   - Voice picker, auto-matched to the page language (html lang="...")
@@ -18,10 +17,6 @@
  *
  * The control bar (voice + speed + whole page) is inserted right above
  * the first section, or use <div id="tts-bar"></div> to place it yourself.
- *
- * NOTE on seeking: speechSynthesis has no real audio position, so
- * "Back/Forward 30s" jumps by an estimated 30 seconds' worth of
- * sentences (it lands on a sentence boundary, which reads naturally).
  */
 
 (function () {
@@ -34,8 +29,6 @@
   var PAUSE_LABEL = '\u23F8 Pause';
   var RESUME_LABEL = '\u25B6 Resume';
   var STOP_LABEL = '\u23F9 Stop';
-  var BACK_LABEL = '\u23EA 30s';
-  var FWD_LABEL = '\u23E9 30s';
   var PAGE_LABEL = '\u25B6 Listen to whole page';
   var PAGE_PAUSE_LABEL = '\u23F8 Pause page';
   var PAGE_STOP_LABEL = '\u23F9 Stop playback';
@@ -247,35 +240,6 @@
     syncButtons();
   }
 
-  // Seek by ~seconds worth of sentences (estimated at ~15 chars/sec * rate).
-  function seek(seconds) {
-    if (!session) return;
-    var wasPaused = session.paused;
-    var budget = Math.round(seconds * 15 * rate); // chars to skip
-    var idx = session.idx;
-    if (seconds > 0) {
-      var acc = 0;
-      while (idx < session.chunks.length - 1) {
-        acc += session.chunks[idx].text.length + 1;
-        idx++;
-        if (acc >= budget) break;
-      }
-    } else {
-      var acc2 = 0;
-      while (idx > 0) {
-        idx--;
-        acc2 += session.chunks[idx].text.length + 1;
-        if (acc2 >= budget) break;
-      }
-    }
-    session.idx = idx;
-    session.paused = false;
-    synth.cancel();
-    speakCurrent();
-    if (wasPaused) { /* stay playing after a seek */ }
-    syncButtons();
-  }
-
   // ---------- button labels ----------
 
   function syncButtons() {
@@ -453,15 +417,6 @@
       var controls = document.createElement('div');
       controls.className = 'tts-controls';
 
-      var back = document.createElement('button');
-      back.type = 'button';
-      back.className = 'tts-btn tts-seek';
-      back.textContent = BACK_LABEL;
-      back.setAttribute('aria-label', 'Go back 30 seconds');
-      back.addEventListener('click', function () {
-        if (session && !session.isPageButton) seek(-30);
-      });
-
       var play = document.createElement('button');
       play.type = 'button';
       play.className = 'tts-btn tts-play';
@@ -479,18 +434,7 @@
         }
       });
 
-      var fwd = document.createElement('button');
-      fwd.type = 'button';
-      fwd.className = 'tts-btn tts-seek';
-      fwd.textContent = FWD_LABEL;
-      fwd.setAttribute('aria-label', 'Forward 30 seconds');
-      fwd.addEventListener('click', function () {
-        if (session && !session.isPageButton) seek(30);
-      });
-
       controls.appendChild(play);
-      controls.appendChild(back);
-      controls.appendChild(fwd);
       section.insertBefore(controls, section.firstChild);
     });
 
