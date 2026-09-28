@@ -913,3 +913,94 @@ html.dark-theme .language-switch a {
   border-bottom-color: #f0f0f0 !important;
 }
 
+/* ========================= */
+/* TTS AUDIO PLAYBACK        */
+/* ========================= */
+
+/* Control bar (voice picker + whole-page button) */
+#tts-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 30px;
+  padding: 12px 16px;
+  max-width: 1100px;              /* matches .section width */
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.tts-voice-label {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.tts-voice-select {
+  width: auto;                    /* override 100% from global input/select rule */
+  max-width: 260px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  background: var(--background);
+  color: var(--text);
+}
+
+/* TTS buttons — override global `button` accent style */
+.tts-btn {
+  margin-top: 0;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.tts-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+  opacity: 1;
+}
+
+/* Section-level Listen button sits top-left of each section */
+.section > .tts-btn {
+  display: inline-block;
+  margin-bottom: 18px;
+}
+
+/* Subtle highlight for the section currently being read */
+.tts-active {
+  box-shadow: 0 0 0 2px var(--accent) !important;
+}
+
+/* --- Dark mode (matches your .dark-theme pattern) --- */
+.dark-theme .tts-btn,
+.dark-theme .tts-voice-select {
+  background: transparent !important;
+  color: #f0f0f0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.dark-theme .tts-btn:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark-theme .tts-voice-label {
+  color: #aaa !important;
+}
+
+/* Mobile: keep the bar tidy */
+@media (max-width: 768px) {
+  #tts-bar {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .tts-voice-select {
+    max-width: 100%;
+  }
+}
