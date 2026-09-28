@@ -28,21 +28,41 @@
   var STOP_LABEL = '\u23F9 Stop';                   // stop button emoji
   var PAGE_LABEL = '\u25B6 Listen to whole page';   // play triangle
   var PAGE_STOP_LABEL = '\u23F9 Stop playback';
-  var PREFERRED_LANG = 'en-US';
-  var STORAGE_KEY = 'seipsum-tts-voice';
   var BAR_ID = 'tts-bar';
+
+  // Map base language -> preferred full locale (add more here if needed)
+  var LANG_PREFS = {
+    en: 'en-US',
+    ro: 'ro-RO'
+  };
+  var DEFAULT_LANG = 'en';
+
+  // Current page language: from <html lang="...">, falling back to DEFAULT_LANG
+  function pageLang() {
+    var lang = (document.documentElement.lang || DEFAULT_LANG).toLowerCase();
+    return LANG_PREFS[lang] ? lang : DEFAULT_LANG;
+  }
 
   var synth = window.speechSynthesis;
   var activeButton = null;
   var pageButton = null;
   var pageMode = false;
   var pageQueue = [];
-  var chosenVoiceURI = null;
+  var chosenVoiceURI = {};  // saved voice per language, e.g. { en: '...', ro: '...' }
+  var CUR_LANG = null;      // resolved once at init: 'en' or 'ro'
+  var PREFERRED_LANG = 'en-US'; // full locale for CUR_LANG, set at init
+
+  function storageKey(lang) {
+    return 'seipsum-tts-voice-' + lang;
+  }
 
   // ---- voice selection: pick the best available, don't hardcode one ----
   function pickVoice(voices) {
     var ranked = voices.filter(function (v) {
-      return v.lang && v.lang.indexOf(PREFERRED_LANG.slice(0, 2)) === 0;
+      return v.lang && v.lang.toLowerCase().indexOf(CUR_LANG) === 0;
+    });
+    if (!ranked.length) ranked = voices.filter(function (v) {
+      return v.lang && v.lang.toLowerCase().indexOf(PREFERRED_LANG) === 0;
     });
     if (!ranked.length) return null;
     var score = function (v) {
@@ -56,13 +76,15 @@
     return ranked.slice().sort(function (a, b) { return score(b) - score(a); })[0];
   }
 
-  // The voice to actually use: the user's pick if valid, else the best one.
+  // The voice to actually use: the user's saved pick for this language
+  // if valid, else the auto-selected best voice for this language.
   function currentVoice() {
     var voices = synth.getVoices();
     if (!voices.length) return null;
-    if (chosenVoiceURI) {
+    var saved = chosenVoiceURI[CUR_LANG];
+    if (saved) {
       for (var i = 0; i < voices.length; i++) {
-        if (voices[i].voiceURI === chosenVoiceURI) return voices[i];
+        if (voices[i].voiceURI === saved) return voices[i];
       }
     }
     return pickVoice(voices);
@@ -184,13 +206,32 @@
   function buildVoicePicker(select) {
     function fill() {
       var voices = synth.getVoices();
+      // Show only voices for the current page language first,
+      // then any other voices below a separator.
+      var mine = voices.filter(function (v) {
+        return v.lang && v.lang.toLowerCase().indexOf(CUR_LANG) === 0;
+      });
+      var others = voices.filter(function (v) { return mine.indexOf(v) === -1; });
+
       select.innerHTML = '';
-      voices.forEach(function (v) {
+      mine.forEach(function (v) {
         var opt = document.createElement('option');
         opt.value = v.voiceURI;
         opt.textContent = v.name + ' (' + v.lang + ')';
         select.appendChild(opt);
       });
+      if (others.length) {
+        var sep = document.createElement('option');
+        sep.disabled = true;
+        sep.textContent = '--- other languages ---';
+        select.appendChild(sep);
+        others.forEach(function (v) {
+          var opt = document.createElement('option');
+          opt.value = v.voiceURI;
+          opt.textContent = v.name + ' (' + v.lang + ')';
+          select.appendChild(opt);
+        });
+      }
       var cur = currentVoice();
       if (cur) select.value = cur.voiceURI;
     }
@@ -200,9 +241,9 @@
       synth.onvoiceschanged = fill;
     }
     select.addEventListener('change', function () {
-      chosenVoiceURI = select.value;
+      chosenVoiceURI[CUR_LANG] = select.value;
       try {
-        localStorage.setItem(STORAGE_KEY, chosenVoiceURI);
+        localStorage.setItem(storageKey(CUR_LANG), select.value);
       } catch (e) { /* private mode etc. */ }
       // stop current playback; press Listen again for the new voice
       if (synth.speaking) {
@@ -245,10 +286,14 @@
   function init() {
     if (!('speechSynthesis' in window)) return; // browser too old: hide feature
 
-    // Restore the visitor's saved voice choice
+    // Resolve the page language once (from <html lang="...">)
+    CUR_LANG = pageLang();
+    PREFERRED_LANG = LANG_PREFS[CUR_LANG];
+
+    // Restore the visitor's saved voice choice for this language
     try {
-      chosenVoiceURI = localStorage.getItem(STORAGE_KEY);
-    } catch (e) { chosenVoiceURI = null; }
+      chosenVoiceURI[CUR_LANG] = localStorage.getItem(storageKey(CUR_LANG));
+    } catch (e) { chosenVoiceURI[CUR_LANG] = null; }
 
     // Some browsers load voices asynchronously; prime the list early.
     synth.getVoices();
