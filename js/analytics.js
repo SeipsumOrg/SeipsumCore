@@ -1,13 +1,13 @@
-// Seipsum Analytics v8.2
+// Seipsum Analytics v8.3
 
 (function () {
-  
-const ANALYTICS_VERSION = "v8.2";
+
+const ANALYTICS_VERSION = "v8.3";
 
 console.log(
-    "Seipsum Analytics",
-    ANALYTICS_VERSION,
-    "booted"
+  "Seipsum Analytics",
+  ANALYTICS_VERSION,
+  "booted"
 );
 
 // =========================
@@ -18,20 +18,17 @@ function detectBot() {
   const ua = navigator.userAgent || "";
   const uaLower = ua.toLowerCase();
 
-  // Known AI crawlers (some do render JS)
   const aiBots = [
     "gptbot", "chatgpt-user", "oai-searchbot",
     "claudebot", "claude-web", "anthropic-ai",
     "perplexitybot", "perplexity-user",
     "google-extended", "googleother",
-    "ccbot",          // Common Crawl
-    "bytespider",     // ByteDance / TikTok AI
-    "amazonbot",
-    "applebot-extended",
+    "ccbot", "bytespider",
+    "amazonbot", "applebot-extended",
     "meta-externalagent", "facebookexternalhit",
     "omgilibot", "omgili",
     "diffbot", "youbot", "pinterestbot",
-    "semrushbot", "ahrefsbot", "mj12bot", "dotbot" // SEO crawlers
+    "semrushbot", "ahrefsbot", "mj12bot", "dotbot"
   ];
 
   for (const bot of aiBots) {
@@ -40,7 +37,6 @@ function detectBot() {
     }
   }
 
-  // Generic search engine bots
   const searchBots = [
     "googlebot", "bingbot", "yandexbot",
     "duckduckbot", "slurp", "baiduspider", "sogou"
@@ -51,7 +47,6 @@ function detectBot() {
     }
   }
 
-  // Headless browser hints (JS-executing scrapers pretending to be human)
   const headlessHints = [
     "headlesschrome", "phantomjs", "electron",
     "puppeteer", "playwright", "selenium"
@@ -62,7 +57,6 @@ function detectBot() {
     }
   }
 
-  // WebDriver flag (Selenium/Puppeteer)
   if (navigator.webdriver === true) {
     return { is_bot: true, bot_name: "webdriver", bot_category: "headless_scraper" };
   }
@@ -71,7 +65,6 @@ function detectBot() {
 }
 
 const botInfo = detectBot();
-  
 
 // =========================
 // SESSION ID
@@ -88,7 +81,6 @@ const sessionId =
 
 localStorage.setItem("seipsum_sid", sessionId);
 
-
 // =========================
 // VISITOR TYPE
 // =========================
@@ -102,16 +94,14 @@ const visitorType =
     : "new_visitor";
 
 if (!firstVisit) {
-
   localStorage.setItem(
     "seipsum_first_visit",
     Date.now()
   );
-
 }
 
 // =========================
-// DEV MODE 
+// DEV MODE
 // =========================
 
 const isDev =
@@ -129,7 +119,6 @@ if (isDev) {
 let hasMouseMoved = false;
 window.addEventListener("mousemove", () => { hasMouseMoved = true; }, { once: true });
 
-
 // =========================
 // PAGE VIEW
 // =========================
@@ -143,19 +132,21 @@ logEvent("page_view");
 // =========================
 // STATE
 // =========================
-  
+
 let maxScroll = 0;
 let activeTime = 0;
 
-const pageEnterTime = Date.now();  
+const pageEnterTime = Date.now();
 let lastFocusedSection = null;
 let lastSelection = "";
 
-// cache sections once
 const sections = document.querySelectorAll("section");
-  
 
-   function normalizePage(page) {
+// =========================
+// HELPERS
+// =========================
+
+function normalizePage(page) {
   if (!page) return "/";
 
   page = page.split("?")[0];
@@ -175,12 +166,11 @@ const sections = document.querySelectorAll("section");
   return page;
 }
 
- function normalizeLanguage(lang) {
+function normalizeLanguage(lang) {
   if (!lang) return "unknown";
 
   const base = lang.split('-')[0].toLowerCase();
 
-  // explicit language mapping layer
   switch (base) {
     case "ro":
       return "ro";
@@ -206,25 +196,22 @@ function getPageLanguage(pathname) {
   return "ro";
 }
 
-  function getBrowserLanguage() {
-
+function getBrowserLanguage() {
   return (
     navigator.language ||
     "unknown"
   ).toLowerCase();
 }
-  
-  function getExperienceCluster(language) {
+
+function getExperienceCluster(language) {
 
   const l = normalizeLanguage(language);
 
   if (l === "ro") return "RO_EXPERIENCE";
-
   if (l === "en") return "EN_EXPERIENCE";
 
   return "UNKNOWN_EXPERIENCE";
 }
-
 
 // =========================
 // EVENT LOGGER
@@ -237,93 +224,85 @@ function logEvent(type, data = {}) {
     const page_language = getPageLanguage(window.location.pathname);
     const browser_language = getBrowserLanguage();
 
-    // Extract the 'ref' parameter from the URL
     const urlParams = new URLSearchParams(window.location.search);
-    const url_ref = urlParams.get('ref') || null; // <-- Add this line
+    const url_ref = urlParams.get('ref') || null;
 
-  const payload = {
-  version: ANALYTICS_VERSION,
-  event_id: crypto.randomUUID(),
-  source: "client",        // <-- ADD THIS LINE HERE
-  type,
+    const payload = {
+      version: ANALYTICS_VERSION,
+      event_id: crypto.randomUUID(),
+      source: "client",
+      type,
 
-  page_raw: window.location.pathname,
-  page: normalizePage(window.location.pathname),
-  canonical_page: normalizePage(window.location.pathname),
+      page_raw: window.location.pathname,
+      page: normalizePage(window.location.pathname),
+      canonical_page: normalizePage(window.location.pathname),
 
-  page_title: document.title,
+      page_title: document.title,
 
-  // 1. WEBSITE LANGUAGE (source: URL / routing logic)
-  page_language,
+      page_language,
+      browser_language,
 
-  // 2. BROWSER LANGUAGE (secondary signal)
-  browser_language,
+      experience_cluster:
+        getExperienceCluster(page_language),
 
-  experience_cluster:
-  getExperienceCluster(page_language),
+      timestamp: Date.now(),
+      session_id: sessionId,
 
-  timestamp: Date.now(),
-  session_id: sessionId,
+      visitor_type: visitorType,
 
-  visitor_type: visitorType,
+      first_visit_timestamp: firstVisit,
 
-  first_visit_timestamp:
-  firstVisit,
+      referrer: (() => {
+        try {
+          if (!document.referrer) return "/";
+          return normalizePage(new URL(document.referrer).pathname);
+        } catch {
+          return "/";
+        }
+      })(),
+      url_ref: url_ref,
 
-  referrer: (() => {
-    try {
-      if (!document.referrer) return "/";
-      return normalizePage(new URL(document.referrer).pathname);
-    } catch {
-      return "/";
-    }
-  })(),
-  url_ref: url_ref, // <-- Add this line to include the ref in the payload
-  
-  is_bot: botInfo.is_bot,
-  bot_name: botInfo.bot_name,
-  bot_category: botInfo.bot_category,
-  is_likely_human: botInfo.is_bot ? false : hasMouseMoved,
-  
-  user_agent: navigator.userAgent,
+      is_bot: botInfo.is_bot,
+      bot_name: botInfo.bot_name,
+      bot_category: botInfo.bot_category,
+      is_likely_human: botInfo.is_bot ? false : hasMouseMoved,
 
-   environment:
+      user_agent: navigator.userAgent,
 
-   isDev
-   ? "development"
-   : "production",
-  
-  viewport: {
-    width: window.innerWidth,
-    height: window.innerHeight
-  },
+      environment:
+        isDev
+          ? "development"
+          : "production",
 
-  ...data
-};
+      viewport: {
+        width: window.innerWidth,
+        height: window.innerHeight
+      },
 
-   console.log("Seipsum Analytics:", payload);
+      ...data
+    };
 
-fetch("https://seipsum-analytics.silvernpaper.workers.dev/", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify(payload),
-  keepalive: true
-}).catch(error => {
+    console.log("Seipsum Analytics:", payload);
 
-  console.error(
-    "Analytics POST failed",
-    error
-  );
+    fetch("https://seipsum-analytics.silvernpaper.workers.dev/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload),
+      keepalive: true
+    }).catch(error => {
+      console.error(
+        "Analytics POST failed",
+        error
+      );
+    });
 
-});
-
-} 
+  }
   catch (error) {
-  console.error("Analytics logEvent error:", error);
-}
-  
+    console.error("Analytics logEvent error:", error);
+  }
+
 }
 
 // =========================
@@ -391,15 +370,15 @@ document.addEventListener("click", (e) => {
 
       if (url.origin === window.location.origin) {
 
-      logEvent("internal_click", {
+        logEvent("internal_click", {
 
-         url: normalizePage(new URL(link.href).pathname),
+          url: normalizePage(new URL(link.href).pathname),
 
-         text: link.innerText.trim(),
+          text: link.innerText.trim(),
 
-         id: link.id || null,
+          id: link.id || null,
 
-         class: link.className || null
+          class: link.className || null
 
         });
 
@@ -413,20 +392,20 @@ document.addEventListener("click", (e) => {
 
     } else {
 
-      logEvent("click",{
+      logEvent("click", {
 
         tag: target.tagName,
 
         text:
-        target.innerText?.trim().substring(0,100),
+          target.innerText?.trim().substring(0, 100),
 
         id:
-        target.id || null,
+          target.id || null,
 
         class:
-        target.className || null
+          target.className || null
 
-       });
+      });
 
     }
 
@@ -449,8 +428,8 @@ document.addEventListener("mouseup", () => {
   const selection = selectedText.toString().trim();
 
   const cleanedSelection = selection
-  .replace(/\s+/g, " ")
-  .trim();
+    .replace(/\s+/g, " ")
+    .trim();
 
   if (
     selection.length > 0 &&
@@ -461,8 +440,7 @@ document.addEventListener("mouseup", () => {
 
     logEvent("text_select", {
 
-      section:
-      lastFocusedSection,
+      section: lastFocusedSection,
 
       length: cleanedSelection.length,
 
@@ -473,7 +451,6 @@ document.addEventListener("mouseup", () => {
   }
 
 });
-
 
 // =========================
 // COPY TRACKING
@@ -486,20 +463,137 @@ document.addEventListener("copy", () => {
 
   if (!selection) return;
 
-
   logEvent("copy", {
 
-    section:
-    lastFocusedSection,
+    section: lastFocusedSection,
 
     length: selection.length,
 
-    text: selection.substring(0,300)
+    text: selection.substring(0, 300)
 
   });
 
 });
-  
+
+// =========================
+// AUDIO PLAYBACK TRACKING
+// (with section listening attribution)
+// =========================
+
+let anyAudioPlaying = false;
+let listenStartTimestamp = null;
+let currentListenSection = null;
+
+const sectionListenTotals = {};
+let totalPageListenSeconds = 0;
+
+function flushSectionListenTime() {
+  if (listenStartTimestamp === null || currentListenSection === null) return;
+
+  const elapsed = (Date.now() - listenStartTimestamp) / 1000;
+  const sec = currentListenSection;
+
+  sectionListenTotals[sec] = (sectionListenTotals[sec] || 0) + elapsed;
+  totalPageListenSeconds += elapsed;
+
+  logEvent("section_listen", {
+    section: sec,
+    seconds_listened: Math.round(elapsed),
+    cumulative_section_seconds: Math.round(sectionListenTotals[sec])
+  });
+
+  listenStartTimestamp = null;
+}
+
+function trackAudioElement(audio, index) {
+
+  const audioId =
+    audio.id ||
+    audio.dataset.track ||
+    (audio.src ? new URL(audio.src, location.href).pathname.split("/").pop() : null) ||
+    `audio_${index}`;
+
+  let secondsListened = 0;
+  let lastPlayTimestamp = null;
+
+  audio.addEventListener("play", () => {
+    lastPlayTimestamp = Date.now();
+    anyAudioPlaying = true;
+
+    currentListenSection = lastFocusedSection || "unknown";
+    listenStartTimestamp = Date.now();
+
+    logEvent("audio_play", {
+      audio_id: audioId,
+      audio_duration: audio.duration || null,
+      position_seconds: Math.round(audio.currentTime),
+      section: currentListenSection,
+      is_resumed: secondsListened > 0
+    });
+  });
+
+  audio.addEventListener("pause", () => {
+    if (lastPlayTimestamp !== null) {
+      secondsListened += (Date.now() - lastPlayTimestamp) / 1000;
+      lastPlayTimestamp = null;
+
+      flushSectionListenTime();
+
+      anyAudioPlaying = [...document.querySelectorAll("audio")]
+        .some(a => !a.paused);
+
+      logEvent("audio_pause", {
+        audio_id: audioId,
+        position_seconds: Math.round(audio.currentTime),
+        seconds_listened: Math.round(secondsListened),
+        section: lastFocusedSection || "unknown"
+      });
+    }
+  });
+
+  audio.addEventListener("ended", () => {
+    if (lastPlayTimestamp !== null) {
+      secondsListened += (Date.now() - lastPlayTimestamp) / 1000;
+      lastPlayTimestamp = null;
+    }
+
+    flushSectionListenTime();
+    anyAudioPlaying = [...document.querySelectorAll("audio")]
+      .some(a => !a.paused);
+
+    logEvent("audio_ended", {
+      audio_id: audioId,
+      audio_duration: audio.duration || null,
+      seconds_listened: Math.round(secondsListened),
+      section: lastFocusedSection || "unknown"
+    });
+  });
+
+  audio.addEventListener("seeked", () => {
+    logEvent("audio_seek", {
+      audio_id: audioId,
+      position_seconds: Math.round(audio.currentTime),
+      section: lastFocusedSection || "unknown"
+    });
+  });
+}
+
+document.querySelectorAll("audio").forEach((audio, i) => trackAudioElement(audio, i));
+
+const audioObserver = new MutationObserver((mutations) => {
+  mutations.forEach((m) => {
+    m.addedNodes.forEach((node) => {
+      if (node instanceof HTMLAudioElement) {
+        trackAudioElement(node, document.querySelectorAll("audio").length);
+      } else if (node instanceof Element) {
+        node.querySelectorAll?.("audio").forEach((a) =>
+          trackAudioElement(a, document.querySelectorAll("audio").length)
+        );
+      }
+    });
+  });
+});
+audioObserver.observe(document.body, { childList: true, subtree: true });
 
 // =========================
 // SECTION FOCUS TRACKING
@@ -520,6 +614,13 @@ window.addEventListener("scroll", () => {
       sec.id !== lastFocusedSection
     ) {
 
+      // Credit listening time to the section being left
+      if (anyAudioPlaying) {
+        flushSectionListenTime();
+        currentListenSection = sec.id;
+        listenStartTimestamp = Date.now();
+      }
+
       lastFocusedSection = sec.id;
 
       logEvent("section_focus", {
@@ -538,20 +639,28 @@ window.addEventListener("scroll", () => {
 
 window.addEventListener("beforeunload", () => {
 
+  // Flush any in-progress section listening
+  flushSectionListenTime();
+
   logEvent("page_exit", {
     active_time_seconds: activeTime,
-   
+
     max_scroll: maxScroll,
 
     duration_ms:
-    Date.now() - pageEnterTime,
+      Date.now() - pageEnterTime,
 
     page_height:
-    document.documentElement.scrollHeight,
+      document.documentElement.scrollHeight,
 
     viewport_height:
-    window.innerHeight,
-    });
+      window.innerHeight,
+
+    // Whole-page listening summary
+    total_listen_seconds: Math.round(totalPageListenSeconds),
+    section_listen_totals: sectionListenTotals,
+    sections_listened: Object.keys(sectionListenTotals).length
+  });
 
 });
 
