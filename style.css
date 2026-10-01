@@ -95,6 +95,35 @@ body {
   margin-left: auto;  /* Pushes the entire group to the right */
 }
 
+/* Left-side container: stacks hamburger + word button vertically */
+.left-section {
+  display: flex;
+  flex-direction: column;    /* Stack vertically */
+  align-items: flex-start;   /* Align to the extreme left */
+  gap: 10px;                 /* Vertical spacing */
+}
+
+/* Word button */
+.word-btn {
+  margin-left: 3px;
+  padding: 8px 14px;
+  background: transparent;
+  border: 2px solid #000000;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  color: #000000;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.word-btn:hover {
+  background-color: #000000;
+  color: #ffffff;
+}
+
 .site-title {
   text-decoration: none;
   position: absolute;
@@ -884,6 +913,16 @@ html.dark-theme body {
 
 .dark-theme .menu-dropdown a:hover {
   background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark-theme .word-btn {
+  border: 2px solid #ffffff !important;
+  color: #f0f0f0 !important;
+}
+
+.dark-theme .word-btn:hover {
+  background-color: #ffffff !important;
+  color: #000000 !important;
 }
 
 /* Dark mode for cookie banner */
