@@ -5,7 +5,6 @@
   <url>
     <loc>https://seipsum.org/</loc>
   </url>
-
   <url>
     <loc>https://seipsum.org/index-en.html</loc>
   </url>
@@ -14,33 +13,37 @@
   <url>
     <loc>https://seipsum.org/origin.html</loc>
   </url>
-
-
   <url>
     <loc>https://seipsum.org/origin-en.html</loc>
   </url>
 
   
+ <url>
+    <loc>https://seipsum.org/luarea-deciziilor-si-rezolvarea-problemelor.html</loc>
+  </url>
+  <url>
+    <loc>https://seipsum.org/decision-making-problem-solving-en.html</loc>
+  </url>
+  
   <url>
     <loc>https://seipsum.org/privacy-policy.html</loc>
   </url>
-
   <url>
     <loc>https://seipsum.org/privacy-policy-en.html</loc>
   </url>
 
+  
   <url>
     <loc>https://seipsum.org/terms-of-use.html</loc>
   </url>
-
   <url>
     <loc>https://seipsum.org/terms-of-use-en.html</loc>
   </url>
 
+  
   <url>
     <loc>https://seipsum.org/disclaimer.html</loc>
   </url>
-
   <url>
     <loc>https://seipsum.org/disclaimer-en.html</loc>
   </url>
