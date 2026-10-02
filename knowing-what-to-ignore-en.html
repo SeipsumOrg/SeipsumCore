@@ -2,6 +2,16 @@
 <html lang="en">
    
 <!-- Google tag (gtag.js) -->
+
+    <!-- Add this RIGHT HERE (critical dark theme (SS) -->
+  <script>
+  (function() {
+    const theme = localStorage.getItem('theme') || 'light';
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark-theme');
+    }
+  })();
+</script>
    
 <head>
   <meta charset="UTF-8">
