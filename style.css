@@ -237,6 +237,7 @@ max-height: calc(100vh - 46px); /* 100vh minus hamburger button height (46px) */
   
 overflow-y: auto;
 position: absolute; /* 👈 ADD THIS */
+z-index: 10;        /* 👈 ADD THIS — puts dropdown above the Pages button */
 display: none; 
 padding-top: 4px; 
 
