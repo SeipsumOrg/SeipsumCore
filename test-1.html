@@ -747,9 +747,53 @@ html.dark-theme .language-switch a {
   color: #f0f0f0 !important;
   border-bottom-color: #f0f0f0 !important;
 }
-    /* ===== LOGO ÎN BARA STICKY ===== */
-    .site-title { display: flex; align-items: center; gap: 12px; }
-    .site-logo { display: block; width: 104px; height: auto; flex: 0 0 auto; }
+    /* ==========================================================
+       BARA STICKY — aliniere fără schimbarea ordinii
+       - ordinea rămâne EXACT ca în CSS-ul de sistem:
+         hamburger peste „Pagini 1." (stânga), theme-toggle peste
+         RO/EN (dreapta) — ambele coloane verticale
+       - alinierea se face pe centrul butoanelor de 46px,
+         care încep ambele din partea de sus a barei
+       - logo + titlu centrate pe ACEEAȘI linie cu butoanele
+       ========================================================== */
+
+    /* header padding top (15px) + jumătate din 46px = 38px
+       → centrul comun al hamburger-ului și al theme-toggle */
+    .site-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      top: 38px;                          /* centrul liniei butoanelor */
+      transform: translate(-50%, -50%);
+      font-size: 46px;
+      line-height: 46px;
+    }
+
+    .site-logo {
+      display: block;
+      height: 46px;      /* aceeași înălțime ca hamburger și theme-toggle */
+      width: auto;
+      flex: 0 0 auto;
+    }
+
+    /* înălțimi fixe pentru rândurile de text, ca cele două
+       coloane laterale să aibă exact aceeași înălțime */
+    .word-btn {
+      display: inline-block;
+      height: 22px;
+      line-height: 22px;
+    }
+    .language-switch {
+      height: 22px;
+      line-height: 22px;
+      margin-left: 0;
+    }
+
+    /* Mobil: păstrează proporția — ambele mai mici, tot egale */
+    @media (max-width: 768px) {
+      .site-title { font-size: 28px; line-height: 28px; top: 38px; }
+      .site-logo { height: 28px; }
+    }
 
     /* ===== GALERIE COMPARATIVĂ LOGO ===== */
     .logo-compare {
