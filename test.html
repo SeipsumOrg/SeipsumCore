@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="robots" content="noindex, nofollow"> 
+
+  <!-- ============================================================
+       PAGINĂ DE TEST — seipsum.org
+       ------------------------------------------------------------
+       SCOP: testare sigură — logo-uri, culori, tipografie,
+       componente. Această pagină NU este legată din navigarea
+       site-ului și nu afectează nicio pagină existentă.
+
+       REGLAMENT (conform convențiilor Seipsum):
+       1. Nav-ul principal de mai jos este blocul canonic RO,
+          copiat VERBATIM. Nimic din el nu se editează aici.
+       2. Ceea ce se testează pe această pagină rămâne pe
+          această pagină — schimbările se aplică pe paginile
+          reale DOAR după confirmare explicită.
+       3. Această pagină poate fi ștearsă oricând fără efect
+          asupra site-ului.
+       ============================================================ -->
+
+  <title>Pagină de Test | Seipsum</title>
+
+  <!-- Stilurile reale ale site-ului: decomentează și indică
+       fișierul CSS real al site-ului pentru testare fidelă.
+       Până atunci, pagina folosește stiluri proprii minime,
+       izolate, ca să nu strice nimic. -->
+  <!-- <link rel="stylesheet" href="style.css"> -->
+
+  <style>
+    /* ==========================================================
+       VARIABILE DE BRAND — singurul loc unde schimbi culorile
+       de test. Fiecare secțiune de mai jos le folosește.
+       ========================================================== */
+    :root {
+      --seipsum-mustard: #D9A441;
+      --seipsum-amber:   #E3B23C;
+      --seipsum-golden:  #C9971E;
+      --seipsum-black:   #111111;
+      --seipsum-white:   #FFFFFF;
+      --seipsum-bg:      #FAF8F3;
+    }
+
+    /* ---------- stiluri minime de pagină (izolate) ---------- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: var(--seipsum-bg);
+      color: var(--seipsum-black);
+      line-height: 1.6;
+    }
+    .test-container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+    .test-section { margin-bottom: 3.5rem; }
+    .test-section h2 {
+      font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 1.05rem; letter-spacing: .03em;
+      border-bottom: 1px solid #ddd; padding-bottom: .5rem; margin-bottom: 1.25rem;
+    }
+    .test-note {
+      font-family: -apple-system, Arial, sans-serif;
+      font-size: .82rem; color: #777; margin-top: .75rem;
+    }
+
+    /* ---------- nav minimal funcțional (doar pentru test) ----------
+       Dacă style.css real este activ, acest bloc poate fi șters;
+       stilurile reale ale site-ului lucrează prin clasele
+       canonice (site-header, main-nav, menu-dropdown...). */
+    .site-header { border-bottom: 2px solid var(--seipsum-black); margin-bottom: 2rem; }
+    .main-nav { display: flex; align-items: center; justify-content: space-between;
+                padding: 1rem 1.5rem; font-family: -apple-system, Arial, sans-serif; }
+    .left-section { display: flex; gap: 1.5rem; }
+    .menu-wrapper { position: relative; }
+    .menu-wrapper a { text-decoration: none; color: var(--seipsum-black); font-size: .9rem; }
+    .hamburger-btn { display: inline-flex; flex-direction: column; gap: 4px; padding: 6px; }
+    .hamburger-btn span { display: block; width: 20px; height: 2px; background: var(--seipsum-black); }
+    .word-btn { padding: 6px 0; display: inline-block; }
+    .menu-dropdown {
+      display: none; position: absolute; top: 100%; left: 0; z-index: 10;
+      background: var(--seipsum-white); border: 1px solid var(--seipsum-black);
+      min-width: 280px; padding: .5rem 0;
+    }
+    .menu-dropdown a { display: block; padding: .4rem 1rem; font-size: .85rem; }
+    .menu-dropdown a:hover { background: var(--seipsum-mustard); }
+    .menu-wrapper.open .menu-dropdown { display: block; }
+    .site-title { font-size: 1.4rem; font-weight: 700; letter-spacing: .06em;
+                  text-decoration: none; color: var(--seipsum-black); }
+
+    /* ---------- zona de test logo ---------- */
+    .logo-test-slot {
+      border: 1px dashed #bbb; padding: 1.5rem; margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+    }
+    .logo-test-slot.dark { background: var(--seipsum-black); }
+
+    /* ---------- zona de test culori ---------- */
+    .swatch-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .swatch { width: 110px; }
+    .swatch .chip { height: 70px; border: 1px solid #999; }
+    .swatch p { font-family: -apple-system, Arial, sans-serif; font-size: .75rem; margin-top: .4rem; }
+
+    /* ---------- picior de pagină de test ---------- */
+    .test-footer {
+      border-top: 2px solid var(--seipsum-black); margin-top: 4rem; padding-top: 1.5rem;
+      font-family: -apple-system, Arial, sans-serif; font-size: .85rem;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    .test-footer a { color: var(--seipsum-black); }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAV PRINCIPAL — BLOC CANONIC RO, COPIAT VERBATIM.
+       Nu edita nimic din interiorul acestui bloc.
+       ============================================================ -->
+  <header class="site-header">
+
+  <nav class="main-nav">
+    <div class="left-section">
+
+      <div class="menu-wrapper">
+        <a href="#" class="hamburger-btn js-menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </a>
+
+        <div class="menu-dropdown js-menu-dropdown">
+          <a href="index.html" class="home-link">1. Acasă</a>
+          <a href="origin.html">2. Fondator & Origine</a>
+          <a href="index.html#Ce Este Gândirea Structurată?">1.1 Ce Este Gândirea Structurată?</a>
+          <a href="index.html#Cogniție-Umană și AI">1.2 Cogniție-Umană & AI</a>
+          <a href="origin.html#Experiență Fondator cu AI">2.1 Experiența Fondatorului cu AI</a>
+          <a href="index.html#testimonials">1.3 Testimoniale Seipsum</a>
+          <a href="index.html#recenzii fondator 1">1.4 Recenzii Fondator</a>
+          <a href="index.html#Operatiuni Seipsum">1.5 Cum Funcționează Seipsum</a>
+          <a href="index.html#problema cognitivă">1.6 Problema Cognitivă Generală</a>
+          <a href="index.html#services">1.7 Servicii Cognitive</a>
+          <a href="index.html#rezultate">1.8 Rezultatele Serviciilor Seipsum</a>
+          <a href="index.html#FAQ">1.9 Întrebări Frecvente</a>
+          <a href="index.html#contact-form">1.9.1 Formular de Contact</a>
+        </div>
+      </div>
+
+      <div class="menu-wrapper">
+        <a href="#" class="word-btn js-menu-toggle">Pagini 1.</a>
+        <div class="menu-dropdown js-menu-dropdown">
+          <a href="luarea-deciziilor-si-rezolvarea-problemelor.html">3. Luarea Deciziilor & Rezolvarea Problemelor</a>
+          <a href="a-sti-ce-sa-ignori.html">4. A Ști Ce Să Ignori</a>
+          <a href="semnal-vs-zgomot-in-gandire.html">5. Semnal vs. Zgomot în Gândire</a>
+        </div>
+      </div>
+
+    </div>
+
+    <a href="index.html" class="site-title">Seipsum</a>
+  </nav>
+
+  <!-- ============================================================
+       SFÂRȘIT BLOC CANONIC
+       ============================================================ -->
+
+  <div class="test-container">
+
+    <!-- ==========================================================
+         SECȚIUNEA 1 — TEST LOGO (v1.3, temă deschisă)
+         ========================================================== -->
+    <section class="test-section">
+      <h2>1. Test Logo — temă deschisă (mustard + negru)</h2>
+
+      <div class="logo-test-slot">
+        <svg width="320" height="auto" viewBox="-216 -96 640 360" xmlns="http://www.w3.org/2000/svg"
+             role="img" aria-label="Seipsum — logo de test">
+          <rect x="-210" y="-90" width="320" height="180"
+                fill="var(--seipsum-mustard)" stroke="var(--seipsum-black)" stroke-width="5"/>
+          <g fill="var(--seipsum-black)" stroke="var(--seipsum-white)" stroke-width="1.6">
+            <circle cx="-192.9" cy="-64" r="3.2"/><circle cx="-190.3" cy="-12.8" r="3.2"/><circle cx="-187.5" cy="-49.5" r="3.4"/><circle cx="-186.7" cy="30.6" r="3.8"/>
+            <circle cx="-185.8" cy="-16.6" r="4.2"/><circle cx="-183.8" cy="-26.5" r="3.4"/><circle cx="-183" cy="37" r="3.9"/><circle cx="-181.2" cy="44.2" r="4.1"/>
+            <circle cx="-180.4" cy="-2.5" r="4.5"/><circle cx="-176.5" cy="5" r="4.2"/><circle cx="-175.8" cy="57.6" r="4.3"/><circle cx="-175" cy="11.3" r="4.8"/>
+            <circle cx="-174.1" cy="-35.3" r="5.3"/><circle cx="-170.4" cy="-53.4" r="4.5"/><circle cx="-170" cy="-8.5" r="4.3"/><circle cx="-169.6" cy="24.9" r="5.1"/>
+            <circle cx="-169.2" cy="54.2" r="5"/><circle cx="-168.7" cy="-21.2" r="5.6"/><circle cx="-164.2" cy="38.3" r="5.3"/><circle cx="-163.4" cy="-39.5" r="4.4"/>
+            <circle cx="-163.3" cy="-7.4" r="5.9"/><circle cx="-162.7" cy="22.4" r="5.2"/><circle cx="-158.7" cy="51.4" r="5.5"/><circle cx="-157.9" cy="6.1" r="6.1"/>
+            <circle cx="-157" cy="-39.4" r="6.7"/><circle cx="-156.2" cy="9.1" r="5.4"/><circle cx="-153.3" cy="-57" r="5.6"/><circle cx="-152.5" cy="19.5" r="6.3"/>
+            <circle cx="-151.6" cy="-25.6" r="7"/><circle cx="-149.6" cy="-21.7" r="5.4"/><circle cx="-148.9" cy="39.3" r="6.4"/><circle cx="-147.1" cy="32.6" r="6.5"/>
+            <circle cx="-146.2" cy="-12.1" r="7.3"/><circle cx="-143.1" cy="-34" r="5.4"/><circle cx="-142.4" cy="8.2" r="6.5"/><circle cx="-141.7" cy="45.4" r="6.6"/>
+            <circle cx="-140.8" cy="1.2" r="7.5"/><circle cx="-139.9" cy="-43.3" r="8.2"/><circle cx="-136.3" cy="58.1" r="6.7"/><circle cx="-135.8" cy="-4.4" r="6.5"/>
+            <circle cx="-135.4" cy="14.3" r="7.6"/><circle cx="-134.5" cy="-29.8" r="8.5"/><circle cx="-130.8" cy="-47" r="6.8"/><circle cx="-130" cy="27.1" r="7.8"/>
+            <circle cx="-129.3" cy="-34.4" r="6.4"/><circle cx="-129.1" cy="-16.5" r="8.7"/><circle cx="-128.6" cy="24.9" r="7.7"/><circle cx="-124.6" cy="39.7" r="7.8"/>
+            <circle cx="-123.7" cy="-3.5" r="8.8"/><circle cx="-122" cy="12.5" r="7.7"/><circle cx="-119.2" cy="52.1" r="7.9"/><circle cx="-118.3" cy="9.3" r="9"/>
+            <circle cx="-117.4" cy="-33.8" r="10"/><circle cx="-115.5" cy="-17.3" r="7.6"/><circle cx="-114.8" cy="41.1" r="9"/><circle cx="-113.8" cy="-50.5" r="7.9"/>
+            <circle cx="-112.9" cy="21.9" r="9"/><circle cx="-112" cy="-20.8" r="10.1"/><circle cx="-109" cy="-28.7" r="7.4"/><circle cx="-108.2" cy="10.9" r="8.9"/>
+            <circle cx="-107.5" cy="34.2" r="9.1"/><circle cx="-106.6" cy="-8" r="10.2"/><circle cx="-102.1" cy="46.3" r="9.1"/><circle cx="-101.7" cy="-0.7" r="8.8"/>
+            <circle cx="-101.2" cy="4.5" r="10.3"/><circle cx="-100.3" cy="-37.5" r="11.5"/><circle cx="-96.7" cy="-53.7" r="9.1"/><circle cx="-95.8" cy="16.8" r="10.3"/>
+            <circle cx="-95.2" cy="-29.8" r="8.5"/><circle cx="-94.9" cy="-24.8" r="11.5"/><circle cx="-94.4" cy="26.9" r="10.3"/><circle cx="-90.4" cy="28.9" r="10.3"/>
+            <circle cx="-89.5" cy="-12.3" r="11.5"/><circle cx="-88.6" cy="-40.5" r="8.2"/><circle cx="-87.9" cy="15.5" r="10.1"/><circle cx="-85" cy="40.7" r="10.3"/>
+            <circle cx="-84.1" cy="0" r="11.5"/><circle cx="-83.3" cy="-41" r="11.5"/><circle cx="-81.4" cy="-13.5" r="9.8"/><circle cx="-78.7" cy="12" r="11.5"/>
+            <circle cx="-77.8" cy="-28.5" r="11.5"/><circle cx="-73.3" cy="23.8" r="11.5"/><circle cx="-61.5" cy="31.2" r="11.5"/><circle cx="-61.5" cy="-16.3" r="11.5"/>
+            <circle cx="-61.5" cy="-44.3" r="11.5"/><circle cx="-60.2" cy="52.3" r="10.2"/><circle cx="-59.4" cy="-23.9" r="9.4"/>
+          </g>
+          <rect x="-50" y="-70" width="140" height="140"
+                fill="var(--seipsum-black)" stroke="var(--seipsum-white)" stroke-width="4"/>
+          <rect x="-210" y="-90" width="320" height="180"
+                fill="none" stroke="var(--seipsum-black)" stroke-width="5"/>
+        </svg>
+        <p style="font-family:-apple-system,Arial,sans-serif;font-size:.85rem;max-width:24ch;">
+          Logo v1.3 — temă deschisă. Punctele și pătratul: interior negru, contur alb.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         SECȚIUNEA 2 — TEST LOGO (temă închisă)
+         ========================================================== -->
+    <section class="test-section">
+      <h2>2. Test Logo — temă închisă (negru + alb)</h2>
+
+      <div class="logo-test-slot dark">
+        <svg width="320" height="auto" viewBox="-216 -96 640 360" xmlns="http://www.w3.org/2000/svg"
+             role="img" aria-label="Seipsum — logo de test, temă închisă">
+          <rect x="-210" y="-90" width="320" height="180"
+                fill="var(--seipsum-mustard)" stroke="var(--seipsum-white)" stroke-width="5"/>
+          <g fill="var(--seipsum-white)" stroke="var(--seipsum-black)" stroke-width="1.6">
+            <circle cx="-192.9" cy="-64" r="3.2"/><circle cx="-190.3" cy="-12.8" r="3.2"/><circle cx="-187.5" cy="-49.5" r="3.4"/><circle cx="-186.7" cy="30.6" r="3.8"/>
+            <circle cx="-185.8" cy="-16.6" r="4.2"/><circle cx="-183.8" cy="-26.5" r="3.4"/><circle cx="-183" cy="37" r="3.9"/><circle cx="-181.2" cy="44.2" r="4.1"/>
+            <circle cx="-180.4" cy="-2.5" r="4.5"/><circle cx="-176.5" cy="5" r="4.2"/><circle cx="-175.8" cy="57.6" r="4.3"/><circle cx="-175" cy="11.3" r="4.8"/>
+            <circle cx="-174.1" cy="-35.3" r="5.3"/><circle cx="-170.4" cy="-53.4" r="4.5"/><circle cx="-170" cy="-8.5" r="4.3"/><circle cx="-169.6" cy="24.9" r="5.1"/>
+            <circle cx="-169.2" cy="54.2" r="5"/><circle cx="-168.7" cy="-21.2" r="5.6"/><circle cx="-164.2" cy="38.3" r="5.3"/><circle cx="-163.4" cy="-39.5" r="4.4"/>
+            <circle cx="-163.3" cy="-7.4" r="5.9"/><circle cx="-162.7" cy="22.4" r="5.2"/><circle cx="-158.7" cy="51.4" r="5.5"/><circle cx="-157.9" cy="6.1" r="6.1"/>
+            <circle cx="-157" cy="-39.4" r="6.7"/><circle cx="-156.2" cy="9.1" r="5.4"/><circle cx="-153.3" cy="-57" r="5.6"/><circle cx="-152.5" cy="19.5" r="6.3"/>
+            <circle cx="-151.6" cy="-25.6" r="7"/><circle cx="-149.6" cy="-21.7" r="5.4"/><circle cx="-148.9" cy="39.3" r="6.4"/><circle cx="-147.1" cy="32.6" r="6.5"/>
+            <circle cx="-146.2" cy="-12.1" r="7.3"/><circle cx="-143.1" cy="-34" r="5.4"/><circle cx="-142.4" cy="8.2" r="6.5"/><circle cx="-141.7" cy="45.4" r="6.6"/>
+            <circle cx="-140.8" cy="1.2" r="7.5"/><circle cx="-139.9" cy="-43.3" r="8.2"/><circle cx="-136.3" cy="58.1" r="6.7"/><circle cx="-135.8" cy="-4.4" r="6.5"/>
+            <circle cx="-135.4" cy="14.3" r="7.6"/><circle cx="-134.5" cy="-29.8" r="8.5"/><circle cx="-130.8" cy="-47" r="6.8"/><circle cx="-130" cy="27.1" r="7.8"/>
+            <circle cx="-129.3" cy="-34.4" r="6.4"/><circle cx="-129.1" cy="-16.5" r="8.7"/><circle cx="-128.6" cy="24.9" r="7.7"/><circle cx="-124.6" cy="39.7" r="7.8"/>
+            <circle cx="-123.7" cy="-3.5" r="8.8"/><circle cx="-122" cy="12.5" r="7.7"/><circle cx="-119.2" cy="52.1" r="7.9"/><circle cx="-118.3" cy="9.3" r="9"/>
+            <circle cx="-117.4" cy="-33.8" r="10"/><circle cx="-115.5" cy="-17.3" r="7.6"/><circle cx="-114.8" cy="41.1" r="9"/><circle cx="-113.8" cy="-50.5" r="7.9"/>
+            <circle cx="-112.9" cy="21.9" r="9"/><circle cx="-112" cy="-20.8" r="10.1"/><circle cx="-109" cy="-28.7" r="7.4"/><circle cx="-108.2" cy="10.9" r="8.9"/>
+            <circle cx="-107.5" cy="34.2" r="9.1"/><circle cx="-106.6" cy="-8" r="10.2"/><circle cx="-102.1" cy="46.3" r="9.1"/><circle cx="-101.7" cy="-0.7" r="8.8"/>
+            <circle cx="-101.2" cy="4.5" r="10.3"/><circle cx="-100.3" cy="-37.5" r="11.5"/><circle cx="-96.7" cy="-53.7" r="9.1"/><circle cx="-95.8" cy="16.8" r="10.3"/>
+            <circle cx="-95.2" cy="-29.8" r="8.5"/><circle cx="-94.9" cy="-24.8" r="11.5"/><circle cx="-94.4" cy="26.9" r="10.3"/><circle cx="-90.4" cy="28.9" r="10.3"/>
+            <circle cx="-89.5" cy="-12.3" r="11.5"/><circle cx="-88.6" cy="-40.5" r="8.2"/><circle cx="-87.9" cy="15.5" r="10.1"/><circle cx="-85" cy="40.7" r="10.3"/>
+            <circle cx="-84.1" cy="0" r="11.5"/><circle cx="-83.3" cy="-41" r="11.5"/><circle cx="-81.4" cy="-13.5" r="9.8"/><circle cx="-78.7" cy="12" r="11.5"/>
+            <circle cx="-77.8" cy="-28.5" r="11.5"/><circle cx="-73.3" cy="23.8" r="11.5"/><circle cx="-61.5" cy="31.2" r="11.5"/><circle cx="-61.5" cy="-16.3" r="11.5"/>
+            <circle cx="-61.5" cy="-44.3" r="11.5"/><circle cx="-60.2" cy="52.3" r="10.2"/><circle cx="-59.4" cy="-23.9" r="9.4"/>
+          </g>
+          <rect x="-50" y="-70" width="140" height="140"
+                fill="var(--seipsum-white)" stroke="var(--seipsum-black)" stroke-width="4"/>
+          <rect x="-210" y="-90" width="320" height="180"
+                fill="none" stroke="var(--seipsum-white)" stroke-width="5"/>
+        </svg>
+        <p style="font-family:-apple-system,Arial,sans-serif;font-size:.85rem;max-width:24ch;color:#aaa;">
+          Logo v1.3 — temă închisă. Punctele și pătratul: interior alb, contur negru.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         SECȚIUNEA 3 — TEST CULORI
+         Schimbă valorile din :root (sus, în <style>) și toate
+         secțiunile se actualizează simultan.
+         ========================================================== -->
+    <section class="test-section">
+      <h2>3. Test Culori — nuanțe active din :root</h2>
+
+      <div class="swatch-row">
+        <div class="swatch"><div class="chip" style="background:var(--seipsum-mustard);"></div><p>mustard<br>#D9A441</p></div>
+        <div class="swatch"><div class="chip" style="background:var(--seipsum-amber);"></div><p>amber<br>#E3B23C</p></div>
+        <div class="swatch"><div class="chip" style="background:var(--seipsum-golden);"></div><p>golden<br>#C9971E</p></div>
+        <div class="swatch"><div class="chip" style="background:var(--seipsum-black);"></div><p>black<br>#111111</p></div>
+        <div class="swatch"><div class="chip" style="background:var(--seipsum-bg); border:1px solid #999;"></div><p>bg<br>#FAF8F3</p></div>
+      </div>
+      <p class="test-note">
+        Nuanța activă a logo-urilor de mai sus este --seipsum-mustard.
+        Schimbă valoarea în :root pentru a compara toate celelalte nuanțe
+        simultan, în ambele teme.
+      </p>
+    </section>
+
+    <!-- ==========================================================
+         SECȚIUNEA 4 — SPAȚIU LIBER DE TEST
+         Zonă goală pentru orice element nou: componente, blocuri
+         de text, layout-uri. Orice se pune aici rămâne izolat.
+         ========================================================== -->
+    <section class="test-section">
+      <h2>4. Spațiu liber de test</h2>
+      <div class="logo-test-slot" style="min-height:120px; align-items:center;">
+        <p style="font-family:-apple-system,Arial,sans-serif;font-size:.85rem;color:#999;">
+          — zonă liberă —
+        </p>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Picior de test. Structura reală a piciorului de pe site
+       poate fi copiată aici pentru testare fidelă; termenul
+       „Declinarea Responsabilității” este canonic și nu se schimbă. -->
+  <footer class="test-footer">
+    <span>© Seipsum — Pagină de Test (neindexată)</span>
+    <span><a href="disclaimer.html">Declinarea Responsabilității</a></span>
+  </footer>
+
+  <!-- Funcționalitate minimă de meniu (doar pentru această pagină) -->
+  <script>
+    document.querySelectorAll('.js-menu-toggle').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        var wrapper = btn.closest('.menu-wrapper');
+        if (wrapper) wrapper.classList.toggle('open');
+      });
+    });
+    document.addEventListener('click', function (e) {
+      document.querySelectorAll('.menu-wrapper.open').forEach(function (w) {
+        if (!w.contains(e.target)) w.classList.remove('open');
+      });
+    });
+  </script>
+
+</body>
+</html>
