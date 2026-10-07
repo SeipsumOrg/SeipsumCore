@@ -3,121 +3,776 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Pagină de Test 1 — Bara Sticky | Seipsum</title>
 
-  <meta name="robots" content="noindex, nofollow"> 
-
-  <!-- ============================================================
-       PAGINĂ DE TEST — seipsum.org
-       ------------------------------------------------------------
-       SCOP: testare sigură — logo-uri, culori, tipografie,
-       componente. Această pagină NU este legată din navigarea
-       site-ului și nu afectează nicio pagină existentă.
-
-       REGLAMENT (conform convențiilor Seipsum):
-       1. Nav-ul principal de mai jos este blocul canonic RO,
-          copiat VERBATIM. Nimic din el nu se editează aici.
-       2. Ceea ce se testează pe această pagină rămâne pe
-          această pagină — schimbările se aplică pe paginile
-          reale DOAR după confirmare explicită.
-       3. Această pagină poate fi ștearsă oricând fără efect
-          asupra site-ului.
-       ============================================================ -->
-
-  <title>Pagină de Test | Seipsum</title>
-
-  <!-- Stilurile reale ale site-ului: decomentează și indică
-       fișierul CSS real al site-ului pentru testare fidelă.
-       Până atunci, pagina folosește stiluri proprii minime,
-       izolate, ca să nu strice nimic. -->
+  <!-- CSS-UL EXTERN REAL AL SITE-ULUI:
+       decomentează și indică fișierul real, ex.: -->
   <!-- <link rel="stylesheet" href="style.css"> -->
 
   <style>
-    /* ==========================================================
-       VARIABILE DE BRAND — singurul loc unde schimbi culorile
-       de test. Fiecare secțiune de mai jos le folosește.
-       ========================================================== */
-    :root {
-      --seipsum-mustard: #D9A441;
-      --seipsum-amber:   #E3B23C;
-      --seipsum-golden:  #C9971E;
-      --seipsum-black:   #111111;
-      --seipsum-white:   #FFFFFF;
-      --seipsum-bg:      #FAF8F3;
-    }
+/* ========================= */
+/* SEIPSUM — SYSTEM STYLE    */
+/* ========================= */
 
-    /* ---------- stiluri minime de pagină (izolate) ---------- */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: Georgia, 'Times New Roman', serif;
-      background: var(--seipsum-bg);
-      color: var(--seipsum-black);
-      line-height: 1.6;
-    }
-    .test-container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
-    .test-section { margin-bottom: 3.5rem; }
-    .test-section h2 {
-      font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
-      font-size: 1.05rem; letter-spacing: .03em;
-      border-bottom: 1px solid #ddd; padding-bottom: .5rem; margin-bottom: 1.25rem;
-    }
-    .test-note {
-      font-family: -apple-system, Arial, sans-serif;
-      font-size: .82rem; color: #777; margin-top: .75rem;
-    }
+:root {
+  --text: #111; /* Dark gray for light mode */
+  --muted: #555;
+  --background: #ffffff; /* Section background (light mode) */
+  --body-background: #f5f5f5;  /* Body background (light mode) */
+  --border: rgba(0, 0, 0, 0.2); /* For light mode */
+  --border-dark: rgba(255, 255, 255, 0.2); /* For dark mode */
 
-    /* ---------- nav minimal funcțional (doar pentru test) ----------
-       Dacă style.css real este activ, acest bloc poate fi șters;
-       stilurile reale ale site-ului lucrează prin clasele
-       canonice (site-header, main-nav, menu-dropdown...). */
-    .site-header { border-bottom: 2px solid var(--seipsum-black); margin-bottom: 2rem; }
-    .main-nav { display: flex; align-items: center; justify-content: space-between;
-                padding: 1rem 1.5rem; font-family: -apple-system, Arial, sans-serif; }
-    .left-section { display: flex; gap: 1.5rem; }
-    .menu-wrapper { position: relative; }
-    .menu-wrapper a { text-decoration: none; color: var(--seipsum-black); font-size: .9rem; }
-    .hamburger-btn { display: inline-flex; flex-direction: column; gap: 4px; padding: 6px; }
-    .hamburger-btn span { display: block; width: 20px; height: 2px; background: var(--seipsum-black); }
-    .word-btn { padding: 6px 0; display: inline-block; }
-    .menu-dropdown {
-      display: none; position: absolute; top: 100%; left: 0; z-index: 10;
-      background: var(--seipsum-white); border: 1px solid var(--seipsum-black);
-      min-width: 280px; padding: .5rem 0;
-    }
-    .menu-dropdown a { display: block; padding: .4rem 1rem; font-size: .85rem; }
-    .menu-dropdown a:hover { background: var(--seipsum-mustard); }
-    .menu-wrapper.open .menu-dropdown { display: block; }
-    .site-title { font-size: 1.4rem; font-weight: 700; letter-spacing: .06em;
-                  text-decoration: none; color: var(--seipsum-black); }
+  --accent: #0f172a;
+  --paragraph-gap: 20px; /* Add this line */
+}
 
-    /* ---------- zona de test logo ---------- */
-    .logo-test-slot {
-      border: 1px dashed #bbb; padding: 1.5rem; margin-bottom: 1rem;
-      display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
-    }
-    .logo-test-slot.dark { background: var(--seipsum-black); }
 
-    /* ---------- zona de test culori ---------- */
-    .swatch-row { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .swatch { width: 110px; }
-    .swatch .chip { height: 70px; border: 1px solid #999; }
-    .swatch p { font-family: -apple-system, Arial, sans-serif; font-size: .75rem; margin-top: .4rem; }
+/* Dark theme overrides */
+.dark-theme {
+  --text: #f0f0f0; /* Almost white for dark mode */
+  --muted: #aaa;
+  --background: #2a2a2a; /* ADD THIS: Overrides the light mode --background */
+  --body-background: #1a1a1a;    /* Body background (dark mode) */
+  --section-background: #2a2a2a; /* Section background (dark mode) */
+  --border: rgba(255, 255, 255, 0.3); /* 30% opacity white */
+  --accent: #6d8ee8; /* Lighter blue for readability */
+}
 
-    /* ---------- picior de pagină de test ---------- */
-    .test-footer {
-      border-top: 2px solid var(--seipsum-black); margin-top: 4rem; padding-top: 1.5rem;
-      font-family: -apple-system, Arial, sans-serif; font-size: .85rem;
-      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+body { color: var(--text); }
+.section, .card { background: var(--background); border: 1px solid var(--border); }
+.hamburger-btn { border: 2px solid var(--hamburger-border); }
+
+/* Apply dark theme to specific elements */
+.dark-theme .site-header {
+  background: rgba(30, 30, 50, 0.96);
+}
+
+.dark-theme .section {
+  background: var(--background);
+  border: 1px solid var(--border);
+}
+
+/* ========================= */
+/* GLOBAL RESET              */
+/* ========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Add the global paragraph rule here */
+p {
+  margin-bottom: var(--paragraph-gap);
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: var(--text);
+  background: #f5f5f5;
+  line-height: 1.75;
+  font-size: 16px;
+}
+
+/* ========================= */
+/* SITE HEADER     */
+/* ========================= */
+
+.site-header {
+  width: 100%;
+  padding: 15px 20px;
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Distribute space between left and right */
+
+  background: rgba(200,200,255,0.3);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Right-side container for theme toggle and language switch */
+.right-section {
+  display: flex;
+  flex-direction: column; /* Stack vertically */
+  align-items: flex-end;   /* Align to the right */
+  gap: 10px;              /* Vertical spacing */
+  margin-left: auto;  /* Pushes the entire group to the right */
+}
+
+/* Left-side container: stacks hamburger + word button vertically */
+.left-section {
+  display: flex;
+  flex-direction: column;    /* Stack vertically */
+  align-items: flex-start;   /* Align to the extreme left */
+  gap: 10px;                 /* Vertical spacing */
+}
+
+/* Word button — plain text, like language switch */
+.word-btn {
+  margin-left: 3px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  color: #000000;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.word-btn:hover {
+  text-decoration: underline;
+}
+
+.site-title {
+  text-decoration: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-weight: 800;
+  font-size: 38px;
+  letter-spacing: 1px;
+  color: #111;
+  pointer-events: auto;
+}
+
+.site-title:visited {
+  color: #111;
+}
+
+/* ========================= */
+/* NAVIGATION     */
+/* ========================= */
+
+/* ========================= */
+ /* THEME TOGGLE BUTTON        */
+ /* ========================= */
+
+.theme-toggle {
+  font-size: 34px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.main-nav {
+  display: flex;
+  justify-content: flex-start; /* sus stânga */
+  align-items: center;
+}
+
+.language-switch {
+  display: flex;
+  flex-direction: row;    /* Side by side horizontally */
+  align-items: center;   /* Center vertically */
+  gap: 12px;             /* Horizontal spacing between RO and EN */
+  font-size: 14px;
+  margin-left: auto;    /* Keep aligned to the right */
+}
+
+.language-switch a {
+  text-decoration: none;
+  color: black;
+}
+
+.language-switch a:hover {
+  text-decoration: underline;
+}
+
+
+/* ========================= */
+ /* HAMBURGER BUTTON */
+/* ========================= */
+
+.hamburger-btn {
+
+width: 46px;
+height: 46px;
+
+margin-left: 3px;
+background: transparent;
+
+border: 2px solid #000000;
+border-radius: 4px;
+cursor: pointer;
+
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+
+gap: 5px;
+text-decoration: none;
+transition: all 0.25s ease;
+
+}
+
+.hamburger-btn span {
+width: 20px;
+height: 2px;
+
+background-color: #000000;
+border-radius: 2px;
+transition: all 0.25s ease;
+
+}
+
+.hamburger-btn:hover {
+background-color: #000000;
+
+}
+
+.hamburger-btn:hover span {
+ background-color: #ffffff;
+
+}
+
+.menu-wrapper {
+position: relative;
+display: inline-block;
+
+}
+
+.menu-dropdown {
+max-height: calc(100vh - 46px); /* 100vh minus hamburger button height (46px) */
+
+overflow-y: auto;
+position: absolute; /* 👈 ADD THIS */
+z-index: 10;        /* 👈 ADD THIS — puts dropdown above the Pages button */
+display: none;
+padding-top: 4px;
+
+top: auto;
+left: 0;
+
+min-width: 220px;
+background: rgba(255,255,255,1);
+
+border-radius: 8px;
+box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+
+}
+
+
+.menu-dropdown a {
+display: block;
+padding: 12px 16px;
+color: #111;
+text-decoration: none;
+
+}
+
+
+.menu-dropdown a:hover {
+background: rgba(0, 0, 0, 0.06);
+
+}
+
+/* active dropdown state */
+
+.menu-dropdown.show {
+display: block;
+}
+
+
+/* ========================= */
+ /* THEME TOGGLE BUTTON        */
+ /* ========================= */
+
+.theme-toggle {
+  width: 46px;
+  height: 46px;
+  margin-left: 10px;
+  background: transparent;
+  border: 2px solid #000000; /* Match hamburger button border */
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.25s ease;
+  font-size: 20px;
+  color: #000000; /* Black moon in light mode */
+}
+
+.theme-toggle:hover {
+  background-color: #000000;
+  color: #ffffff; /* White moon on hover */
+}
+
+/* Dark mode overrides for theme toggle */
+.dark-theme .theme-toggle {
+  border: 2px solid #ffffff; /* White border in dark mode */
+  color: #ffffff; /* White moon in dark mode */
+}
+
+.dark-theme .theme-toggle:hover {
+  background-color: #ffffff;
+  color: #000000; /* Black moon on hover in dark mode */
+}
+
+/* ========================= */
+/* CONTAINER START   */
+/* ========================= */
+
+.container {
+  max-width: 850px;   /* desktop mai aerisit */
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+
+.contact-email {
+  text-align: center;
+}
+
+
+/* ecrane mari */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1100px;
+  }
+}
+
+
+/* foarte mare (ultrawide) */
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+
+/* ========================= */
+/* HERO                     */
+/* ========================= */
+
+.hero {
+  padding: 90px 20px 60px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero h1 {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 22px;
+}
+
+
+.subtitle {
+  font-size: 20px;
+  color: var(--muted);
+  max-width: 800px;
+  margin: 0 auto 20px auto;
+}
+
+.micro-statement {
+  font-size: 15px;
+  color: #333;
+  max-width: 700px;
+  margin: 0 auto 25px auto;
+  font-weight: 500;
+}
+
+.core-idea {
+  font-size: 16px;
+  color: #111;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.core-main {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.core-sub {
+  font-size: 18px;
+  opacity: 0.85;
+  margin-bottom: 16px;
+}
+
+/* ========================= */
+/* SECTIONS                 */
+/* ========================= */
+
+.section {
+  max-width: 1100px;  /* NEW: Controls width of all sections */
+  margin: 0 auto;     /* NEW: Centers them horizontally */
+  padding: 80px 22px;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+}
+
+.section {
+  margin-bottom: 50px;
+}
+
+.section h2 {
+  font-size: 24px;
+  margin-bottom: 30px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.section h3 {
+    font-size: 20px; /* Adjust as needed */
+    margin-bottom: 20px; /* Adjust as needed */
+    font-weight: 600; /* Match or adjust */
+    color: var(--accent); /* Match or adjust */
+    line-height: 1.75; /* Adjust this value to control the gap between lines */
+}
+
+.section p {
+  margin-bottom: 12px;
+  color: #1a1a1a;
+  line-height: 1.75;
+  font-size: 16px;
+}
+
+.conclusion {
+  margin-top: 25px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.paragraph-group p {
+  margin-bottom: 20px; /* Space between paragraphs */
+}
+.paragraph-group {
+  margin-bottom: 30px; /* Space after the group */
+}
+
+/* ========================= */
+/* LISTS                   */
+/* ========================= */
+
+ul {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+li {
+  margin-bottom: 12px;
+  color: #222;
+}
+
+/* ========================= */
+/* SERVICES                */
+/* ========================= */
+
+.services {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.card {
+  border: 1px solid var(--border);
+  padding: 22px;
+  border-radius: 6px;
+  background: var(--background); /* Changed from #fff */
+}
+
+.card h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.card p {
+  color: var(--muted);
+}
+
+/* ========================= */
+/* CONTACT                 */
+/* ========================= */
+
+.contact-form {
+  text-align: center;
+}
+
+.contact-email a {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 2px;
+  transition: all 0.3s ease;
+}
+
+.contact-email a:hover {
+  opacity: 0.8;
+}
+
+
+/* ========================= */
+/* FOOTER                  */
+/* ========================= */
+
+footer {
+  text-align: center;
+  padding: 50px 20px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+label {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  background: var(--background); /* Changed from #fff */
+  color: var(--text); /* Ensure text is readable */
+}
+
+button {
+  margin-top: 10px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.section + .section {
+  margin-top: 24px;
+}
+
+@media (max-width: 768px) {
+  body {
+    background: #f2f2f2;
+  }
+
+  .section {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+/* ========================= */
+/* MOBILE NAVIGATION */
+/* ========================= */
+
+/* hidden on desktop */
+
+.mobile-home-link {
+  display: none;
+}
+
+
+/* mobile layout */
+
+@media (max-width: 768px) {
+
+  .container, .section {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+
+  .home-btn {
+    display: none;
+  }
+
+  .mobile-home-link {
+    display: block;
+  }
+
+  .site-title {
+    font-size: 28px;
+  }
+
+}
+
+/* ======================================== */
+ /* FINAL DARK THEME FIX - ALL ISSUES        */
+ /* ======================================== */
+
+/* Body background in dark mode */
+html.dark-theme body {
+  background: #1a1a1a !important; /* If this turns red, the issue is elsewhere */
+  color: #f0f0f0 !important;
+}
+
+/* Sections in dark mode */
+.dark-theme .section {
+  background: #2a2a2a !important;
+}
+
+/* ALL TEXT: White in dark mode */
+.dark-theme,
+.dark-theme h1,
+.dark-theme h2,
+.dark-theme h3,
+.dark-theme p,
+.dark-theme li,
+.dark-theme a,
+.dark-theme .site-title,
+.dark-theme .subtitle,
+.dark-theme .micro-statement,
+.dark-theme .core-idea,
+.dark-theme .core-main,
+.dark-theme .core-sub,
+.dark-theme .section p,
+.dark-theme .section h2,
+.dark-theme .card,
+.dark-theme .card p,
+.dark-theme .card h3,
+.dark-theme label,
+.dark-theme input,
+.dark-theme textarea,
+.dark-theme select,
+.dark-theme button,
+.dark-theme footer,
+.dark-theme footer p,
+.dark-theme footer a,
+.dark-theme .footer-collaboration,
+.dark-theme .footer-collaboration p,
+.dark-theme .footer-collaboration a,
+.dark-theme .cookie-banner,
+.dark-theme .cookie-banner p,
+.dark-theme .cookie-actions,
+.dark-theme .cookie-actions a {
+  color: #f0f0f0 !important;
+}
+
+/* Site header in dark mode */
+.dark-theme .site-header {
+  background: rgba(30, 30, 50, 0.96) !important;
+}
+
+/* Theme toggle button in dark mode */
+.dark-theme .theme-toggle {
+  border: 2px solid #ffffff !important;
+  color: #ffffff !important;
+}
+
+.dark-theme .theme-toggle:hover {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Mobile body background in dark mode */
+@media (max-width: 768px) {
+  .dark-theme body {
+    background: #1a1a1a !important;
+  }
+}
+
+/* Dark mode for hamburger button */
+.dark-theme .hamburger-btn {
+  border: 2px solid #ffffff !important;
+}
+
+.dark-theme .hamburger-btn span {
+  background-color: #ffffff !important;
+}
+
+.dark-theme .hamburger-btn:hover {
+  background-color: #ffffff !important;
+}
+
+.dark-theme .hamburger-btn:hover span {
+  background-color: #000000 !important;
+}
+
+/* Dark mode for dropdown menu */
+.dark-theme .menu-dropdown {
+  background: #2a2a2a !important;
+}
+
+.dark-theme .menu-dropdown a {
+  color: #f0f0f0 !important;
+}
+
+.dark-theme .menu-dropdown a:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark-theme .word-btn {
+  color: #f0f0f0 !important;
+}
+
+.dark-theme .word-btn:hover {
+  text-decoration: underline;
+}
+
+/* Dark mode: Blue links and underlines */
+html.dark-theme a {
+  color: #6d8ee8 !important;
+  border-bottom-color: #6d8ee8 !important;
+}
+
+/* Dark mode: Keep language switch links white */
+html.dark-theme .language-switch a {
+  color: #f0f0f0 !important;
+  border-bottom-color: #f0f0f0 !important;
+}
+    /* ===== LOGO ÎN BARA STICKY ===== */
+    .site-title { display: flex; align-items: center; gap: 12px; }
+    .site-logo { display: block; width: 104px; height: auto; flex: 0 0 auto; }
+
+    /* ===== GALERIE COMPARATIVĂ LOGO ===== */
+    .logo-compare {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-top: 20px;
     }
-    .test-footer a { color: var(--seipsum-black); }
+    .logo-panel {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+      background: var(--background);
+    }
+    .logo-panel svg { width: 100%; height: auto; display: block; border-radius: 4px; }
+    .logo-panel h3 { margin-bottom: 12px; }
+    .logo-panel p { font-size: 14px; color: var(--muted); margin-bottom: 0; }
   </style>
 </head>
 <body>
 
-  <!-- ============================================================
-       NAV PRINCIPAL — BLOC CANONIC RO, COPIAT VERBATIM.
-       Nu edita nimic din interiorul acestui bloc.
-       ============================================================ -->
-  <header class="site-header">
+<!-- CANONICAL RO MAIN NAV — copy VERBATIM into every RO page. NOTHING in here may be edited, translated, renumbered, or adapted without explicit user instruction. hrefs and visible text are fixed. (Established 2026-10-04) -->
+<header class="site-header">
 
   <nav class="main-nav">
     <div class="left-section">
@@ -157,168 +812,477 @@
 
     </div>
 
-    <a href="index.html" class="site-title">Seipsum</a>
+    <a href="index.html" class="site-title">
+<svg class="site-logo" xmlns="http://www.w3.org/2000/svg" viewBox="-216 -96 332 192" role="img" aria-label="Logo Seipsum">
+  <rect x="-210" y="-90" width="320" height="180" fill="#D9A441" stroke="#111" stroke-width="5"/>
+  <g fill="#111" stroke="#fff" stroke-width="1.6">
+      <g fill="#111" stroke="#fff" stroke-width="1.6">
+          <circle cx="-208.2" cy="-28.9" r="1.8"/><circle cx="-208.2" cy="-16.4" r="1.6"/><circle cx="-207.9" cy="-83.7" r="2.0"/><circle cx="-207.9" cy="16.3" r="1.8"/>
+          <circle cx="-207.9" cy="80.7" r="1.8"/><circle cx="-207.8" cy="24.0" r="2.1"/><circle cx="-207.7" cy="58.8" r="2.1"/><circle cx="-207.1" cy="-70.2" r="2.3"/>
+          <circle cx="-207.0" cy="-79.7" r="1.8"/><circle cx="-207.0" cy="-32.9" r="2.0"/><circle cx="-206.9" cy="10.7" r="2.3"/><circle cx="-206.8" cy="72.0" r="1.8"/>
+          <circle cx="-206.8" cy="-2.6" r="1.6"/><circle cx="-206.8" cy="49.6" r="2.2"/><circle cx="-206.6" cy="-44.5" r="1.5"/><circle cx="-206.5" cy="-58.7" r="2.0"/>
+          <circle cx="-206.4" cy="-65.5" r="2.4"/><circle cx="-206.3" cy="-51.8" r="1.9"/><circle cx="-206.2" cy="-56.1" r="1.6"/><circle cx="-206.2" cy="-62.3" r="1.7"/>
+          <circle cx="-206.1" cy="85.9" r="2.2"/><circle cx="-206.0" cy="46.3" r="1.6"/><circle cx="-205.6" cy="-35.6" r="2.6"/><circle cx="-205.6" cy="28.5" r="2.4"/>
+          <circle cx="-205.5" cy="4.7" r="2.4"/><circle cx="-205.4" cy="82.2" r="2.2"/><circle cx="-205.3" cy="52.9" r="1.9"/><circle cx="-205.3" cy="14.1" r="1.6"/>
+          <circle cx="-205.1" cy="-40.8" r="2.5"/><circle cx="-205.0" cy="36.1" r="1.8"/><circle cx="-205.0" cy="-45.8" r="1.8"/><circle cx="-204.8" cy="1.4" r="1.7"/>
+          <circle cx="-204.6" cy="40.9" r="2.3"/><circle cx="-204.4" cy="25.0" r="2.6"/><circle cx="-204.4" cy="-32.4" r="2.2"/><circle cx="-204.3" cy="-6.5" r="1.6"/>
+          <circle cx="-204.3" cy="63.6" r="2.5"/><circle cx="-204.3" cy="-22.9" r="2.5"/><circle cx="-204.1" cy="17.5" r="2.3"/><circle cx="-204.1" cy="-79.8" r="2.5"/>
+          <circle cx="-204.0" cy="-11.0" r="2.0"/><circle cx="-204.0" cy="-29.1" r="1.9"/><circle cx="-203.7" cy="78.3" r="1.7"/><circle cx="-203.7" cy="-70.7" r="2.0"/>
+          <circle cx="-203.6" cy="-0.8" r="2.0"/><circle cx="-203.4" cy="-25.4" r="1.6"/><circle cx="-203.4" cy="20.6" r="1.8"/><circle cx="-203.3" cy="-48.1" r="1.7"/>
+          <circle cx="-203.3" cy="49.5" r="2.5"/><circle cx="-203.2" cy="-51.5" r="1.9"/><circle cx="-203.1" cy="-63.0" r="2.7"/><circle cx="-203.1" cy="-73.7" r="2.6"/>
+          <circle cx="-203.0" cy="56.5" r="1.8"/><circle cx="-202.7" cy="85.6" r="2.5"/><circle cx="-202.5" cy="-83.8" r="2.4"/><circle cx="-202.4" cy="-4.3" r="2.0"/>
+          <circle cx="-202.4" cy="2.8" r="1.9"/><circle cx="-202.4" cy="35.4" r="2.5"/><circle cx="-202.3" cy="-59.1" r="2.6"/><circle cx="-202.3" cy="66.4" r="2.5"/>
+          <circle cx="-202.0" cy="-36.0" r="2.5"/><circle cx="-201.9" cy="45.5" r="2.5"/><circle cx="-201.6" cy="-27.0" r="2.2"/><circle cx="-201.5" cy="-76.1" r="1.8"/>
+          <circle cx="-201.3" cy="-23.7" r="1.9"/><circle cx="-201.2" cy="39.8" r="2.5"/><circle cx="-201.1" cy="11.3" r="2.5"/><circle cx="-200.8" cy="-46.7" r="1.9"/>
+          <circle cx="-200.8" cy="-19.1" r="2.3"/><circle cx="-200.6" cy="-54.3" r="2.2"/><circle cx="-200.5" cy="76.2" r="2.5"/><circle cx="-200.5" cy="-50.3" r="1.9"/>
+          <circle cx="-200.4" cy="70.3" r="2.3"/><circle cx="-200.4" cy="5.8" r="2.8"/><circle cx="-200.3" cy="33.2" r="2.1"/><circle cx="-200.2" cy="48.1" r="2.5"/>
+          <circle cx="-200.1" cy="28.4" r="2.6"/><circle cx="-199.9" cy="83.1" r="2.3"/><circle cx="-199.9" cy="56.4" r="1.7"/><circle cx="-199.7" cy="-68.2" r="2.5"/>
+          <circle cx="-199.5" cy="-80.5" r="2.5"/><circle cx="-199.5" cy="63.1" r="2.6"/><circle cx="-199.4" cy="-64.1" r="1.9"/><circle cx="-199.3" cy="-83.7" r="2.1"/>
+          <circle cx="-198.9" cy="-43.5" r="1.8"/><circle cx="-198.9" cy="37.2" r="2.7"/><circle cx="-198.8" cy="-34.3" r="2.7"/><circle cx="-198.8" cy="-40.8" r="2.0"/>
+          <circle cx="-198.7" cy="-73.8" r="1.8"/><circle cx="-198.6" cy="-48.6" r="2.1"/><circle cx="-198.5" cy="-59.5" r="2.6"/><circle cx="-198.3" cy="-16.3" r="2.1"/>
+          <circle cx="-198.3" cy="21.6" r="2.6"/><circle cx="-198.3" cy="-3.0" r="2.7"/><circle cx="-198.3" cy="-29.9" r="2.0"/><circle cx="-197.9" cy="-24.9" r="2.9"/>
+          <circle cx="-197.8" cy="81.2" r="1.9"/><circle cx="-197.7" cy="41.1" r="2.0"/><circle cx="-197.4" cy="57.6" r="2.7"/><circle cx="-197.4" cy="10.6" r="2.5"/>
+          <circle cx="-197.0" cy="70.6" r="2.7"/><circle cx="-196.9" cy="48.6" r="2.2"/><circle cx="-196.9" cy="-55.3" r="2.6"/><circle cx="-196.9" cy="24.4" r="2.1"/>
+          <circle cx="-196.8" cy="-11.1" r="2.4"/><circle cx="-196.7" cy="-19.4" r="3.0"/><circle cx="-196.5" cy="44.2" r="2.1"/><circle cx="-196.5" cy="-44.7" r="2.3"/>
+          <circle cx="-196.4" cy="-37.6" r="2.8"/><circle cx="-196.2" cy="-27.8" r="2.0"/><circle cx="-196.2" cy="-63.4" r="2.9"/><circle cx="-196.1" cy="4.1" r="2.3"/>
+          <circle cx="-195.9" cy="78.2" r="2.3"/><circle cx="-195.7" cy="-7.1" r="2.1"/><circle cx="-195.6" cy="52.4" r="2.7"/><circle cx="-195.5" cy="-47.8" r="2.2"/>
+          <circle cx="-195.3" cy="12.7" r="2.0"/><circle cx="-195.3" cy="35.9" r="1.9"/><circle cx="-195.2" cy="-69.9" r="3.0"/><circle cx="-195.1" cy="-77.2" r="3.0"/>
+          <circle cx="-195.1" cy="-32.0" r="2.9"/><circle cx="-195.0" cy="-82.8" r="2.6"/><circle cx="-194.8" cy="82.8" r="2.0"/><circle cx="-194.7" cy="-1.6" r="3.0"/>
+          <circle cx="-194.6" cy="16.8" r="3.0"/><circle cx="-194.5" cy="39.2" r="2.7"/><circle cx="-193.9" cy="63.5" r="2.2"/><circle cx="-193.9" cy="42.5" r="2.2"/>
+          <circle cx="-193.5" cy="80.0" r="2.4"/><circle cx="-193.4" cy="46.2" r="2.6"/><circle cx="-193.3" cy="-23.6" r="2.4"/><circle cx="-193.3" cy="-15.8" r="3.1"/>
+          <circle cx="-193.3" cy="33.5" r="2.0"/><circle cx="-192.9" cy="-65.8" r="2.3"/><circle cx="-192.7" cy="6.5" r="3.0"/><circle cx="-192.6" cy="-39.2" r="2.6"/>
+          <circle cx="-192.6" cy="70.2" r="2.2"/><circle cx="-192.5" cy="-7.3" r="2.2"/><circle cx="-192.5" cy="-59.3" r="2.3"/><circle cx="-192.3" cy="21.0" r="2.7"/>
+          <circle cx="-192.2" cy="-47.5" r="3.2"/><circle cx="-192.2" cy="49.2" r="2.4"/><circle cx="-192.1" cy="53.8" r="3.0"/><circle cx="-192.0" cy="27.5" r="2.6"/>
+          <circle cx="-192.0" cy="73.6" r="2.7"/><circle cx="-191.9" cy="36.1" r="2.6"/><circle cx="-191.2" cy="-42.8" r="3.0"/><circle cx="-191.1" cy="16.9" r="2.5"/>
+          <circle cx="-191.0" cy="-55.9" r="2.1"/><circle cx="-190.9" cy="-81.2" r="3.1"/><circle cx="-190.6" cy="-12.5" r="3.2"/><circle cx="-190.4" cy="67.7" r="2.7"/>
+          <circle cx="-190.0" cy="1.8" r="2.7"/><circle cx="-189.8" cy="-23.9" r="2.4"/><circle cx="-189.4" cy="83.7" r="2.1"/><circle cx="-189.3" cy="-31.5" r="2.5"/>
+          <circle cx="-189.2" cy="-65.6" r="2.1"/><circle cx="-189.1" cy="-69.8" r="2.1"/><circle cx="-189.0" cy="-73.6" r="2.8"/><circle cx="-188.9" cy="62.0" r="3.1"/>
+          <circle cx="-188.9" cy="-2.7" r="3.1"/><circle cx="-188.7" cy="28.4" r="2.7"/><circle cx="-188.6" cy="-51.3" r="2.9"/><circle cx="-188.4" cy="10.8" r="3.2"/>
+          <circle cx="-188.4" cy="50.6" r="2.1"/><circle cx="-188.3" cy="56.6" r="3.1"/><circle cx="-188.1" cy="35.7" r="2.3"/><circle cx="-188.1" cy="5.0" r="3.1"/>
+          <circle cx="-188.0" cy="24.1" r="2.3"/><circle cx="-188.0" cy="-36.8" r="2.8"/><circle cx="-187.6" cy="-20.1" r="3.2"/><circle cx="-187.5" cy="71.9" r="2.3"/>
+          <circle cx="-187.3" cy="-7.9" r="3.3"/><circle cx="-187.3" cy="32.0" r="3.1"/><circle cx="-187.3" cy="-42.9" r="2.1"/><circle cx="-187.2" cy="-27.2" r="3.4"/>
+          <circle cx="-187.0" cy="-33.7" r="2.3"/><circle cx="-186.7" cy="42.5" r="2.3"/><circle cx="-186.4" cy="77.2" r="2.2"/><circle cx="-186.4" cy="-56.6" r="3.3"/>
+          <circle cx="-186.2" cy="-78.0" r="3.2"/><circle cx="-186.1" cy="21.1" r="3.3"/><circle cx="-186.1" cy="-81.8" r="2.2"/><circle cx="-186.1" cy="-40.5" r="2.1"/>
+          <circle cx="-186.0" cy="-62.5" r="2.7"/><circle cx="-185.8" cy="-13.9" r="3.1"/><circle cx="-185.7" cy="2.1" r="2.6"/><circle cx="-185.3" cy="15.9" r="3.4"/>
+          <circle cx="-185.2" cy="-48.5" r="2.5"/><circle cx="-185.1" cy="-17.5" r="2.4"/><circle cx="-185.0" cy="28.3" r="3.0"/><circle cx="-184.6" cy="-69.1" r="3.1"/>
+          <circle cx="-184.6" cy="36.4" r="3.4"/><circle cx="-184.3" cy="49.3" r="3.4"/><circle cx="-184.2" cy="-37.5" r="3.1"/><circle cx="-184.1" cy="54.1" r="2.5"/>
+          <circle cx="-183.8" cy="8.1" r="2.6"/><circle cx="-183.7" cy="-59.2" r="2.6"/><circle cx="-183.6" cy="44.5" r="3.0"/><circle cx="-183.0" cy="62.9" r="2.4"/>
+          <circle cx="-182.9" cy="-22.2" r="3.1"/><circle cx="-182.7" cy="-3.8" r="2.3"/><circle cx="-182.7" cy="1.3" r="2.2"/><circle cx="-182.5" cy="72.0" r="2.9"/>
+          <circle cx="-182.4" cy="-9.1" r="3.4"/><circle cx="-181.9" cy="-45.4" r="3.5"/><circle cx="-181.7" cy="-80.8" r="3.6"/><circle cx="-181.6" cy="66.3" r="3.3"/>
+          <circle cx="-181.5" cy="-31.3" r="2.9"/><circle cx="-181.5" cy="12.3" r="3.3"/><circle cx="-181.4" cy="16.8" r="2.9"/><circle cx="-181.2" cy="-72.6" r="3.4"/>
+          <circle cx="-181.2" cy="75.6" r="3.1"/><circle cx="-181.1" cy="-63.7" r="3.5"/><circle cx="-180.8" cy="-40.0" r="3.5"/><circle cx="-180.7" cy="59.0" r="3.0"/>
+          <circle cx="-180.6" cy="-49.9" r="3.7"/><circle cx="-180.5" cy="-54.4" r="2.8"/><circle cx="-180.4" cy="-5.9" r="2.2"/><circle cx="-180.1" cy="33.8" r="2.3"/>
+          <circle cx="-179.6" cy="24.9" r="3.7"/><circle cx="-179.4" cy="29.7" r="2.7"/><circle cx="-179.3" cy="8.1" r="2.5"/><circle cx="-179.3" cy="50.3" r="2.6"/>
+          <circle cx="-178.9" cy="40.1" r="3.8"/><circle cx="-178.7" cy="-18.1" r="2.8"/><circle cx="-178.6" cy="-24.7" r="2.6"/><circle cx="-178.3" cy="55.9" r="2.7"/>
+          <circle cx="-177.7" cy="72.3" r="2.5"/><circle cx="-177.5" cy="-3.6" r="3.2"/><circle cx="-177.4" cy="-44.8" r="2.9"/><circle cx="-177.1" cy="5.8" r="2.5"/>
+          <circle cx="-177.0" cy="-53.7" r="2.6"/><circle cx="-176.9" cy="-10.8" r="3.4"/><circle cx="-176.9" cy="-80.7" r="3.6"/><circle cx="-176.7" cy="45.5" r="3.5"/>
+          <circle cx="-176.6" cy="62.2" r="3.8"/><circle cx="-176.4" cy="16.1" r="3.6"/><circle cx="-175.8" cy="1.9" r="3.6"/><circle cx="-175.8" cy="-76.3" r="3.1"/>
+          <circle cx="-175.8" cy="68.8" r="3.4"/><circle cx="-175.7" cy="-36.5" r="3.8"/><circle cx="-175.3" cy="-26.2" r="2.6"/><circle cx="-175.2" cy="-58.6" r="3.0"/>
+          <circle cx="-175.1" cy="52.5" r="3.3"/><circle cx="-174.9" cy="33.8" r="3.7"/><circle cx="-174.8" cy="-32.2" r="2.5"/><circle cx="-174.7" cy="-48.4" r="3.3"/>
+          <circle cx="-174.3" cy="-66.5" r="2.9"/><circle cx="-174.2" cy="73.3" r="3.4"/><circle cx="-173.9" cy="9.6" r="2.5"/><circle cx="-173.8" cy="-43.4" r="3.2"/>
+          <circle cx="-173.4" cy="26.6" r="3.8"/><circle cx="-173.2" cy="56.3" r="2.9"/><circle cx="-173.1" cy="-71.2" r="3.3"/><circle cx="-173.1" cy="64.8" r="3.1"/>
+          <circle cx="-173.0" cy="79.8" r="3.8"/><circle cx="-172.9" cy="-79.5" r="3.0"/><circle cx="-172.7" cy="-21.9" r="2.7"/><circle cx="-172.5" cy="21.3" r="3.0"/>
+          <circle cx="-172.4" cy="45.1" r="3.2"/><circle cx="-172.2" cy="-16.7" r="3.3"/><circle cx="-172.0" cy="-39.4" r="3.7"/><circle cx="-171.7" cy="-51.7" r="3.0"/>
+          <circle cx="-171.6" cy="39.9" r="3.9"/><circle cx="-171.5" cy="0.1" r="3.3"/><circle cx="-171.5" cy="-61.7" r="2.5"/><circle cx="-171.3" cy="15.9" r="3.1"/>
+          <circle cx="-170.9" cy="8.0" r="2.9"/><circle cx="-170.7" cy="30.6" r="3.3"/><circle cx="-170.5" cy="71.7" r="2.9"/><circle cx="-170.0" cy="-76.1" r="3.4"/>
+          <circle cx="-169.8" cy="-46.0" r="3.5"/><circle cx="-169.6" cy="-68.4" r="3.7"/><circle cx="-169.6" cy="34.5" r="2.8"/><circle cx="-169.2" cy="59.5" r="3.7"/>
+          <circle cx="-169.2" cy="-4.4" r="3.8"/><circle cx="-168.9" cy="53.4" r="3.5"/><circle cx="-168.9" cy="-26.5" r="4.1"/><circle cx="-168.9" cy="-56.8" r="4.2"/>
+          <circle cx="-168.4" cy="77.8" r="3.9"/><circle cx="-168.4" cy="68.1" r="3.4"/><circle cx="-168.0" cy="-33.9" r="3.4"/><circle cx="-167.7" cy="-17.6" r="2.8"/>
+          <circle cx="-167.6" cy="19.6" r="2.8"/><circle cx="-167.0" cy="-52.7" r="2.7"/><circle cx="-166.9" cy="15.3" r="3.1"/><circle cx="-166.9" cy="-41.9" r="3.1"/>
+          <circle cx="-166.6" cy="-11.7" r="3.1"/><circle cx="-166.3" cy="48.6" r="4.0"/><circle cx="-165.0" cy="59.5" r="2.9"/><circle cx="-164.9" cy="-60.7" r="2.8"/>
+          <circle cx="-164.8" cy="-79.1" r="3.1"/><circle cx="-164.7" cy="34.7" r="3.6"/><circle cx="-164.6" cy="0.4" r="2.7"/><circle cx="-164.5" cy="74.6" r="3.4"/>
+          <circle cx="-164.4" cy="-72.5" r="3.8"/><circle cx="-164.2" cy="12.1" r="3.5"/><circle cx="-164.1" cy="-37.8" r="3.7"/><circle cx="-163.9" cy="44.2" r="2.8"/>
+          <circle cx="-163.6" cy="-45.5" r="4.0"/><circle cx="-163.5" cy="29.1" r="3.2"/><circle cx="-163.5" cy="-65.9" r="4.1"/><circle cx="-163.2" cy="-7.7" r="3.7"/>
+          <circle cx="-162.8" cy="24.1" r="3.6"/><circle cx="-162.8" cy="-27.2" r="3.4"/><circle cx="-162.8" cy="78.3" r="2.9"/><circle cx="-162.8" cy="53.2" r="3.1"/>
+          <circle cx="-162.6" cy="-18.2" r="3.6"/><circle cx="-162.2" cy="8.7" r="2.7"/><circle cx="-161.9" cy="4.1" r="4.3"/><circle cx="-161.7" cy="-58.2" r="3.1"/>
+          <circle cx="-161.5" cy="19.2" r="3.5"/><circle cx="-161.4" cy="-54.2" r="3.2"/><circle cx="-161.2" cy="57.6" r="3.7"/><circle cx="-161.0" cy="63.0" r="4.2"/>
+          <circle cx="-161.0" cy="32.7" r="3.2"/><circle cx="-161.0" cy="48.7" r="3.7"/><circle cx="-160.3" cy="-12.1" r="4.1"/><circle cx="-160.2" cy="75.1" r="3.0"/>
+          <circle cx="-160.1" cy="70.0" r="3.1"/><circle cx="-160.0" cy="-35.2" r="3.3"/><circle cx="-159.8" cy="28.1" r="2.9"/><circle cx="-159.7" cy="-70.2" r="4.1"/>
+          <circle cx="-159.7" cy="-76.2" r="4.4"/><circle cx="-159.1" cy="-39.7" r="2.8"/><circle cx="-158.0" cy="-2.8" r="3.6"/><circle cx="-157.9" cy="-19.8" r="3.7"/>
+          <circle cx="-157.7" cy="-64.6" r="4.1"/><circle cx="-157.7" cy="-48.3" r="4.5"/><circle cx="-157.6" cy="78.6" r="3.2"/><circle cx="-157.4" cy="20.9" r="3.5"/>
+          <circle cx="-157.3" cy="14.7" r="4.6"/><circle cx="-157.0" cy="56.8" r="3.1"/><circle cx="-156.9" cy="45.3" r="3.7"/><circle cx="-156.4" cy="40.3" r="4.3"/>
+          <circle cx="-156.2" cy="52.2" r="3.1"/><circle cx="-155.7" cy="-29.7" r="3.8"/><circle cx="-155.3" cy="64.9" r="4.6"/><circle cx="-155.3" cy="-7.5" r="3.6"/>
+          <circle cx="-154.6" cy="-41.0" r="4.4"/><circle cx="-154.1" cy="3.6" r="3.1"/><circle cx="-153.9" cy="-58.7" r="4.7"/><circle cx="-153.9" cy="-24.1" r="3.6"/>
+          <circle cx="-153.9" cy="28.9" r="3.4"/><circle cx="-153.5" cy="-0.6" r="3.7"/><circle cx="-153.3" cy="76.6" r="3.5"/><circle cx="-153.2" cy="-15.5" r="4.0"/>
+          <circle cx="-152.9" cy="-75.1" r="3.6"/><circle cx="-152.6" cy="-69.8" r="4.1"/><circle cx="-152.4" cy="-49.5" r="3.3"/><circle cx="-152.0" cy="22.3" r="3.8"/>
+          <circle cx="-151.6" cy="-9.8" r="3.1"/><circle cx="-151.5" cy="60.2" r="4.3"/><circle cx="-151.3" cy="46.1" r="3.5"/><circle cx="-151.2" cy="-4.8" r="4.0"/>
+          <circle cx="-151.1" cy="-33.3" r="3.3"/><circle cx="-150.9" cy="33.5" r="4.3"/><circle cx="-150.5" cy="70.3" r="4.0"/><circle cx="-149.9" cy="17.7" r="3.6"/>
+          <circle cx="-149.4" cy="52.7" r="3.7"/><circle cx="-149.1" cy="-21.9" r="4.0"/><circle cx="-149.1" cy="-28.4" r="3.5"/><circle cx="-147.9" cy="28.5" r="3.4"/>
+          <circle cx="-147.7" cy="41.0" r="3.7"/><circle cx="-147.3" cy="-51.1" r="3.9"/><circle cx="-147.2" cy="-39.5" r="3.2"/><circle cx="-147.2" cy="-69.0" r="4.6"/>
+          <circle cx="-147.2" cy="-9.0" r="3.4"/><circle cx="-146.9" cy="9.2" r="3.5"/><circle cx="-146.9" cy="0.4" r="4.1"/><circle cx="-146.6" cy="-60.3" r="3.9"/>
+          <circle cx="-146.2" cy="33.9" r="3.3"/><circle cx="-145.5" cy="-34.8" r="3.2"/><circle cx="-145.5" cy="55.6" r="3.3"/><circle cx="-145.4" cy="22.5" r="4.2"/>
+          <circle cx="-145.4" cy="-45.2" r="4.4"/><circle cx="-145.1" cy="-74.9" r="5.3"/><circle cx="-144.9" cy="-13.9" r="4.3"/><circle cx="-144.9" cy="64.4" r="3.2"/>
+          <circle cx="-144.6" cy="70.1" r="4.1"/><circle cx="-143.9" cy="4.6" r="4.0"/><circle cx="-143.8" cy="-22.9" r="3.7"/><circle cx="-143.1" cy="13.3" r="4.6"/>
+          <circle cx="-143.1" cy="43.0" r="3.4"/><circle cx="-142.6" cy="-57.6" r="3.7"/><circle cx="-142.5" cy="-29.5" r="3.8"/><circle cx="-142.5" cy="48.6" r="3.8"/>
+          <circle cx="-142.0" cy="-52.5" r="4.3"/><circle cx="-141.4" cy="-69.0" r="4.5"/><circle cx="-141.3" cy="-40.9" r="4.7"/><circle cx="-141.0" cy="59.7" r="4.5"/>
+          <circle cx="-140.8" cy="36.8" r="4.9"/><circle cx="-139.8" cy="30.9" r="4.3"/><circle cx="-139.6" cy="-62.2" r="3.5"/><circle cx="-139.2" cy="-22.7" r="3.4"/>
+          <circle cx="-139.1" cy="54.4" r="3.6"/><circle cx="-138.5" cy="-12.7" r="4.0"/><circle cx="-138.3" cy="6.3" r="4.1"/><circle cx="-138.3" cy="18.1" r="4.4"/>
+          <circle cx="-137.6" cy="-1.1" r="4.2"/><circle cx="-137.6" cy="48.8" r="3.9"/><circle cx="-137.3" cy="12.4" r="3.8"/><circle cx="-137.2" cy="-33.7" r="5.0"/>
+          <circle cx="-136.9" cy="-27.9" r="3.5"/><circle cx="-136.6" cy="-46.3" r="4.2"/><circle cx="-136.4" cy="74.6" r="4.7"/><circle cx="-136.3" cy="66.6" r="4.6"/>
+          <circle cx="-135.3" cy="26.4" r="4.7"/><circle cx="-135.0" cy="-74.7" r="4.4"/><circle cx="-134.6" cy="-8.5" r="4.0"/><circle cx="-134.2" cy="53.4" r="4.3"/>
+          <circle cx="-134.1" cy="42.1" r="5.5"/><circle cx="-134.1" cy="-58.9" r="3.5"/><circle cx="-133.3" cy="-20.4" r="3.9"/><circle cx="-133.3" cy="3.3" r="4.1"/>
+          <circle cx="-132.7" cy="-65.9" r="4.1"/><circle cx="-132.2" cy="34.8" r="3.6"/><circle cx="-132.0" cy="-43.4" r="4.3"/><circle cx="-131.5" cy="61.8" r="4.4"/>
+          <circle cx="-131.4" cy="-53.9" r="4.3"/><circle cx="-131.0" cy="-30.0" r="5.6"/><circle cx="-130.7" cy="30.1" r="4.3"/><circle cx="-130.3" cy="47.2" r="3.9"/>
+          <circle cx="-130.1" cy="9.3" r="4.5"/><circle cx="-129.7" cy="20.9" r="4.4"/><circle cx="-129.1" cy="-72.9" r="5.3"/><circle cx="-128.8" cy="-14.4" r="3.7"/>
+          <circle cx="-128.6" cy="-38.8" r="4.1"/><circle cx="-128.6" cy="-0.7" r="5.5"/><circle cx="-127.7" cy="14.9" r="4.4"/><circle cx="-127.3" cy="-9.0" r="4.9"/>
+          <circle cx="-127.2" cy="-21.1" r="4.2"/><circle cx="-127.1" cy="37.7" r="3.9"/><circle cx="-127.1" cy="65.7" r="4.8"/><circle cx="-126.8" cy="55.1" r="5.1"/>
+          <circle cx="-126.5" cy="-59.8" r="5.1"/><circle cx="-126.2" cy="74.5" r="3.7"/><circle cx="-124.3" cy="-45.2" r="6.0"/><circle cx="-124.2" cy="-52.5" r="4.2"/>
+          <circle cx="-123.8" cy="27.5" r="4.1"/><circle cx="-123.2" cy="43.4" r="3.9"/><circle cx="-122.8" cy="-15.4" r="5.0"/><circle cx="-122.4" cy="-71.3" r="4.2"/>
+          <circle cx="-122.1" cy="-24.1" r="4.8"/><circle cx="-121.7" cy="69.6" r="4.1"/><circle cx="-121.5" cy="11.3" r="6.3"/><circle cx="-120.2" cy="-62.2" r="5.1"/>
+          <circle cx="-119.4" cy="30.9" r="4.7"/><circle cx="-119.0" cy="-35.4" r="6.2"/><circle cx="-118.3" cy="-3.4" r="4.3"/><circle cx="-118.1" cy="60.9" r="4.6"/>
+          <circle cx="-117.0" cy="5.3" r="4.3"/><circle cx="-115.3" cy="22.4" r="4.2"/><circle cx="-115.3" cy="-55.4" r="6.0"/><circle cx="-115.1" cy="53.1" r="4.0"/>
+          <circle cx="-115.0" cy="41.3" r="5.8"/><circle cx="-114.8" cy="-9.1" r="4.5"/><circle cx="-114.5" cy="-65.7" r="4.1"/><circle cx="-113.9" cy="-26.3" r="4.6"/>
+          <circle cx="-113.9" cy="29.1" r="4.2"/><circle cx="-113.8" cy="-42.7" r="6.4"/><circle cx="-113.1" cy="71.6" r="4.5"/><circle cx="-113.0" cy="-19.7" r="5.9"/>
+          <circle cx="-112.8" cy="63.9" r="4.6"/><circle cx="-111.2" cy="12.6" r="5.5"/><circle cx="-110.4" cy="-70.3" r="5.1"/><circle cx="-110.1" cy="1.0" r="5.6"/>
+          <circle cx="-109.0" cy="49.4" r="5.7"/><circle cx="-108.9" cy="-36.0" r="4.7"/><circle cx="-108.2" cy="-11.5" r="6.6"/><circle cx="-107.3" cy="30.2" r="4.5"/>
+          <circle cx="-106.7" cy="55.9" r="5.3"/><circle cx="-106.4" cy="-44.4" r="5.6"/><circle cx="-105.7" cy="-21.7" r="5.8"/><circle cx="-105.6" cy="24.1" r="4.7"/>
+          <circle cx="-105.0" cy="-57.3" r="6.0"/><circle cx="-104.5" cy="63.8" r="6.2"/><circle cx="-104.4" cy="11.6" r="5.2"/><circle cx="-103.7" cy="-29.7" r="6.8"/>
+          <circle cx="-103.3" cy="-0.2" r="4.3"/><circle cx="-103.0" cy="43.0" r="7.1"/><circle cx="-102.5" cy="5.4" r="4.6"/><circle cx="-102.5" cy="-50.1" r="5.1"/>
+          <circle cx="-100.5" cy="-65.0" r="5.6"/><circle cx="-99.0" cy="31.0" r="4.7"/><circle cx="-98.8" cy="55.0" r="5.7"/><circle cx="-97.4" cy="-22.0" r="7.0"/>
+          <circle cx="-97.2" cy="-57.8" r="5.4"/><circle cx="-96.7" cy="-47.3" r="4.7"/><circle cx="-96.6" cy="-14.2" r="5.2"/><circle cx="-96.5" cy="19.0" r="6.8"/>
+          <circle cx="-96.0" cy="-33.0" r="4.6"/><circle cx="-95.1" cy="66.7" r="6.1"/><circle cx="-95.1" cy="-2.2" r="6.6"/><circle cx="-94.4" cy="37.0" r="7.3"/>
+          <circle cx="-94.3" cy="11.1" r="5.1"/><circle cx="-92.9" cy="52.3" r="4.7"/><circle cx="-92.6" cy="-40.7" r="7.3"/><circle cx="-91.5" cy="-52.4" r="5.4"/>
+          <circle cx="-90.8" cy="28.1" r="5.9"/><circle cx="-90.2" cy="-63.8" r="5.9"/><circle cx="-88.2" cy="46.8" r="5.3"/><circle cx="-87.6" cy="-47.4" r="4.9"/>
+          <circle cx="-87.1" cy="-4.1" r="6.5"/><circle cx="-86.5" cy="65.7" r="6.0"/><circle cx="-86.3" cy="-29.9" r="5.8"/><circle cx="-86.2" cy="-20.6" r="7.7"/>
+          <circle cx="-85.1" cy="-55.7" r="4.9"/><circle cx="-85.1" cy="18.4" r="7.4"/><circle cx="-83.0" cy="51.8" r="5.8"/><circle cx="-82.8" cy="30.4" r="6.6"/>
+          <circle cx="-81.8" cy="7.6" r="7.8"/><circle cx="-80.9" cy="-36.9" r="6.5"/><circle cx="-79.5" cy="-48.5" r="5.1"/><circle cx="-79.4" cy="-61.8" r="6.8"/>
+          <circle cx="-78.3" cy="62.8" r="6.3"/><circle cx="-77.7" cy="-11.6" r="5.4"/><circle cx="-77.7" cy="41.6" r="7.4"/><circle cx="-75.6" cy="53.7" r="5.4"/>
+          <circle cx="-75.4" cy="-24.9" r="5.7"/><circle cx="-74.2" cy="-2.9" r="6.1"/><circle cx="-73.5" cy="-44.3" r="5.9"/><circle cx="-71.1" cy="-35.4" r="8.0"/>
+          <circle cx="-70.3" cy="24.4" r="8.2"/><circle cx="-70.1" cy="3.2" r="5.4"/><circle cx="-70.0" cy="-60.2" r="7.1"/><circle cx="-69.0" cy="48.0" r="8.2"/>
+          <circle cx="-67.1" cy="12.7" r="6.6"/><circle cx="-66.0" cy="-14.2" r="8.8"/><circle cx="-65.2" cy="33.4" r="6.2"/><circle cx="-63.4" cy="-3.0" r="6.0"/>
+          <circle cx="-63.3" cy="57.8" r="8.6"/><circle cx="-62.5" cy="-50.2" r="7.2"/><circle cx="-61.7" cy="-24.7" r="9.0"/><circle cx="-61.4" cy="-36.7" r="5.4"/>
+          <circle cx="-60.9" cy="41.4" r="7.6"/><circle cx="-60.5" cy="-59.6" r="6.9"/><circle cx="-60.3" cy="4.5" r="5.7"/><circle cx="-59.0" cy="21.3" r="8.2"/>
+      </g>
+  </g>
+  <rect x="-50" y="-70" width="140" height="140" fill="#111" stroke="#fff" stroke-width="4"/>
+  <rect x="-210" y="-90" width="320" height="180" fill="none" stroke="#111" stroke-width="5"/>
+</svg>
+      <span>Seipsum</span>
+    </a>
   </nav>
 
-  <!-- ============================================================
-       SFÂRȘIT BLOC CANONIC
-       ============================================================ -->
-
-  <div class="test-container">
-
-    <!-- ==========================================================
-         SECȚIUNEA 1 — TEST LOGO (v1.3, temă deschisă)
-         ========================================================== -->
-    <section class="test-section">
-      <h2>1. Test Logo — temă deschisă (mustard + negru)</h2>
-
-      <div class="logo-test-slot">
-        <svg width="320" height="auto" viewBox="-216 -96 640 360" xmlns="http://www.w3.org/2000/svg"
-             role="img" aria-label="Seipsum — logo de test">
-          <rect x="-210" y="-90" width="320" height="180"
-                fill="var(--seipsum-mustard)" stroke="var(--seipsum-black)" stroke-width="5"/>
-          <g fill="var(--seipsum-black)" stroke="var(--seipsum-white)" stroke-width="1.6">
-            <circle cx="-192.9" cy="-64" r="3.2"/><circle cx="-190.3" cy="-12.8" r="3.2"/><circle cx="-187.5" cy="-49.5" r="3.4"/><circle cx="-186.7" cy="30.6" r="3.8"/>
-            <circle cx="-185.8" cy="-16.6" r="4.2"/><circle cx="-183.8" cy="-26.5" r="3.4"/><circle cx="-183" cy="37" r="3.9"/><circle cx="-181.2" cy="44.2" r="4.1"/>
-            <circle cx="-180.4" cy="-2.5" r="4.5"/><circle cx="-176.5" cy="5" r="4.2"/><circle cx="-175.8" cy="57.6" r="4.3"/><circle cx="-175" cy="11.3" r="4.8"/>
-            <circle cx="-174.1" cy="-35.3" r="5.3"/><circle cx="-170.4" cy="-53.4" r="4.5"/><circle cx="-170" cy="-8.5" r="4.3"/><circle cx="-169.6" cy="24.9" r="5.1"/>
-            <circle cx="-169.2" cy="54.2" r="5"/><circle cx="-168.7" cy="-21.2" r="5.6"/><circle cx="-164.2" cy="38.3" r="5.3"/><circle cx="-163.4" cy="-39.5" r="4.4"/>
-            <circle cx="-163.3" cy="-7.4" r="5.9"/><circle cx="-162.7" cy="22.4" r="5.2"/><circle cx="-158.7" cy="51.4" r="5.5"/><circle cx="-157.9" cy="6.1" r="6.1"/>
-            <circle cx="-157" cy="-39.4" r="6.7"/><circle cx="-156.2" cy="9.1" r="5.4"/><circle cx="-153.3" cy="-57" r="5.6"/><circle cx="-152.5" cy="19.5" r="6.3"/>
-            <circle cx="-151.6" cy="-25.6" r="7"/><circle cx="-149.6" cy="-21.7" r="5.4"/><circle cx="-148.9" cy="39.3" r="6.4"/><circle cx="-147.1" cy="32.6" r="6.5"/>
-            <circle cx="-146.2" cy="-12.1" r="7.3"/><circle cx="-143.1" cy="-34" r="5.4"/><circle cx="-142.4" cy="8.2" r="6.5"/><circle cx="-141.7" cy="45.4" r="6.6"/>
-            <circle cx="-140.8" cy="1.2" r="7.5"/><circle cx="-139.9" cy="-43.3" r="8.2"/><circle cx="-136.3" cy="58.1" r="6.7"/><circle cx="-135.8" cy="-4.4" r="6.5"/>
-            <circle cx="-135.4" cy="14.3" r="7.6"/><circle cx="-134.5" cy="-29.8" r="8.5"/><circle cx="-130.8" cy="-47" r="6.8"/><circle cx="-130" cy="27.1" r="7.8"/>
-            <circle cx="-129.3" cy="-34.4" r="6.4"/><circle cx="-129.1" cy="-16.5" r="8.7"/><circle cx="-128.6" cy="24.9" r="7.7"/><circle cx="-124.6" cy="39.7" r="7.8"/>
-            <circle cx="-123.7" cy="-3.5" r="8.8"/><circle cx="-122" cy="12.5" r="7.7"/><circle cx="-119.2" cy="52.1" r="7.9"/><circle cx="-118.3" cy="9.3" r="9"/>
-            <circle cx="-117.4" cy="-33.8" r="10"/><circle cx="-115.5" cy="-17.3" r="7.6"/><circle cx="-114.8" cy="41.1" r="9"/><circle cx="-113.8" cy="-50.5" r="7.9"/>
-            <circle cx="-112.9" cy="21.9" r="9"/><circle cx="-112" cy="-20.8" r="10.1"/><circle cx="-109" cy="-28.7" r="7.4"/><circle cx="-108.2" cy="10.9" r="8.9"/>
-            <circle cx="-107.5" cy="34.2" r="9.1"/><circle cx="-106.6" cy="-8" r="10.2"/><circle cx="-102.1" cy="46.3" r="9.1"/><circle cx="-101.7" cy="-0.7" r="8.8"/>
-            <circle cx="-101.2" cy="4.5" r="10.3"/><circle cx="-100.3" cy="-37.5" r="11.5"/><circle cx="-96.7" cy="-53.7" r="9.1"/><circle cx="-95.8" cy="16.8" r="10.3"/>
-            <circle cx="-95.2" cy="-29.8" r="8.5"/><circle cx="-94.9" cy="-24.8" r="11.5"/><circle cx="-94.4" cy="26.9" r="10.3"/><circle cx="-90.4" cy="28.9" r="10.3"/>
-            <circle cx="-89.5" cy="-12.3" r="11.5"/><circle cx="-88.6" cy="-40.5" r="8.2"/><circle cx="-87.9" cy="15.5" r="10.1"/><circle cx="-85" cy="40.7" r="10.3"/>
-            <circle cx="-84.1" cy="0" r="11.5"/><circle cx="-83.3" cy="-41" r="11.5"/><circle cx="-81.4" cy="-13.5" r="9.8"/><circle cx="-78.7" cy="12" r="11.5"/>
-            <circle cx="-77.8" cy="-28.5" r="11.5"/><circle cx="-73.3" cy="23.8" r="11.5"/><circle cx="-61.5" cy="31.2" r="11.5"/><circle cx="-61.5" cy="-16.3" r="11.5"/>
-            <circle cx="-61.5" cy="-44.3" r="11.5"/><circle cx="-60.2" cy="52.3" r="10.2"/><circle cx="-59.4" cy="-23.9" r="9.4"/>
-          </g>
-          <rect x="-50" y="-70" width="140" height="140"
-                fill="var(--seipsum-black)" stroke="var(--seipsum-white)" stroke-width="4"/>
-          <rect x="-210" y="-90" width="320" height="180"
-                fill="none" stroke="var(--seipsum-black)" stroke-width="5"/>
-        </svg>
-        <p style="font-family:-apple-system,Arial,sans-serif;font-size:.85rem;max-width:24ch;">
-          Logo v1.3 — temă deschisă. Punctele și pătratul: interior negru, contur alb.
-        </p>
-      </div>
-    </section>
-
-    <!-- ==========================================================
-         SECȚIUNEA 2 — TEST LOGO (temă închisă)
-         ========================================================== -->
-    <section class="test-section">
-      <h2>2. Test Logo — temă închisă (negru + alb)</h2>
-
-      <div class="logo-test-slot dark">
-        <svg width="320" height="auto" viewBox="-216 -96 640 360" xmlns="http://www.w3.org/2000/svg"
-             role="img" aria-label="Seipsum — logo de test, temă închisă">
-          <rect x="-210" y="-90" width="320" height="180"
-                fill="var(--seipsum-mustard)" stroke="var(--seipsum-white)" stroke-width="5"/>
-          <g fill="var(--seipsum-white)" stroke="var(--seipsum-black)" stroke-width="1.6">
-            <circle cx="-192.9" cy="-64" r="3.2"/><circle cx="-190.3" cy="-12.8" r="3.2"/><circle cx="-187.5" cy="-49.5" r="3.4"/><circle cx="-186.7" cy="30.6" r="3.8"/>
-            <circle cx="-185.8" cy="-16.6" r="4.2"/><circle cx="-183.8" cy="-26.5" r="3.4"/><circle cx="-183" cy="37" r="3.9"/><circle cx="-181.2" cy="44.2" r="4.1"/>
-            <circle cx="-180.4" cy="-2.5" r="4.5"/><circle cx="-176.5" cy="5" r="4.2"/><circle cx="-175.8" cy="57.6" r="4.3"/><circle cx="-175" cy="11.3" r="4.8"/>
-            <circle cx="-174.1" cy="-35.3" r="5.3"/><circle cx="-170.4" cy="-53.4" r="4.5"/><circle cx="-170" cy="-8.5" r="4.3"/><circle cx="-169.6" cy="24.9" r="5.1"/>
-            <circle cx="-169.2" cy="54.2" r="5"/><circle cx="-168.7" cy="-21.2" r="5.6"/><circle cx="-164.2" cy="38.3" r="5.3"/><circle cx="-163.4" cy="-39.5" r="4.4"/>
-            <circle cx="-163.3" cy="-7.4" r="5.9"/><circle cx="-162.7" cy="22.4" r="5.2"/><circle cx="-158.7" cy="51.4" r="5.5"/><circle cx="-157.9" cy="6.1" r="6.1"/>
-            <circle cx="-157" cy="-39.4" r="6.7"/><circle cx="-156.2" cy="9.1" r="5.4"/><circle cx="-153.3" cy="-57" r="5.6"/><circle cx="-152.5" cy="19.5" r="6.3"/>
-            <circle cx="-151.6" cy="-25.6" r="7"/><circle cx="-149.6" cy="-21.7" r="5.4"/><circle cx="-148.9" cy="39.3" r="6.4"/><circle cx="-147.1" cy="32.6" r="6.5"/>
-            <circle cx="-146.2" cy="-12.1" r="7.3"/><circle cx="-143.1" cy="-34" r="5.4"/><circle cx="-142.4" cy="8.2" r="6.5"/><circle cx="-141.7" cy="45.4" r="6.6"/>
-            <circle cx="-140.8" cy="1.2" r="7.5"/><circle cx="-139.9" cy="-43.3" r="8.2"/><circle cx="-136.3" cy="58.1" r="6.7"/><circle cx="-135.8" cy="-4.4" r="6.5"/>
-            <circle cx="-135.4" cy="14.3" r="7.6"/><circle cx="-134.5" cy="-29.8" r="8.5"/><circle cx="-130.8" cy="-47" r="6.8"/><circle cx="-130" cy="27.1" r="7.8"/>
-            <circle cx="-129.3" cy="-34.4" r="6.4"/><circle cx="-129.1" cy="-16.5" r="8.7"/><circle cx="-128.6" cy="24.9" r="7.7"/><circle cx="-124.6" cy="39.7" r="7.8"/>
-            <circle cx="-123.7" cy="-3.5" r="8.8"/><circle cx="-122" cy="12.5" r="7.7"/><circle cx="-119.2" cy="52.1" r="7.9"/><circle cx="-118.3" cy="9.3" r="9"/>
-            <circle cx="-117.4" cy="-33.8" r="10"/><circle cx="-115.5" cy="-17.3" r="7.6"/><circle cx="-114.8" cy="41.1" r="9"/><circle cx="-113.8" cy="-50.5" r="7.9"/>
-            <circle cx="-112.9" cy="21.9" r="9"/><circle cx="-112" cy="-20.8" r="10.1"/><circle cx="-109" cy="-28.7" r="7.4"/><circle cx="-108.2" cy="10.9" r="8.9"/>
-            <circle cx="-107.5" cy="34.2" r="9.1"/><circle cx="-106.6" cy="-8" r="10.2"/><circle cx="-102.1" cy="46.3" r="9.1"/><circle cx="-101.7" cy="-0.7" r="8.8"/>
-            <circle cx="-101.2" cy="4.5" r="10.3"/><circle cx="-100.3" cy="-37.5" r="11.5"/><circle cx="-96.7" cy="-53.7" r="9.1"/><circle cx="-95.8" cy="16.8" r="10.3"/>
-            <circle cx="-95.2" cy="-29.8" r="8.5"/><circle cx="-94.9" cy="-24.8" r="11.5"/><circle cx="-94.4" cy="26.9" r="10.3"/><circle cx="-90.4" cy="28.9" r="10.3"/>
-            <circle cx="-89.5" cy="-12.3" r="11.5"/><circle cx="-88.6" cy="-40.5" r="8.2"/><circle cx="-87.9" cy="15.5" r="10.1"/><circle cx="-85" cy="40.7" r="10.3"/>
-            <circle cx="-84.1" cy="0" r="11.5"/><circle cx="-83.3" cy="-41" r="11.5"/><circle cx="-81.4" cy="-13.5" r="9.8"/><circle cx="-78.7" cy="12" r="11.5"/>
-            <circle cx="-77.8" cy="-28.5" r="11.5"/><circle cx="-73.3" cy="23.8" r="11.5"/><circle cx="-61.5" cy="31.2" r="11.5"/><circle cx="-61.5" cy="-16.3" r="11.5"/>
-            <circle cx="-61.5" cy="-44.3" r="11.5"/><circle cx="-60.2" cy="52.3" r="10.2"/><circle cx="-59.4" cy="-23.9" r="9.4"/>
-          </g>
-          <rect x="-50" y="-70" width="140" height="140"
-                fill="var(--seipsum-white)" stroke="var(--seipsum-black)" stroke-width="4"/>
-          <rect x="-210" y="-90" width="320" height="180"
-                fill="none" stroke="var(--seipsum-white)" stroke-width="5"/>
-        </svg>
-        <p style="font-family:-apple-system,Arial,sans-serif;font-size:.85rem;max-width:24ch;color:#aaa;">
-          Logo v1.3 — temă închisă. Punctele și pătratul: interior alb, contur negru.
-        </p>
-      </div>
-    </section>
-
-    <!-- ==========================================================
-         SECȚIUNEA 3 — TEST CULORI
-         Schimbă valorile din :root (sus, în <style>) și toate
-         secțiunile se actualizează simultan.
-         ========================================================== -->
-    <section class="test-section">
-      <h2>3. Test Culori — nuanțe active din :root</h2>
-
-      <div class="swatch-row">
-        <div class="swatch"><div class="chip" style="background:var(--seipsum-mustard);"></div><p>mustard<br>#D9A441</p></div>
-        <div class="swatch"><div class="chip" style="background:var(--seipsum-amber);"></div><p>amber<br>#E3B23C</p></div>
-        <div class="swatch"><div class="chip" style="background:var(--seipsum-golden);"></div><p>golden<br>#C9971E</p></div>
-        <div class="swatch"><div class="chip" style="background:var(--seipsum-black);"></div><p>black<br>#111111</p></div>
-        <div class="swatch"><div class="chip" style="background:var(--seipsum-bg); border:1px solid #999;"></div><p>bg<br>#FAF8F3</p></div>
-      </div>
-      <p class="test-note">
-        Nuanța activă a logo-urilor de mai sus este --seipsum-mustard.
-        Schimbă valoarea în :root pentru a compara toate celelalte nuanțe
-        simultan, în ambele teme.
-      </p>
-    </section>
-
-    <!-- ==========================================================
-         SECȚIUNEA 4 — SPAȚIU LIBER DE TEST
-         Zonă goală pentru orice element nou: componente, blocuri
-         de text, layout-uri. Orice se pune aici rămâne izolat.
-         ========================================================== -->
-    <section class="test-section">
-      <h2>4. Spațiu liber de test</h2>
-      <div class="logo-test-slot" style="min-height:120px; align-items:center;">
-        <p style="font-family:-apple-system,Arial,sans-serif;font-size:.85rem;color:#999;">
-          — zonă liberă —
-        </p>
-      </div>
-    </section>
-
+  <div class="right-section">
+    <button class="theme-toggle js-theme-toggle" aria-label="Comută tema">🌙</button>
+    <div class="language-switch">
+      <a href="#">RO</a>
+      <a href="#">EN</a>
+    </div>
   </div>
 
-  <!-- Picior de test. Structura reală a piciorului de pe site
-       poate fi copiată aici pentru testare fidelă; termenul
-       „Declinarea Responsabilității” este canonic și nu se schimbă. -->
-  <footer class="test-footer">
-    <span>© Seipsum — Pagină de Test (neindexată)</span>
-    <span><a href="disclaimer.html">Declinarea Responsabilității</a></span>
+</header>
+
+  <!-- ============================================================
+       CONȚINUT DE TEST — doar pentru a demonstra comportamentul
+       sticky al barei la scroll. Substitut, nu conținut real.
+       ============================================================ -->
+
+  <section class="hero">
+    <div class="container">
+      <h1>Pagină de Test 1 — Bara Sticky</h1>
+      <p class="subtitle">Scroll-ează în jos pentru a verifica că bara rămâne fixă sus, exact ca pe paginile reale.</p>
+      <div class="core-idea">
+        <div class="core-main">Structura barei: left-section (hamburger + Pagini 1.)</div>
+        <div class="core-sub">site-title centrat absolut · right-section (theme toggle + RO/EN)</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="section">
+      <h2>Secțiune de test 1</h2>
+      <p>Acest paragraf există doar pentru a da paginii înălțime suficientă încât scroll-ul să fie vizibil. Bara sticky trebuie să rămână afișată în timp ce derulezi.</p>
+      <p>Hamburger-ul și butonul „Pagini 1." deschid dropdown-urile canonice. Theme toggle comută între modul deschis și modul întunecat, folosind exact clasele <code>.dark-theme</code> din CSS-ul tău.</p>
+      <p class="conclusion">Concluzie de test: dacă bara nu se lipește de marginea de sus, ceva din structură nu corespunde.</p>
+    </div>
+
+    <div class="section">
+      <h2>Secțiune de test 2</h2>
+      <p>Mai mult conținut de umplutură. Continuă să derulezi — bara trebuie să rămână în poziție sticky tot timpul.</p>
+      <ul>
+        <li>Element de listă de test.</li>
+        <li>Element de listă de test.</li>
+        <li>Element de listă de test.</li>
+      </ul>
+      <p>Ultimul paragraf al acestei secțiuni de test.</p>
+    </div>
+
+    <div class="section">
+      <h2>Secțiune de test 3</h2>
+      <p>Încă o secțiune, pentru mai multă înălțime de scroll.</p>
+      <p>Finalul conținutului de test.</p>
+    </div>
+  </div>
+
+    <div class="section" id="logo-compare">
+      <h2>Comparație — variațiile finale ale logo-ului</h2>
+      <p>Versiunile recente ale mărcii, în ordinea iterării. Toate respectă aceeași geometrie: cutia 320×180, pătratul 140×140 cu spațiu mustar de ~20, puncte convergent spre pătrat. Bara sticky de sus folosește variația aprobată (v1.6).</p>
+      <div class="logo-compare">
+        <div class="logo-panel">
+          <h3>v1.4 — pâlnie inițială (84 puncte)</h3>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-216 -96 332 192" role="img">
+  <rect x="-210" y="-90" width="320" height="180" fill="#D9A441" stroke="#111" stroke-width="5"/>
+  <g fill="#111" stroke="#fff" stroke-width="1.6">
+          <circle cx="-202.6" cy="-42.8" r="2.4"/><circle cx="-202.3" cy="-7.3" r="2.1"/><circle cx="-201.7" cy="73.3" r="2.0"/><circle cx="-199.7" cy="43.5" r="2.0"/>
+          <circle cx="-193.0" cy="-85.4" r="2.4"/><circle cx="-192.6" cy="-30.4" r="3.0"/><circle cx="-191.6" cy="-58.0" r="2.5"/><circle cx="-190.9" cy="-44.7" r="2.6"/>
+          <circle cx="-189.0" cy="85.2" r="2.2"/><circle cx="-188.2" cy="-66.1" r="2.1"/><circle cx="-184.9" cy="-59.0" r="3.4"/><circle cx="-182.6" cy="21.7" r="2.8"/>
+          <circle cx="-182.2" cy="-52.4" r="3.4"/><circle cx="-182.0" cy="-83.4" r="3.1"/><circle cx="-181.3" cy="-46.1" r="2.5"/><circle cx="-178.0" cy="83.2" r="2.8"/>
+          <circle cx="-173.6" cy="4.5" r="3.2"/><circle cx="-172.3" cy="0.4" r="3.5"/><circle cx="-171.5" cy="55.0" r="3.4"/><circle cx="-171.4" cy="-4.6" r="3.0"/>
+          <circle cx="-171.0" cy="-81.6" r="3.6"/><circle cx="-167.0" cy="81.4" r="3.2"/><circle cx="-166.7" cy="28.8" r="3.6"/><circle cx="-164.0" cy="38.4" r="2.9"/>
+          <circle cx="-163.5" cy="-57.6" r="3.5"/><circle cx="-160.0" cy="-80.0" r="3.7"/><circle cx="-156.0" cy="79.9" r="3.3"/><circle cx="-155.9" cy="-74.2" r="3.5"/>
+          <circle cx="-155.8" cy="22.8" r="4.6"/><circle cx="-155.4" cy="-23.2" r="3.8"/><circle cx="-149.0" cy="-77.9" r="4.4"/><circle cx="-148.3" cy="17.3" r="4.4"/>
+          <circle cx="-148.2" cy="22.8" r="3.6"/><circle cx="-145.0" cy="77.9" r="4.0"/><circle cx="-143.1" cy="67.4" r="3.9"/><circle cx="-139.0" cy="2.7" r="4.6"/>
+          <circle cx="-138.8" cy="-24.7" r="4.2"/><circle cx="-138.0" cy="-76.3" r="4.7"/><circle cx="-137.9" cy="11.0" r="4.5"/><circle cx="-137.1" cy="-31.4" r="4.4"/>
+          <circle cx="-134.3" cy="39.5" r="5.0"/><circle cx="-134.0" cy="76.2" r="4.3"/><circle cx="-128.5" cy="71.6" r="5.1"/><circle cx="-128.1" cy="11.2" r="5.6"/>
+          <circle cx="-127.0" cy="-74.5" r="5.1"/><circle cx="-126.5" cy="-62.1" r="4.6"/><circle cx="-125.7" cy="-44.8" r="4.5"/><circle cx="-123.0" cy="74.5" r="4.6"/>
+          <circle cx="-120.3" cy="-53.9" r="6.0"/><circle cx="-116.4" cy="-8.2" r="4.8"/><circle cx="-116.4" cy="4.3" r="5.4"/><circle cx="-116.1" cy="69.6" r="5.9"/>
+          <circle cx="-116.0" cy="-73.2" r="5.0"/><circle cx="-111.8" cy="-44.1" r="5.6"/><circle cx="-110.1" cy="-6.4" r="5.7"/><circle cx="-109.2" cy="6.5" r="5.6"/>
+          <circle cx="-108.0" cy="39.4" r="4.8"/><circle cx="-105.0" cy="-71.2" r="5.6"/><circle cx="-101.0" cy="71.3" r="5.1"/><circle cx="-100.5" cy="20.2" r="5.4"/>
+          <circle cx="-100.1" cy="10.6" r="6.1"/><circle cx="-94.5" cy="4.7" r="6.0"/><circle cx="-94.0" cy="-68.8" r="6.7"/><circle cx="-93.8" cy="-33.1" r="6.3"/>
+          <circle cx="-92.7" cy="25.8" r="5.7"/><circle cx="-91.6" cy="-43.0" r="7.2"/><circle cx="-90.0" cy="69.0" r="6.0"/><circle cx="-89.5" cy="43.1" r="7.4"/>
+          <circle cx="-85.7" cy="-56.3" r="5.9"/><circle cx="-83.7" cy="-21.6" r="6.2"/><circle cx="-83.0" cy="-67.8" r="6.4"/><circle cx="-79.0" cy="67.9" r="5.7"/>
+          <circle cx="-76.1" cy="51.2" r="7.2"/><circle cx="-73.4" cy="-14.7" r="7.1"/><circle cx="-72.0" cy="-65.2" r="7.6"/><circle cx="-71.3" cy="40.9" r="7.3"/>
+          <circle cx="-71.2" cy="7.3" r="7.6"/><circle cx="-68.0" cy="65.4" r="6.8"/><circle cx="-66.5" cy="-44.8" r="8.2"/><circle cx="-65.6" cy="31.8" r="8.7"/>
+          <circle cx="-64.0" cy="50.0" r="7.0"/><circle cx="-62.9" cy="-11.2" r="8.1"/><circle cx="-60.0" cy="2.0" r="9.5"/><circle cx="-59.0" cy="-22.0" r="9.0"/>
+  </g>
+  <rect x="-50" y="-70" width="140" height="140" fill="#111" stroke="#fff" stroke-width="4"/>
+  <rect x="-210" y="-90" width="320" height="180" fill="none" stroke="#111" stroke-width="5"/>
+</svg>
+          <p>Prima geometrie a pâlniei. Puncte așezate conștient pe liniile imaginare — prea riguros.</p>
+        </div>
+        <div class="logo-panel">
+          <h3>v1.5 — mai dense (136 puncte)</h3>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-216 -96 332 192" role="img">
+  <rect x="-210" y="-90" width="320" height="180" fill="#D9A441" stroke="#111" stroke-width="5"/>
+  <g fill="#111" stroke="#fff" stroke-width="1.6">
+          <circle cx="-201.9" cy="-28.1" r="2.5"/><circle cx="-201.6" cy="-46.0" r="2.3"/><circle cx="-200.0" cy="-86.1" r="2.6"/><circle cx="-197.9" cy="-50.7" r="2.1"/>
+          <circle cx="-196.5" cy="85.9" r="2.4"/><circle cx="-193.8" cy="19.9" r="2.4"/><circle cx="-193.7" cy="-10.4" r="3.0"/><circle cx="-193.6" cy="-79.5" r="3.2"/>
+          <circle cx="-192.5" cy="-84.6" r="3.2"/><circle cx="-190.9" cy="-24.8" r="2.3"/><circle cx="-189.0" cy="84.4" r="2.9"/><circle cx="-187.8" cy="-38.0" r="2.5"/>
+          <circle cx="-187.5" cy="47.8" r="3.1"/><circle cx="-187.4" cy="-19.3" r="3.4"/><circle cx="-186.0" cy="77.0" r="3.5"/><circle cx="-185.4" cy="6.3" r="3.3"/>
+          <circle cx="-185.0" cy="-83.6" r="3.3"/><circle cx="-181.5" cy="83.4" r="3.0"/><circle cx="-180.2" cy="59.3" r="2.9"/><circle cx="-179.7" cy="36.8" r="3.1"/>
+          <circle cx="-177.5" cy="-82.3" r="3.6"/><circle cx="-177.2" cy="50.4" r="2.8"/><circle cx="-176.9" cy="-8.6" r="3.3"/><circle cx="-174.0" cy="82.2" r="3.3"/>
+          <circle cx="-173.7" cy="-77.3" r="3.1"/><circle cx="-172.1" cy="-59.8" r="4.2"/><circle cx="-172.1" cy="-71.1" r="3.6"/><circle cx="-172.0" cy="-47.0" r="3.9"/>
+          <circle cx="-171.5" cy="-14.8" r="4.2"/><circle cx="-170.0" cy="-81.1" r="3.9"/><circle cx="-167.4" cy="43.7" r="3.6"/><circle cx="-167.0" cy="-30.6" r="3.4"/>
+          <circle cx="-166.5" cy="81.0" r="3.6"/><circle cx="-166.3" cy="64.4" r="4.0"/><circle cx="-165.9" cy="34.0" r="4.2"/><circle cx="-164.7" cy="-40.7" r="3.4"/>
+          <circle cx="-162.8" cy="76.9" r="4.0"/><circle cx="-162.5" cy="-79.9" r="4.2"/><circle cx="-159.4" cy="-53.2" r="3.5"/><circle cx="-159.1" cy="12.1" r="3.9"/>
+          <circle cx="-159.0" cy="79.8" r="3.8"/><circle cx="-158.1" cy="26.2" r="3.8"/><circle cx="-158.0" cy="-35.1" r="3.7"/><circle cx="-155.6" cy="51.4" r="4.9"/>
+          <circle cx="-155.0" cy="-78.9" r="4.2"/><circle cx="-152.9" cy="34.4" r="4.8"/><circle cx="-151.6" cy="3.5" r="4.5"/><circle cx="-151.5" cy="78.8" r="3.9"/>
+          <circle cx="-151.2" cy="27.2" r="4.1"/><circle cx="-150.8" cy="-7.6" r="4.9"/><circle cx="-150.2" cy="15.5" r="4.2"/><circle cx="-147.5" cy="-77.7" r="4.5"/>
+          <circle cx="-145.5" cy="70.9" r="4.8"/><circle cx="-145.0" cy="-45.0" r="4.7"/><circle cx="-144.3" cy="35.1" r="5.5"/><circle cx="-144.0" cy="77.6" r="4.2"/>
+          <circle cx="-142.4" cy="-38.0" r="3.9"/><circle cx="-142.3" cy="-27.1" r="5.4"/><circle cx="-142.2" cy="-62.5" r="4.8"/><circle cx="-140.0" cy="-75.8" r="5.5"/>
+          <circle cx="-139.2" cy="-56.2" r="5.3"/><circle cx="-137.9" cy="-68.0" r="4.6"/><circle cx="-137.8" cy="38.2" r="5.8"/><circle cx="-137.6" cy="16.2" r="4.1"/>
+          <circle cx="-136.5" cy="75.8" r="5.0"/><circle cx="-135.1" cy="-11.7" r="5.9"/><circle cx="-134.9" cy="54.7" r="5.1"/><circle cx="-132.5" cy="-74.5" r="5.9"/>
+          <circle cx="-129.2" cy="-48.4" r="5.5"/><circle cx="-129.0" cy="74.5" r="5.4"/><circle cx="-129.0" cy="-62.4" r="5.8"/><circle cx="-127.9" cy="-27.1" r="6.1"/>
+          <circle cx="-125.0" cy="-73.3" r="6.0"/><circle cx="-125.0" cy="19.6" r="5.0"/><circle cx="-121.7" cy="39.8" r="4.6"/><circle cx="-121.5" cy="73.4" r="5.5"/>
+          <circle cx="-121.3" cy="-56.0" r="6.2"/><circle cx="-120.8" cy="59.1" r="5.7"/><circle cx="-118.1" cy="-44.5" r="6.2"/><circle cx="-118.0" cy="49.1" r="5.7"/>
+          <circle cx="-118.0" cy="-64.1" r="6.4"/><circle cx="-117.5" cy="-72.3" r="6.2"/><circle cx="-117.0" cy="-9.5" r="6.8"/><circle cx="-115.1" cy="4.2" r="5.2"/>
+          <circle cx="-114.0" cy="72.3" r="5.7"/><circle cx="-111.1" cy="52.3" r="5.5"/><circle cx="-111.0" cy="-23.1" r="6.3"/><circle cx="-110.1" cy="-56.3" r="5.7"/>
+          <circle cx="-110.0" cy="-70.6" r="6.9"/><circle cx="-109.8" cy="11.8" r="5.8"/><circle cx="-108.9" cy="23.8" r="7.0"/><circle cx="-108.0" cy="63.7" r="5.8"/>
+          <circle cx="-107.8" cy="-7.0" r="5.9"/><circle cx="-106.8" cy="-28.9" r="5.7"/><circle cx="-106.5" cy="70.7" r="6.3"/><circle cx="-102.8" cy="-12.6" r="5.4"/>
+          <circle cx="-102.5" cy="-70.0" r="6.5"/><circle cx="-102.4" cy="45.5" r="6.7"/><circle cx="-102.3" cy="11.7" r="7.0"/><circle cx="-101.0" cy="33.5" r="5.7"/>
+          <circle cx="-100.6" cy="-59.4" r="6.2"/><circle cx="-100.1" cy="-5.5" r="6.7"/><circle cx="-99.0" cy="70.1" r="6.0"/><circle cx="-97.1" cy="-25.1" r="7.3"/>
+          <circle cx="-95.2" cy="-14.9" r="5.7"/><circle cx="-94.7" cy="-47.5" r="6.0"/><circle cx="-93.7" cy="-63.6" r="5.6"/><circle cx="-89.8" cy="5.6" r="7.6"/>
+          <circle cx="-89.6" cy="-33.1" r="7.8"/><circle cx="-89.4" cy="26.1" r="6.8"/><circle cx="-88.3" cy="41.3" r="7.6"/><circle cx="-88.0" cy="64.1" r="7.9"/>
+          <circle cx="-87.6" cy="-10.2" r="7.9"/><circle cx="-87.5" cy="-67.3" r="7.4"/><circle cx="-82.4" cy="22.1" r="6.9"/><circle cx="-81.1" cy="-47.9" r="7.3"/>
+          <circle cx="-79.2" cy="14.1" r="7.3"/><circle cx="-79.1" cy="-13.4" r="8.0"/><circle cx="-78.7" cy="38.9" r="7.2"/><circle cx="-78.5" cy="-58.4" r="6.1"/>
+          <circle cx="-76.5" cy="66.4" r="6.9"/><circle cx="-75.7" cy="-1.2" r="8.7"/><circle cx="-75.2" cy="26.5" r="8.0"/><circle cx="-72.5" cy="-64.3" r="8.5"/>
+          <circle cx="-70.0" cy="-35.0" r="8.5"/><circle cx="-70.0" cy="35.0" r="8.2"/><circle cx="-69.0" cy="64.5" r="7.8"/><circle cx="-67.1" cy="-49.0" r="9.0"/>
+          <circle cx="-66.4" cy="54.1" r="9.2"/><circle cx="-61.0" cy="0.0" r="9.8"/><circle cx="-60.0" cy="-25.0" r="9.5"/><circle cx="-60.0" cy="20.0" r="9.0"/>
+          <circle cx="-59.6" cy="-57.4" r="9.0"/><circle cx="-59.5" cy="39.2" r="9.1"/><circle cx="-58.8" cy="-15.0" r="8.7"/><circle cx="-58.3" cy="-40.3" r="8.7"/>
+  </g>
+  <rect x="-50" y="-70" width="140" height="140" fill="#111" stroke="#fff" stroke-width="4"/>
+  <rect x="-210" y="-90" width="320" height="180" fill="none" stroke="#111" stroke-width="5"/>
+</svg>
+          <p>Puncte mai multe și mai mari, dar rândurile de pe linii erau încă drepte.</p>
+        </div>
+        <div class="logo-panel">
+          <h3>v1.6 — finală, aprobată (540 puncte)</h3>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-216 -96 332 192" role="img">
+  <rect x="-210" y="-90" width="320" height="180" fill="#D9A441" stroke="#111" stroke-width="5"/>
+  <g fill="#111" stroke="#fff" stroke-width="1.6">
+      <g fill="#111" stroke="#fff" stroke-width="1.6">
+          <circle cx="-208.2" cy="-28.9" r="1.8"/><circle cx="-208.2" cy="-16.4" r="1.6"/><circle cx="-207.9" cy="-83.7" r="2.0"/><circle cx="-207.9" cy="16.3" r="1.8"/>
+          <circle cx="-207.9" cy="80.7" r="1.8"/><circle cx="-207.8" cy="24.0" r="2.1"/><circle cx="-207.7" cy="58.8" r="2.1"/><circle cx="-207.1" cy="-70.2" r="2.3"/>
+          <circle cx="-207.0" cy="-79.7" r="1.8"/><circle cx="-207.0" cy="-32.9" r="2.0"/><circle cx="-206.9" cy="10.7" r="2.3"/><circle cx="-206.8" cy="72.0" r="1.8"/>
+          <circle cx="-206.8" cy="-2.6" r="1.6"/><circle cx="-206.8" cy="49.6" r="2.2"/><circle cx="-206.6" cy="-44.5" r="1.5"/><circle cx="-206.5" cy="-58.7" r="2.0"/>
+          <circle cx="-206.4" cy="-65.5" r="2.4"/><circle cx="-206.3" cy="-51.8" r="1.9"/><circle cx="-206.2" cy="-56.1" r="1.6"/><circle cx="-206.2" cy="-62.3" r="1.7"/>
+          <circle cx="-206.1" cy="85.9" r="2.2"/><circle cx="-206.0" cy="46.3" r="1.6"/><circle cx="-205.6" cy="-35.6" r="2.6"/><circle cx="-205.6" cy="28.5" r="2.4"/>
+          <circle cx="-205.5" cy="4.7" r="2.4"/><circle cx="-205.4" cy="82.2" r="2.2"/><circle cx="-205.3" cy="52.9" r="1.9"/><circle cx="-205.3" cy="14.1" r="1.6"/>
+          <circle cx="-205.1" cy="-40.8" r="2.5"/><circle cx="-205.0" cy="36.1" r="1.8"/><circle cx="-205.0" cy="-45.8" r="1.8"/><circle cx="-204.8" cy="1.4" r="1.7"/>
+          <circle cx="-204.6" cy="40.9" r="2.3"/><circle cx="-204.4" cy="25.0" r="2.6"/><circle cx="-204.4" cy="-32.4" r="2.2"/><circle cx="-204.3" cy="-6.5" r="1.6"/>
+          <circle cx="-204.3" cy="63.6" r="2.5"/><circle cx="-204.3" cy="-22.9" r="2.5"/><circle cx="-204.1" cy="17.5" r="2.3"/><circle cx="-204.1" cy="-79.8" r="2.5"/>
+          <circle cx="-204.0" cy="-11.0" r="2.0"/><circle cx="-204.0" cy="-29.1" r="1.9"/><circle cx="-203.7" cy="78.3" r="1.7"/><circle cx="-203.7" cy="-70.7" r="2.0"/>
+          <circle cx="-203.6" cy="-0.8" r="2.0"/><circle cx="-203.4" cy="-25.4" r="1.6"/><circle cx="-203.4" cy="20.6" r="1.8"/><circle cx="-203.3" cy="-48.1" r="1.7"/>
+          <circle cx="-203.3" cy="49.5" r="2.5"/><circle cx="-203.2" cy="-51.5" r="1.9"/><circle cx="-203.1" cy="-63.0" r="2.7"/><circle cx="-203.1" cy="-73.7" r="2.6"/>
+          <circle cx="-203.0" cy="56.5" r="1.8"/><circle cx="-202.7" cy="85.6" r="2.5"/><circle cx="-202.5" cy="-83.8" r="2.4"/><circle cx="-202.4" cy="-4.3" r="2.0"/>
+          <circle cx="-202.4" cy="2.8" r="1.9"/><circle cx="-202.4" cy="35.4" r="2.5"/><circle cx="-202.3" cy="-59.1" r="2.6"/><circle cx="-202.3" cy="66.4" r="2.5"/>
+          <circle cx="-202.0" cy="-36.0" r="2.5"/><circle cx="-201.9" cy="45.5" r="2.5"/><circle cx="-201.6" cy="-27.0" r="2.2"/><circle cx="-201.5" cy="-76.1" r="1.8"/>
+          <circle cx="-201.3" cy="-23.7" r="1.9"/><circle cx="-201.2" cy="39.8" r="2.5"/><circle cx="-201.1" cy="11.3" r="2.5"/><circle cx="-200.8" cy="-46.7" r="1.9"/>
+          <circle cx="-200.8" cy="-19.1" r="2.3"/><circle cx="-200.6" cy="-54.3" r="2.2"/><circle cx="-200.5" cy="76.2" r="2.5"/><circle cx="-200.5" cy="-50.3" r="1.9"/>
+          <circle cx="-200.4" cy="70.3" r="2.3"/><circle cx="-200.4" cy="5.8" r="2.8"/><circle cx="-200.3" cy="33.2" r="2.1"/><circle cx="-200.2" cy="48.1" r="2.5"/>
+          <circle cx="-200.1" cy="28.4" r="2.6"/><circle cx="-199.9" cy="83.1" r="2.3"/><circle cx="-199.9" cy="56.4" r="1.7"/><circle cx="-199.7" cy="-68.2" r="2.5"/>
+          <circle cx="-199.5" cy="-80.5" r="2.5"/><circle cx="-199.5" cy="63.1" r="2.6"/><circle cx="-199.4" cy="-64.1" r="1.9"/><circle cx="-199.3" cy="-83.7" r="2.1"/>
+          <circle cx="-198.9" cy="-43.5" r="1.8"/><circle cx="-198.9" cy="37.2" r="2.7"/><circle cx="-198.8" cy="-34.3" r="2.7"/><circle cx="-198.8" cy="-40.8" r="2.0"/>
+          <circle cx="-198.7" cy="-73.8" r="1.8"/><circle cx="-198.6" cy="-48.6" r="2.1"/><circle cx="-198.5" cy="-59.5" r="2.6"/><circle cx="-198.3" cy="-16.3" r="2.1"/>
+          <circle cx="-198.3" cy="21.6" r="2.6"/><circle cx="-198.3" cy="-3.0" r="2.7"/><circle cx="-198.3" cy="-29.9" r="2.0"/><circle cx="-197.9" cy="-24.9" r="2.9"/>
+          <circle cx="-197.8" cy="81.2" r="1.9"/><circle cx="-197.7" cy="41.1" r="2.0"/><circle cx="-197.4" cy="57.6" r="2.7"/><circle cx="-197.4" cy="10.6" r="2.5"/>
+          <circle cx="-197.0" cy="70.6" r="2.7"/><circle cx="-196.9" cy="48.6" r="2.2"/><circle cx="-196.9" cy="-55.3" r="2.6"/><circle cx="-196.9" cy="24.4" r="2.1"/>
+          <circle cx="-196.8" cy="-11.1" r="2.4"/><circle cx="-196.7" cy="-19.4" r="3.0"/><circle cx="-196.5" cy="44.2" r="2.1"/><circle cx="-196.5" cy="-44.7" r="2.3"/>
+          <circle cx="-196.4" cy="-37.6" r="2.8"/><circle cx="-196.2" cy="-27.8" r="2.0"/><circle cx="-196.2" cy="-63.4" r="2.9"/><circle cx="-196.1" cy="4.1" r="2.3"/>
+          <circle cx="-195.9" cy="78.2" r="2.3"/><circle cx="-195.7" cy="-7.1" r="2.1"/><circle cx="-195.6" cy="52.4" r="2.7"/><circle cx="-195.5" cy="-47.8" r="2.2"/>
+          <circle cx="-195.3" cy="12.7" r="2.0"/><circle cx="-195.3" cy="35.9" r="1.9"/><circle cx="-195.2" cy="-69.9" r="3.0"/><circle cx="-195.1" cy="-77.2" r="3.0"/>
+          <circle cx="-195.1" cy="-32.0" r="2.9"/><circle cx="-195.0" cy="-82.8" r="2.6"/><circle cx="-194.8" cy="82.8" r="2.0"/><circle cx="-194.7" cy="-1.6" r="3.0"/>
+          <circle cx="-194.6" cy="16.8" r="3.0"/><circle cx="-194.5" cy="39.2" r="2.7"/><circle cx="-193.9" cy="63.5" r="2.2"/><circle cx="-193.9" cy="42.5" r="2.2"/>
+          <circle cx="-193.5" cy="80.0" r="2.4"/><circle cx="-193.4" cy="46.2" r="2.6"/><circle cx="-193.3" cy="-23.6" r="2.4"/><circle cx="-193.3" cy="-15.8" r="3.1"/>
+          <circle cx="-193.3" cy="33.5" r="2.0"/><circle cx="-192.9" cy="-65.8" r="2.3"/><circle cx="-192.7" cy="6.5" r="3.0"/><circle cx="-192.6" cy="-39.2" r="2.6"/>
+          <circle cx="-192.6" cy="70.2" r="2.2"/><circle cx="-192.5" cy="-7.3" r="2.2"/><circle cx="-192.5" cy="-59.3" r="2.3"/><circle cx="-192.3" cy="21.0" r="2.7"/>
+          <circle cx="-192.2" cy="-47.5" r="3.2"/><circle cx="-192.2" cy="49.2" r="2.4"/><circle cx="-192.1" cy="53.8" r="3.0"/><circle cx="-192.0" cy="27.5" r="2.6"/>
+          <circle cx="-192.0" cy="73.6" r="2.7"/><circle cx="-191.9" cy="36.1" r="2.6"/><circle cx="-191.2" cy="-42.8" r="3.0"/><circle cx="-191.1" cy="16.9" r="2.5"/>
+          <circle cx="-191.0" cy="-55.9" r="2.1"/><circle cx="-190.9" cy="-81.2" r="3.1"/><circle cx="-190.6" cy="-12.5" r="3.2"/><circle cx="-190.4" cy="67.7" r="2.7"/>
+          <circle cx="-190.0" cy="1.8" r="2.7"/><circle cx="-189.8" cy="-23.9" r="2.4"/><circle cx="-189.4" cy="83.7" r="2.1"/><circle cx="-189.3" cy="-31.5" r="2.5"/>
+          <circle cx="-189.2" cy="-65.6" r="2.1"/><circle cx="-189.1" cy="-69.8" r="2.1"/><circle cx="-189.0" cy="-73.6" r="2.8"/><circle cx="-188.9" cy="62.0" r="3.1"/>
+          <circle cx="-188.9" cy="-2.7" r="3.1"/><circle cx="-188.7" cy="28.4" r="2.7"/><circle cx="-188.6" cy="-51.3" r="2.9"/><circle cx="-188.4" cy="10.8" r="3.2"/>
+          <circle cx="-188.4" cy="50.6" r="2.1"/><circle cx="-188.3" cy="56.6" r="3.1"/><circle cx="-188.1" cy="35.7" r="2.3"/><circle cx="-188.1" cy="5.0" r="3.1"/>
+          <circle cx="-188.0" cy="24.1" r="2.3"/><circle cx="-188.0" cy="-36.8" r="2.8"/><circle cx="-187.6" cy="-20.1" r="3.2"/><circle cx="-187.5" cy="71.9" r="2.3"/>
+          <circle cx="-187.3" cy="-7.9" r="3.3"/><circle cx="-187.3" cy="32.0" r="3.1"/><circle cx="-187.3" cy="-42.9" r="2.1"/><circle cx="-187.2" cy="-27.2" r="3.4"/>
+          <circle cx="-187.0" cy="-33.7" r="2.3"/><circle cx="-186.7" cy="42.5" r="2.3"/><circle cx="-186.4" cy="77.2" r="2.2"/><circle cx="-186.4" cy="-56.6" r="3.3"/>
+          <circle cx="-186.2" cy="-78.0" r="3.2"/><circle cx="-186.1" cy="21.1" r="3.3"/><circle cx="-186.1" cy="-81.8" r="2.2"/><circle cx="-186.1" cy="-40.5" r="2.1"/>
+          <circle cx="-186.0" cy="-62.5" r="2.7"/><circle cx="-185.8" cy="-13.9" r="3.1"/><circle cx="-185.7" cy="2.1" r="2.6"/><circle cx="-185.3" cy="15.9" r="3.4"/>
+          <circle cx="-185.2" cy="-48.5" r="2.5"/><circle cx="-185.1" cy="-17.5" r="2.4"/><circle cx="-185.0" cy="28.3" r="3.0"/><circle cx="-184.6" cy="-69.1" r="3.1"/>
+          <circle cx="-184.6" cy="36.4" r="3.4"/><circle cx="-184.3" cy="49.3" r="3.4"/><circle cx="-184.2" cy="-37.5" r="3.1"/><circle cx="-184.1" cy="54.1" r="2.5"/>
+          <circle cx="-183.8" cy="8.1" r="2.6"/><circle cx="-183.7" cy="-59.2" r="2.6"/><circle cx="-183.6" cy="44.5" r="3.0"/><circle cx="-183.0" cy="62.9" r="2.4"/>
+          <circle cx="-182.9" cy="-22.2" r="3.1"/><circle cx="-182.7" cy="-3.8" r="2.3"/><circle cx="-182.7" cy="1.3" r="2.2"/><circle cx="-182.5" cy="72.0" r="2.9"/>
+          <circle cx="-182.4" cy="-9.1" r="3.4"/><circle cx="-181.9" cy="-45.4" r="3.5"/><circle cx="-181.7" cy="-80.8" r="3.6"/><circle cx="-181.6" cy="66.3" r="3.3"/>
+          <circle cx="-181.5" cy="-31.3" r="2.9"/><circle cx="-181.5" cy="12.3" r="3.3"/><circle cx="-181.4" cy="16.8" r="2.9"/><circle cx="-181.2" cy="-72.6" r="3.4"/>
+          <circle cx="-181.2" cy="75.6" r="3.1"/><circle cx="-181.1" cy="-63.7" r="3.5"/><circle cx="-180.8" cy="-40.0" r="3.5"/><circle cx="-180.7" cy="59.0" r="3.0"/>
+          <circle cx="-180.6" cy="-49.9" r="3.7"/><circle cx="-180.5" cy="-54.4" r="2.8"/><circle cx="-180.4" cy="-5.9" r="2.2"/><circle cx="-180.1" cy="33.8" r="2.3"/>
+          <circle cx="-179.6" cy="24.9" r="3.7"/><circle cx="-179.4" cy="29.7" r="2.7"/><circle cx="-179.3" cy="8.1" r="2.5"/><circle cx="-179.3" cy="50.3" r="2.6"/>
+          <circle cx="-178.9" cy="40.1" r="3.8"/><circle cx="-178.7" cy="-18.1" r="2.8"/><circle cx="-178.6" cy="-24.7" r="2.6"/><circle cx="-178.3" cy="55.9" r="2.7"/>
+          <circle cx="-177.7" cy="72.3" r="2.5"/><circle cx="-177.5" cy="-3.6" r="3.2"/><circle cx="-177.4" cy="-44.8" r="2.9"/><circle cx="-177.1" cy="5.8" r="2.5"/>
+          <circle cx="-177.0" cy="-53.7" r="2.6"/><circle cx="-176.9" cy="-10.8" r="3.4"/><circle cx="-176.9" cy="-80.7" r="3.6"/><circle cx="-176.7" cy="45.5" r="3.5"/>
+          <circle cx="-176.6" cy="62.2" r="3.8"/><circle cx="-176.4" cy="16.1" r="3.6"/><circle cx="-175.8" cy="1.9" r="3.6"/><circle cx="-175.8" cy="-76.3" r="3.1"/>
+          <circle cx="-175.8" cy="68.8" r="3.4"/><circle cx="-175.7" cy="-36.5" r="3.8"/><circle cx="-175.3" cy="-26.2" r="2.6"/><circle cx="-175.2" cy="-58.6" r="3.0"/>
+          <circle cx="-175.1" cy="52.5" r="3.3"/><circle cx="-174.9" cy="33.8" r="3.7"/><circle cx="-174.8" cy="-32.2" r="2.5"/><circle cx="-174.7" cy="-48.4" r="3.3"/>
+          <circle cx="-174.3" cy="-66.5" r="2.9"/><circle cx="-174.2" cy="73.3" r="3.4"/><circle cx="-173.9" cy="9.6" r="2.5"/><circle cx="-173.8" cy="-43.4" r="3.2"/>
+          <circle cx="-173.4" cy="26.6" r="3.8"/><circle cx="-173.2" cy="56.3" r="2.9"/><circle cx="-173.1" cy="-71.2" r="3.3"/><circle cx="-173.1" cy="64.8" r="3.1"/>
+          <circle cx="-173.0" cy="79.8" r="3.8"/><circle cx="-172.9" cy="-79.5" r="3.0"/><circle cx="-172.7" cy="-21.9" r="2.7"/><circle cx="-172.5" cy="21.3" r="3.0"/>
+          <circle cx="-172.4" cy="45.1" r="3.2"/><circle cx="-172.2" cy="-16.7" r="3.3"/><circle cx="-172.0" cy="-39.4" r="3.7"/><circle cx="-171.7" cy="-51.7" r="3.0"/>
+          <circle cx="-171.6" cy="39.9" r="3.9"/><circle cx="-171.5" cy="0.1" r="3.3"/><circle cx="-171.5" cy="-61.7" r="2.5"/><circle cx="-171.3" cy="15.9" r="3.1"/>
+          <circle cx="-170.9" cy="8.0" r="2.9"/><circle cx="-170.7" cy="30.6" r="3.3"/><circle cx="-170.5" cy="71.7" r="2.9"/><circle cx="-170.0" cy="-76.1" r="3.4"/>
+          <circle cx="-169.8" cy="-46.0" r="3.5"/><circle cx="-169.6" cy="-68.4" r="3.7"/><circle cx="-169.6" cy="34.5" r="2.8"/><circle cx="-169.2" cy="59.5" r="3.7"/>
+          <circle cx="-169.2" cy="-4.4" r="3.8"/><circle cx="-168.9" cy="53.4" r="3.5"/><circle cx="-168.9" cy="-26.5" r="4.1"/><circle cx="-168.9" cy="-56.8" r="4.2"/>
+          <circle cx="-168.4" cy="77.8" r="3.9"/><circle cx="-168.4" cy="68.1" r="3.4"/><circle cx="-168.0" cy="-33.9" r="3.4"/><circle cx="-167.7" cy="-17.6" r="2.8"/>
+          <circle cx="-167.6" cy="19.6" r="2.8"/><circle cx="-167.0" cy="-52.7" r="2.7"/><circle cx="-166.9" cy="15.3" r="3.1"/><circle cx="-166.9" cy="-41.9" r="3.1"/>
+          <circle cx="-166.6" cy="-11.7" r="3.1"/><circle cx="-166.3" cy="48.6" r="4.0"/><circle cx="-165.0" cy="59.5" r="2.9"/><circle cx="-164.9" cy="-60.7" r="2.8"/>
+          <circle cx="-164.8" cy="-79.1" r="3.1"/><circle cx="-164.7" cy="34.7" r="3.6"/><circle cx="-164.6" cy="0.4" r="2.7"/><circle cx="-164.5" cy="74.6" r="3.4"/>
+          <circle cx="-164.4" cy="-72.5" r="3.8"/><circle cx="-164.2" cy="12.1" r="3.5"/><circle cx="-164.1" cy="-37.8" r="3.7"/><circle cx="-163.9" cy="44.2" r="2.8"/>
+          <circle cx="-163.6" cy="-45.5" r="4.0"/><circle cx="-163.5" cy="29.1" r="3.2"/><circle cx="-163.5" cy="-65.9" r="4.1"/><circle cx="-163.2" cy="-7.7" r="3.7"/>
+          <circle cx="-162.8" cy="24.1" r="3.6"/><circle cx="-162.8" cy="-27.2" r="3.4"/><circle cx="-162.8" cy="78.3" r="2.9"/><circle cx="-162.8" cy="53.2" r="3.1"/>
+          <circle cx="-162.6" cy="-18.2" r="3.6"/><circle cx="-162.2" cy="8.7" r="2.7"/><circle cx="-161.9" cy="4.1" r="4.3"/><circle cx="-161.7" cy="-58.2" r="3.1"/>
+          <circle cx="-161.5" cy="19.2" r="3.5"/><circle cx="-161.4" cy="-54.2" r="3.2"/><circle cx="-161.2" cy="57.6" r="3.7"/><circle cx="-161.0" cy="63.0" r="4.2"/>
+          <circle cx="-161.0" cy="32.7" r="3.2"/><circle cx="-161.0" cy="48.7" r="3.7"/><circle cx="-160.3" cy="-12.1" r="4.1"/><circle cx="-160.2" cy="75.1" r="3.0"/>
+          <circle cx="-160.1" cy="70.0" r="3.1"/><circle cx="-160.0" cy="-35.2" r="3.3"/><circle cx="-159.8" cy="28.1" r="2.9"/><circle cx="-159.7" cy="-70.2" r="4.1"/>
+          <circle cx="-159.7" cy="-76.2" r="4.4"/><circle cx="-159.1" cy="-39.7" r="2.8"/><circle cx="-158.0" cy="-2.8" r="3.6"/><circle cx="-157.9" cy="-19.8" r="3.7"/>
+          <circle cx="-157.7" cy="-64.6" r="4.1"/><circle cx="-157.7" cy="-48.3" r="4.5"/><circle cx="-157.6" cy="78.6" r="3.2"/><circle cx="-157.4" cy="20.9" r="3.5"/>
+          <circle cx="-157.3" cy="14.7" r="4.6"/><circle cx="-157.0" cy="56.8" r="3.1"/><circle cx="-156.9" cy="45.3" r="3.7"/><circle cx="-156.4" cy="40.3" r="4.3"/>
+          <circle cx="-156.2" cy="52.2" r="3.1"/><circle cx="-155.7" cy="-29.7" r="3.8"/><circle cx="-155.3" cy="64.9" r="4.6"/><circle cx="-155.3" cy="-7.5" r="3.6"/>
+          <circle cx="-154.6" cy="-41.0" r="4.4"/><circle cx="-154.1" cy="3.6" r="3.1"/><circle cx="-153.9" cy="-58.7" r="4.7"/><circle cx="-153.9" cy="-24.1" r="3.6"/>
+          <circle cx="-153.9" cy="28.9" r="3.4"/><circle cx="-153.5" cy="-0.6" r="3.7"/><circle cx="-153.3" cy="76.6" r="3.5"/><circle cx="-153.2" cy="-15.5" r="4.0"/>
+          <circle cx="-152.9" cy="-75.1" r="3.6"/><circle cx="-152.6" cy="-69.8" r="4.1"/><circle cx="-152.4" cy="-49.5" r="3.3"/><circle cx="-152.0" cy="22.3" r="3.8"/>
+          <circle cx="-151.6" cy="-9.8" r="3.1"/><circle cx="-151.5" cy="60.2" r="4.3"/><circle cx="-151.3" cy="46.1" r="3.5"/><circle cx="-151.2" cy="-4.8" r="4.0"/>
+          <circle cx="-151.1" cy="-33.3" r="3.3"/><circle cx="-150.9" cy="33.5" r="4.3"/><circle cx="-150.5" cy="70.3" r="4.0"/><circle cx="-149.9" cy="17.7" r="3.6"/>
+          <circle cx="-149.4" cy="52.7" r="3.7"/><circle cx="-149.1" cy="-21.9" r="4.0"/><circle cx="-149.1" cy="-28.4" r="3.5"/><circle cx="-147.9" cy="28.5" r="3.4"/>
+          <circle cx="-147.7" cy="41.0" r="3.7"/><circle cx="-147.3" cy="-51.1" r="3.9"/><circle cx="-147.2" cy="-39.5" r="3.2"/><circle cx="-147.2" cy="-69.0" r="4.6"/>
+          <circle cx="-147.2" cy="-9.0" r="3.4"/><circle cx="-146.9" cy="9.2" r="3.5"/><circle cx="-146.9" cy="0.4" r="4.1"/><circle cx="-146.6" cy="-60.3" r="3.9"/>
+          <circle cx="-146.2" cy="33.9" r="3.3"/><circle cx="-145.5" cy="-34.8" r="3.2"/><circle cx="-145.5" cy="55.6" r="3.3"/><circle cx="-145.4" cy="22.5" r="4.2"/>
+          <circle cx="-145.4" cy="-45.2" r="4.4"/><circle cx="-145.1" cy="-74.9" r="5.3"/><circle cx="-144.9" cy="-13.9" r="4.3"/><circle cx="-144.9" cy="64.4" r="3.2"/>
+          <circle cx="-144.6" cy="70.1" r="4.1"/><circle cx="-143.9" cy="4.6" r="4.0"/><circle cx="-143.8" cy="-22.9" r="3.7"/><circle cx="-143.1" cy="13.3" r="4.6"/>
+          <circle cx="-143.1" cy="43.0" r="3.4"/><circle cx="-142.6" cy="-57.6" r="3.7"/><circle cx="-142.5" cy="-29.5" r="3.8"/><circle cx="-142.5" cy="48.6" r="3.8"/>
+          <circle cx="-142.0" cy="-52.5" r="4.3"/><circle cx="-141.4" cy="-69.0" r="4.5"/><circle cx="-141.3" cy="-40.9" r="4.7"/><circle cx="-141.0" cy="59.7" r="4.5"/>
+          <circle cx="-140.8" cy="36.8" r="4.9"/><circle cx="-139.8" cy="30.9" r="4.3"/><circle cx="-139.6" cy="-62.2" r="3.5"/><circle cx="-139.2" cy="-22.7" r="3.4"/>
+          <circle cx="-139.1" cy="54.4" r="3.6"/><circle cx="-138.5" cy="-12.7" r="4.0"/><circle cx="-138.3" cy="6.3" r="4.1"/><circle cx="-138.3" cy="18.1" r="4.4"/>
+          <circle cx="-137.6" cy="-1.1" r="4.2"/><circle cx="-137.6" cy="48.8" r="3.9"/><circle cx="-137.3" cy="12.4" r="3.8"/><circle cx="-137.2" cy="-33.7" r="5.0"/>
+          <circle cx="-136.9" cy="-27.9" r="3.5"/><circle cx="-136.6" cy="-46.3" r="4.2"/><circle cx="-136.4" cy="74.6" r="4.7"/><circle cx="-136.3" cy="66.6" r="4.6"/>
+          <circle cx="-135.3" cy="26.4" r="4.7"/><circle cx="-135.0" cy="-74.7" r="4.4"/><circle cx="-134.6" cy="-8.5" r="4.0"/><circle cx="-134.2" cy="53.4" r="4.3"/>
+          <circle cx="-134.1" cy="42.1" r="5.5"/><circle cx="-134.1" cy="-58.9" r="3.5"/><circle cx="-133.3" cy="-20.4" r="3.9"/><circle cx="-133.3" cy="3.3" r="4.1"/>
+          <circle cx="-132.7" cy="-65.9" r="4.1"/><circle cx="-132.2" cy="34.8" r="3.6"/><circle cx="-132.0" cy="-43.4" r="4.3"/><circle cx="-131.5" cy="61.8" r="4.4"/>
+          <circle cx="-131.4" cy="-53.9" r="4.3"/><circle cx="-131.0" cy="-30.0" r="5.6"/><circle cx="-130.7" cy="30.1" r="4.3"/><circle cx="-130.3" cy="47.2" r="3.9"/>
+          <circle cx="-130.1" cy="9.3" r="4.5"/><circle cx="-129.7" cy="20.9" r="4.4"/><circle cx="-129.1" cy="-72.9" r="5.3"/><circle cx="-128.8" cy="-14.4" r="3.7"/>
+          <circle cx="-128.6" cy="-38.8" r="4.1"/><circle cx="-128.6" cy="-0.7" r="5.5"/><circle cx="-127.7" cy="14.9" r="4.4"/><circle cx="-127.3" cy="-9.0" r="4.9"/>
+          <circle cx="-127.2" cy="-21.1" r="4.2"/><circle cx="-127.1" cy="37.7" r="3.9"/><circle cx="-127.1" cy="65.7" r="4.8"/><circle cx="-126.8" cy="55.1" r="5.1"/>
+          <circle cx="-126.5" cy="-59.8" r="5.1"/><circle cx="-126.2" cy="74.5" r="3.7"/><circle cx="-124.3" cy="-45.2" r="6.0"/><circle cx="-124.2" cy="-52.5" r="4.2"/>
+          <circle cx="-123.8" cy="27.5" r="4.1"/><circle cx="-123.2" cy="43.4" r="3.9"/><circle cx="-122.8" cy="-15.4" r="5.0"/><circle cx="-122.4" cy="-71.3" r="4.2"/>
+          <circle cx="-122.1" cy="-24.1" r="4.8"/><circle cx="-121.7" cy="69.6" r="4.1"/><circle cx="-121.5" cy="11.3" r="6.3"/><circle cx="-120.2" cy="-62.2" r="5.1"/>
+          <circle cx="-119.4" cy="30.9" r="4.7"/><circle cx="-119.0" cy="-35.4" r="6.2"/><circle cx="-118.3" cy="-3.4" r="4.3"/><circle cx="-118.1" cy="60.9" r="4.6"/>
+          <circle cx="-117.0" cy="5.3" r="4.3"/><circle cx="-115.3" cy="22.4" r="4.2"/><circle cx="-115.3" cy="-55.4" r="6.0"/><circle cx="-115.1" cy="53.1" r="4.0"/>
+          <circle cx="-115.0" cy="41.3" r="5.8"/><circle cx="-114.8" cy="-9.1" r="4.5"/><circle cx="-114.5" cy="-65.7" r="4.1"/><circle cx="-113.9" cy="-26.3" r="4.6"/>
+          <circle cx="-113.9" cy="29.1" r="4.2"/><circle cx="-113.8" cy="-42.7" r="6.4"/><circle cx="-113.1" cy="71.6" r="4.5"/><circle cx="-113.0" cy="-19.7" r="5.9"/>
+          <circle cx="-112.8" cy="63.9" r="4.6"/><circle cx="-111.2" cy="12.6" r="5.5"/><circle cx="-110.4" cy="-70.3" r="5.1"/><circle cx="-110.1" cy="1.0" r="5.6"/>
+          <circle cx="-109.0" cy="49.4" r="5.7"/><circle cx="-108.9" cy="-36.0" r="4.7"/><circle cx="-108.2" cy="-11.5" r="6.6"/><circle cx="-107.3" cy="30.2" r="4.5"/>
+          <circle cx="-106.7" cy="55.9" r="5.3"/><circle cx="-106.4" cy="-44.4" r="5.6"/><circle cx="-105.7" cy="-21.7" r="5.8"/><circle cx="-105.6" cy="24.1" r="4.7"/>
+          <circle cx="-105.0" cy="-57.3" r="6.0"/><circle cx="-104.5" cy="63.8" r="6.2"/><circle cx="-104.4" cy="11.6" r="5.2"/><circle cx="-103.7" cy="-29.7" r="6.8"/>
+          <circle cx="-103.3" cy="-0.2" r="4.3"/><circle cx="-103.0" cy="43.0" r="7.1"/><circle cx="-102.5" cy="5.4" r="4.6"/><circle cx="-102.5" cy="-50.1" r="5.1"/>
+          <circle cx="-100.5" cy="-65.0" r="5.6"/><circle cx="-99.0" cy="31.0" r="4.7"/><circle cx="-98.8" cy="55.0" r="5.7"/><circle cx="-97.4" cy="-22.0" r="7.0"/>
+          <circle cx="-97.2" cy="-57.8" r="5.4"/><circle cx="-96.7" cy="-47.3" r="4.7"/><circle cx="-96.6" cy="-14.2" r="5.2"/><circle cx="-96.5" cy="19.0" r="6.8"/>
+          <circle cx="-96.0" cy="-33.0" r="4.6"/><circle cx="-95.1" cy="66.7" r="6.1"/><circle cx="-95.1" cy="-2.2" r="6.6"/><circle cx="-94.4" cy="37.0" r="7.3"/>
+          <circle cx="-94.3" cy="11.1" r="5.1"/><circle cx="-92.9" cy="52.3" r="4.7"/><circle cx="-92.6" cy="-40.7" r="7.3"/><circle cx="-91.5" cy="-52.4" r="5.4"/>
+          <circle cx="-90.8" cy="28.1" r="5.9"/><circle cx="-90.2" cy="-63.8" r="5.9"/><circle cx="-88.2" cy="46.8" r="5.3"/><circle cx="-87.6" cy="-47.4" r="4.9"/>
+          <circle cx="-87.1" cy="-4.1" r="6.5"/><circle cx="-86.5" cy="65.7" r="6.0"/><circle cx="-86.3" cy="-29.9" r="5.8"/><circle cx="-86.2" cy="-20.6" r="7.7"/>
+          <circle cx="-85.1" cy="-55.7" r="4.9"/><circle cx="-85.1" cy="18.4" r="7.4"/><circle cx="-83.0" cy="51.8" r="5.8"/><circle cx="-82.8" cy="30.4" r="6.6"/>
+          <circle cx="-81.8" cy="7.6" r="7.8"/><circle cx="-80.9" cy="-36.9" r="6.5"/><circle cx="-79.5" cy="-48.5" r="5.1"/><circle cx="-79.4" cy="-61.8" r="6.8"/>
+          <circle cx="-78.3" cy="62.8" r="6.3"/><circle cx="-77.7" cy="-11.6" r="5.4"/><circle cx="-77.7" cy="41.6" r="7.4"/><circle cx="-75.6" cy="53.7" r="5.4"/>
+          <circle cx="-75.4" cy="-24.9" r="5.7"/><circle cx="-74.2" cy="-2.9" r="6.1"/><circle cx="-73.5" cy="-44.3" r="5.9"/><circle cx="-71.1" cy="-35.4" r="8.0"/>
+          <circle cx="-70.3" cy="24.4" r="8.2"/><circle cx="-70.1" cy="3.2" r="5.4"/><circle cx="-70.0" cy="-60.2" r="7.1"/><circle cx="-69.0" cy="48.0" r="8.2"/>
+          <circle cx="-67.1" cy="12.7" r="6.6"/><circle cx="-66.0" cy="-14.2" r="8.8"/><circle cx="-65.2" cy="33.4" r="6.2"/><circle cx="-63.4" cy="-3.0" r="6.0"/>
+          <circle cx="-63.3" cy="57.8" r="8.6"/><circle cx="-62.5" cy="-50.2" r="7.2"/><circle cx="-61.7" cy="-24.7" r="9.0"/><circle cx="-61.4" cy="-36.7" r="5.4"/>
+          <circle cx="-60.9" cy="41.4" r="7.6"/><circle cx="-60.5" cy="-59.6" r="6.9"/><circle cx="-60.3" cy="4.5" r="5.7"/><circle cx="-59.0" cy="21.3" r="8.2"/>
+      </g>
+  </g>
+  <rect x="-50" y="-70" width="140" height="140" fill="#111" stroke="#fff" stroke-width="4"/>
+  <rect x="-210" y="-90" width="320" height="180" fill="none" stroke="#111" stroke-width="5"/>
+</svg>
+          <p>Plasare complet aleatorie: punctele ating liniile imaginare, dar nu le desenează. Aceasta este variația din bara sticky.</p>
+        </div>
+      </div>
+    </div>
+
+  <footer>
+    <p>Pagină de test — conținut substitut, nestabil pe site.</p>
   </footer>
 
-  <!-- Funcționalitate minimă de meniu (doar pentru această pagină) -->
   <script>
-    document.querySelectorAll('.js-menu-toggle').forEach(function (btn) {
-      btn.addEventListener('click', function (e) {
+    /* Dropdown-uri: comută .show pe .js-menu-dropdown din .menu-wrapper-ul părinte */
+    document.querySelectorAll('.js-menu-toggle').forEach(function (toggle) {
+      toggle.addEventListener('click', function (e) {
         e.preventDefault();
-        var wrapper = btn.closest('.menu-wrapper');
-        if (wrapper) wrapper.classList.toggle('open');
+        var wrapper = toggle.closest('.menu-wrapper');
+        if (!wrapper) return;
+        var dropdown = wrapper.querySelector('.js-menu-dropdown');
+        if (!dropdown) return;
+        var isOpen = dropdown.classList.contains('show');
+        document.querySelectorAll('.js-menu-dropdown.show').forEach(function (d) {
+          d.classList.remove('show');
+        });
+        if (!isOpen) dropdown.classList.add('show');
       });
     });
-    document.addEventListener('click', function (e) {
-      document.querySelectorAll('.menu-wrapper.open').forEach(function (w) {
-        if (!w.contains(e.target)) w.classList.remove('open');
-      });
-    });
-  </script>
 
+    /* Închide dropdown-urile la click în exterior */
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.menu-wrapper')) {
+        document.querySelectorAll('.js-menu-dropdown.show').forEach(function (d) {
+          d.classList.remove('show');
+        });
+      }
+    });
+
+    /* Theme toggle: comută .dark-theme pe <html> */
+    var themeBtn = document.querySelector('.js-theme-toggle');
+    if (themeBtn) {
+      themeBtn.addEventListener('click', function () {
+        var isDark = document.documentElement.classList.toggle('dark-theme');
+        themeBtn.textContent = isDark ? '☀️' : '🌙';
+      });
+    }
+  </script>
 </body>
 </html>
