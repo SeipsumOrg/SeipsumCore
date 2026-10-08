@@ -6,6 +6,15 @@
   <meta name="robots" content="noindex, nofollow">
   <title>Pagină de Test 1 — Bara Sticky | Seipsum</title>
 
+  <!-- ===== Site-wide assets ===== -->
+  <!-- Favicon: v1.8 mark (cutie mustar + pătrat cu inele albe + câteva puncte) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-216 -96 332 192'%3E%3Crect x='-210' y='-90' width='320' height='180' fill='%23D9A441' stroke='%23111' stroke-width='5'/%3E%3Cg fill='%23111'%3E%3Ccircle cx='-185' cy='-55' r='4'/%3E%3Ccircle cx='-190' cy='20' r='4.5'/%3E%3Ccircle cx='-175' cy='60' r='5'/%3E%3Ccircle cx='-165' cy='-25' r='5.5'/%3E%3Ccircle cx='-160' cy='45' r='6'/%3E%3Ccircle cx='-150' cy='-60' r='6'/%3E%3Ccircle cx='-140' cy='5' r='7'/%3E%3Ccircle cx='-130' cy='50' r='7.5'/%3E%3Ccircle cx='-120' cy='-40' r='8'/%3E%3Ccircle cx='-110' cy='20' r='8.5'/%3E%3Ccircle cx='-100' cy='-15' r='9'/%3E%3Ccircle cx='-90' cy='55' r='9'/%3E%3Ccircle cx='-80' cy='-50' r='9.5'/%3E%3Ccircle cx='-75' cy='10' r='10'/%3E%3Ccircle cx='-65' cy='35' r='10'/%3E%3C/g%3E%3Crect x='-50' y='-70' width='140' height='140' fill='%23111'/%3E%3Crect x='-43' y='-63' width='126' height='126' fill='none' stroke='%23fff' stroke-width='14'/%3E%3Crect x='-19' y='-39' width='78' height='78' fill='none' stroke='%23fff' stroke-width='8'/%3E%3Crect x='-4.5' y='-24.5' width='49' height='49' fill='none' stroke='%23fff' stroke-width='5'/%3E%3Crect x='-210' y='-90' width='320' height='180' fill='none' stroke='%23111' stroke-width='5'/%3E%3C/svg%3E">
+  <!-- Fonturi: preconnect + Archivo (greutate ușoară, geometrică — se potrivește preciziei mărcii) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;600&display=swap">
+  <!-- <link rel="icon" href="favicon.ico"> — pentru producție, exportă SVG-ul de mai sus ca favicon.ico -->
+
   <!-- CSS-UL EXTERN REAL AL SITE-ULUI:
        decomentează și indică fișierul real, ex.: -->
   <!-- <link rel="stylesheet" href="style.css"> -->
@@ -811,6 +820,12 @@ html.dark-theme .language-switch a {
     .logo-panel svg { width: 100%; height: auto; display: block; border-radius: 4px; }
     .logo-panel h3 { margin-bottom: 12px; }
     .logo-panel p { font-size: 14px; color: var(--muted); margin-bottom: 0; }
+
+    /* ===== Test-only: fontul Archivo pe secțiunile de test (CSS-ul de sistem rămâne neatins) ===== */
+    .section h2, .logo-panel h3, .logo-panel p { font-family: "Archivo", Arial, sans-serif; }
+    .section h2 { font-weight: 600; letter-spacing: 0.02em; }
+    .logo-panel h3 { font-weight: 400; }
+    .logo-panel p { font-weight: 300; }
   </style>
 </head>
 <body>
