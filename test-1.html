@@ -602,6 +602,7 @@ button:hover {
   }
 }
 
+
 /* ======================================== */
  /* FINAL DARK THEME FIX - ALL ISSUES        */
  /* ======================================== */
@@ -738,6 +739,11 @@ html.dark-theme .language-switch a {
 
     /* header padding top (15px) + jumătate din 46px = 38px
        → centrul comun al hamburger-ului și al theme-toggle */
+    .site-header {
+      align-items: flex-start; /* top-alignează coloanele: hamburger și
+                                  toggle pornesc de pe aceeași linie, indiferent
+                                  de înălțimile conținutului de sub ele */
+    }
     .site-title {
       display: flex;
       align-items: center;
