@@ -602,6 +602,9 @@ button:hover {
   }
 }
 
+/* ========================= */
+/* MOBILE NAVIGATION */
+/* ========================= */
 
 /* ======================================== */
  /* FINAL DARK THEME FIX - ALL ISSUES        */
@@ -831,7 +834,7 @@ html.dark-theme .language-switch a {
     .logo-panel p { font-weight: 300; }
   </style>
 
-   <!-- Add this RIGHT HERE (critical dark theme (SS) -->
+  <!-- Add this RIGHT HERE (critical dark theme (SS) -->
   <script>
   (function() {
     const theme = localStorage.getItem('theme') || 'light';
@@ -840,7 +843,7 @@ html.dark-theme .language-switch a {
     }
   })();
 </script>
-  
+
 </head>
 <body>
 
@@ -1022,13 +1025,39 @@ html.dark-theme .language-switch a {
                 <circle cx="-75.4" cy="-24.9" r="5.7"/><circle cx="-74.2" cy="-2.9" r="6.1"/><circle cx="-73.5" cy="-44.3" r="5.9"/><circle cx="-71.1" cy="-35.4" r="8.0"/>
                 <circle cx="-70.3" cy="24.4" r="8.2"/><circle cx="-70.1" cy="3.2" r="5.4"/><circle cx="-70.0" cy="-60.2" r="7.1"/><circle cx="-69.0" cy="48.0" r="8.2"/>
                 <circle cx="-67.1" cy="12.7" r="6.6"/><circle cx="-66.0" cy="-14.2" r="8.8"/><circle cx="-65.2" cy="33.4" r="6.2"/><circle cx="-63.4" cy="-3.0" r="6.0"/>
-                <circle cx="-63.3" cy="57.8" r="8.6"/><circle cx="-62.5" cy="-50.2" r="7.2"/><circle cx="-61.7" cy="-24.7" r="9.0"/><circle cx="-61.4" cy="-36.7" r="5.4"/>
-                <circle cx="-60.9" cy="41.4" r="7.6"/><circle cx="-60.5" cy="-59.6" r="6.9"/><circle cx="-60.3" cy="4.5" r="5.7"/><circle cx="-59.0" cy="21.3" r="8.2"/>
+                <circle cx="-61.4" cy="-36.7" r="5.4"/>
+                <circle cx="-55.7" cy="6" r="5.7"/>
+<!-- v1.8.6: melt dots out-of-bounds deleted + gap fills. v1.8.7: 3 gap-fill dots moved to touch the white square edge. v1.8.8: 3 deliberate dots. v1.8.9: the 3 deliberate dots re-placed  top: between melt #1 and the big dot behind it; middle: touching square, exactly between melt #5 and #6; bottom: lower-left pocket, max size allowed by funnel + neighbors. -->
+                <circle cx="-56" cy="-50.2" r="6.0"/><circle cx="-56" cy="62" r="6.0"/><circle cx="-60" cy="28" r="3.5"/><circle cx="-60.1" cy="-60" r="3.0"/><circle cx="-53.8" cy="33.2" r="3.8"/><circle cx="-67" cy="64" r="4.8"/><circle cx="-65" cy="-50" r="4.0"/><circle cx="-57" cy="56" r="4.5"/>
   </g>
   <rect x="-50" y="-70" width="140" height="140" fill="#111"/>
   <rect x="-45" y="-65" width="130" height="130" fill="none" stroke="#fff" stroke-width="10"/>
   <rect x="-19" y="-39" width="78" height="78" fill="none" stroke="#fff" stroke-width="8"/>
   <rect x="-4.5" y="-24.5" width="49" height="49" fill="none" stroke="#fff" stroke-width="5"/>
+  <!-- v1.8.5: topire verticala  6 puncte pe linia marginii albe (x = -50), jumatate / 2/3 vizibil,
+       restul taiat vertical; in interiorul vizibil al fiecarui punct, o linie alba verticala mai groasa
+       decat conturul punctului  ca si cum patratul isi intinde albul in puncte -->
+  <clipPath id="melt-cut"><rect x="-216" y="-96" width="166" height="192"/></clipPath>
+  <g fill="#111" stroke="#fff" stroke-width="1.6" clip-path="url(#melt-cut)">
+    <circle cx="-50" cy="-59.6" r="6.9"/>
+    <circle cx="-53" cy="-24.7" r="9.0"/>
+    <circle cx="-52.7" cy="21.3" r="8.2"/>
+    <circle cx="-52" cy="-42" r="6.5"/>
+    <circle cx="-50.5" cy="-5" r="7.0"/>
+    <circle cx="-52" cy="45" r="8.0"/>
+  </g>
+  <clipPath id="melt-dots">
+    <circle cx="-50" cy="-59.6" r="6.9"/><circle cx="-53" cy="-24.7" r="9.0"/><circle cx="-52.7" cy="21.3" r="8.2"/>
+    <circle cx="-52" cy="-42" r="6.5"/><circle cx="-50.5" cy="-5" r="7.0"/><circle cx="-52" cy="45" r="8.0"/>
+  </clipPath>
+  <g stroke="#fff" stroke-width="3.5" clip-path="url(#melt-dots)">
+    <line x1="-51.5" y1="-66.3" x2="-51.5" y2="-52.9"/>
+    <line x1="-51.5" y1="-33.6" x2="-51.5" y2="-15.8"/>
+    <line x1="-51.5" y1="13.2" x2="-51.5" y2="29.4"/>
+    <line x1="-51.5" y1="-48.5" x2="-51.5" y2="-35.5"/>
+    <line x1="-51.5" y1="-11.9" x2="-51.5" y2="1.9"/>
+    <line x1="-51.5" y1="37.0" x2="-51.5" y2="53.0"/>
+  </g>
   <rect x="-210" y="-90" width="320" height="180" fill="none" stroke="#111" stroke-width="5"/>
 </svg>
       <span>Seipsum</span>
@@ -1089,7 +1118,7 @@ html.dark-theme .language-switch a {
 
     <div class="section" id="logo-compare">
       <h2>Comparație — variațiile finale ale logo-ului</h2>
-      <p>Versiunile recente ale mărcii, în ordinea iterării. Toate respectă aceeași geometrie: cutia 320×180, pătratul 140×140 cu spațiu mustar de ~20, puncte convergent spre pătrat. Bara sticky de sus folosește variația aprobată (v1.8.1 — inelul alb exterior 10).</p>
+      <p>Versiunile recente ale mărcii, în ordinea iterării. Toate respectă aceeași geometrie: cutia 320×180, pătratul 140×140 cu spațiu mustar de ~20, puncte convergent spre pătrat. Bara sticky de sus folosește versiunea finală v2 (inelul alb exterior 10, puncte care se topesc în pătratul alb).</p>
       <div class="logo-compare">
         <div class="logo-panel">
           <h3>v0.1 — origin: Compression Mark (strămoșul v1.8)</h3>
@@ -1861,13 +1890,12 @@ html.dark-theme .language-switch a {
   <rect x="-4.5" y="-24.5" width="49" height="49" fill="none" stroke="#fff" stroke-width="5"/>
   <rect x="-210" y="-90" width="320" height="180" fill="none" stroke="#111" stroke-width="5"/>
 </svg>
-          <p>IdenticÄ cu v1.8, dar inelul alb exterior este subÈiat de la 14 la 10, lÄsÃ¢nd banda neagrÄ exterioarÄ mai latÄ. Aceasta este variaÈia din bara sticky.</p>
+          <p>Identică cu v1.8, dar inelul alb exterior este subțiat de la 14 la 10, lăsând banda neagră exterioară mai lată. A fost variația din bara sticky până la v2.</p>
         </div>
         <div class="logo-panel">
-         <h3>v1.8.9 — inel alb exterior subțiat la 10 (~548 puncte); puncte care se topesc in patratul alb.</h3>
-        <!-- © 2026 Seipsum.org — Logo v1.7. All rights reserved. Unauthorised use prohibited. -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-216 -96 332 192" role="img" aria-label="Seipsum — complexity compressed into clarity">
-  <title>Seipsum.org logo — © 2026 Seipsum.org, all rights reserved</title>
+          <h3>v1.8.9 — 8 puncte deliberate repoziționate; câmpul curățat (v1.8.6–v1.8.9)</h3>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-216 -96 332 192" role="img" aria-label="Seipsum â complexity compressed into clarity">
+  <title>Seipsum.org logo â Â© 2026 Seipsum.org, all rights reserved</title>
   <rect x="-210" y="-90" width="320" height="180" fill="#D9A441" stroke="#111" stroke-width="5"/>
   <g fill="#111" stroke="#fff" stroke-width="1.6">
                 <circle cx="-208.2" cy="-28.9" r="1.8"/><circle cx="-208.2" cy="-16.4" r="1.6"/><circle cx="-207.9" cy="-83.7" r="2.0"/><circle cx="-207.9" cy="16.3" r="1.8"/>
@@ -2005,16 +2033,16 @@ html.dark-theme .language-switch a {
                 <circle cx="-67.1" cy="12.7" r="6.6"/><circle cx="-66.0" cy="-14.2" r="8.8"/><circle cx="-65.2" cy="33.4" r="6.2"/><circle cx="-63.4" cy="-3.0" r="6.0"/>
                 <circle cx="-61.4" cy="-36.7" r="5.4"/>
                 <circle cx="-60.3" cy="4.5" r="5.7"/>
-<!-- v1.8.6: melt dots out-of-bounds deleted + gap fills. v1.8.7: 3 gap-fill dots moved to touch the white square edge. v1.8.8: 3 deliberate dots. v1.8.9: the 3 deliberate dots re-placed — top: between melt #1 and the big dot behind it; middle: touching square, exactly between melt #5 and #6; bottom: lower-left pocket, max size allowed by funnel + neighbors. -->
+<!-- v1.8.6: melt dots out-of-bounds deleted + gap fills. v1.8.7: 3 gap-fill dots moved to touch the white square edge. v1.8.8: 3 deliberate dots. v1.8.9: the 3 deliberate dots re-placed â top: between melt #1 and the big dot behind it; middle: touching square, exactly between melt #5 and #6; bottom: lower-left pocket, max size allowed by funnel + neighbors. -->
                 <circle cx="-56" cy="-50.2" r="6.0"/><circle cx="-56" cy="62" r="6.0"/><circle cx="-60" cy="28" r="3.5"/><circle cx="-60.1" cy="-60" r="3.0"/><circle cx="-53.8" cy="33.2" r="3.8"/><circle cx="-67" cy="67" r="4.8"/><circle cx="-65" cy="-43" r="4.0"/><circle cx="-64" cy="56" r="4.5"/>
   </g>
   <rect x="-50" y="-70" width="140" height="140" fill="#111"/>
   <rect x="-45" y="-65" width="130" height="130" fill="none" stroke="#fff" stroke-width="10"/>
   <rect x="-19" y="-39" width="78" height="78" fill="none" stroke="#fff" stroke-width="8"/>
   <rect x="-4.5" y="-24.5" width="49" height="49" fill="none" stroke="#fff" stroke-width="5"/>
-  <!-- v1.8.5: topire verticala — 8 puncte pe linia marginii albe (x = -50), jumatate / 2/3 vizibil,
+  <!-- v1.8.5: topire verticala â 6 puncte pe linia marginii albe (x = -50), jumatate / 2/3 vizibil,
        restul taiat vertical; in interiorul vizibil al fiecarui punct, o linie alba verticala mai groasa
-       decat conturul punctului — ca si cum patratul îsi intinde albul in puncte -->
+       decat conturul punctului â ca si cum patratul isi intinde albul in puncte -->
   <clipPath id="melt-cut"><rect x="-216" y="-96" width="166" height="192"/></clipPath>
   <g fill="#111" stroke="#fff" stroke-width="1.6" clip-path="url(#melt-cut)">
     <circle cx="-50" cy="-59.6" r="6.9"/>
@@ -2038,12 +2066,12 @@ html.dark-theme .language-switch a {
   </g>
   <rect x="-210" y="-90" width="320" height="180" fill="none" stroke="#111" stroke-width="5"/>
 </svg>
-       </div>
+        </div>
         <div class="logo-panel">
-         <h3>v1.9 — inel alb exterior subțiat la 10 (~548 puncte); puncte care se topesc in patratul alb -- modificat.</h3>
-        <!-- © 2026 Seipsum.org — Logo v1.7. All rights reserved. Unauthorised use prohibited. -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-216 -96 332 192" role="img" aria-label="Seipsum — complexity compressed into clarity">
-  <title>Seipsum.org logo — © 2026 Seipsum.org, all rights reserved</title>
+          <h3>v2 — inel alb exterior subțiat la 10 (~548 puncte); puncte care se topesc în pătratul alb — versiunea finală.</h3>
+        <!-- © 2026 Seipsum.org — Logo v2. All rights reserved. Unauthorised use prohibited. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-216 -96 332 192" role="img" aria-label="Seipsum â complexity compressed into clarity">
+  <title>Seipsum.org logo â Â© 2026 Seipsum.org, all rights reserved</title>
   <rect x="-210" y="-90" width="320" height="180" fill="#D9A441" stroke="#111" stroke-width="5"/>
   <g fill="#111" stroke="#fff" stroke-width="1.6">
                 <circle cx="-208.2" cy="-28.9" r="1.8"/><circle cx="-208.2" cy="-16.4" r="1.6"/><circle cx="-207.9" cy="-83.7" r="2.0"/><circle cx="-207.9" cy="16.3" r="1.8"/>
@@ -2181,16 +2209,16 @@ html.dark-theme .language-switch a {
                 <circle cx="-67.1" cy="12.7" r="6.6"/><circle cx="-66.0" cy="-14.2" r="8.8"/><circle cx="-65.2" cy="33.4" r="6.2"/><circle cx="-63.4" cy="-3.0" r="6.0"/>
                 <circle cx="-61.4" cy="-36.7" r="5.4"/>
                 <circle cx="-55.7" cy="6" r="5.7"/>
-<!-- v1.8.6: melt dots out-of-bounds deleted + gap fills. v1.8.7: 3 gap-fill dots moved to touch the white square edge. v1.8.8: 3 deliberate dots. v1.8.9: the 3 deliberate dots re-placed — top: between melt #1 and the big dot behind it; middle: touching square, exactly between melt #5 and #6; bottom: lower-left pocket, max size allowed by funnel + neighbors. -->
+<!-- v1.8.6: melt dots out-of-bounds deleted + gap fills. v1.8.7: 3 gap-fill dots moved to touch the white square edge. v1.8.8: 3 deliberate dots. v1.8.9: the 3 deliberate dots re-placed â top: between melt #1 and the big dot behind it; middle: touching square, exactly between melt #5 and #6; bottom: lower-left pocket, max size allowed by funnel + neighbors. -->
                 <circle cx="-56" cy="-50.2" r="6.0"/><circle cx="-56" cy="62" r="6.0"/><circle cx="-60" cy="28" r="3.5"/><circle cx="-60.1" cy="-60" r="3.0"/><circle cx="-53.8" cy="33.2" r="3.8"/><circle cx="-67" cy="64" r="4.8"/><circle cx="-65" cy="-50" r="4.0"/><circle cx="-57" cy="56" r="4.5"/>
   </g>
   <rect x="-50" y="-70" width="140" height="140" fill="#111"/>
   <rect x="-45" y="-65" width="130" height="130" fill="none" stroke="#fff" stroke-width="10"/>
   <rect x="-19" y="-39" width="78" height="78" fill="none" stroke="#fff" stroke-width="8"/>
   <rect x="-4.5" y="-24.5" width="49" height="49" fill="none" stroke="#fff" stroke-width="5"/>
-  <!-- v1.8.5: topire verticala — 8 puncte pe linia marginii albe (x = -50), jumatate / 2/3 vizibil,
+  <!-- v1.8.5: topire verticala â 6 puncte pe linia marginii albe (x = -50), jumatate / 2/3 vizibil,
        restul taiat vertical; in interiorul vizibil al fiecarui punct, o linie alba verticala mai groasa
-       decat conturul punctului — ca si cum patratul îsi intinde albul in puncte -->
+       decat conturul punctului â ca si cum patratul isi intinde albul in puncte -->
   <clipPath id="melt-cut"><rect x="-216" y="-96" width="166" height="192"/></clipPath>
   <g fill="#111" stroke="#fff" stroke-width="1.6" clip-path="url(#melt-cut)">
     <circle cx="-50" cy="-59.6" r="6.9"/>
@@ -2214,8 +2242,8 @@ html.dark-theme .language-switch a {
   </g>
   <rect x="-210" y="-90" width="320" height="180" fill="none" stroke="#111" stroke-width="5"/>
 </svg>
-       </div>
-        
+          <p>Versiunea finală a mărcii: câmpul redus și curățat, topirea verticală păstrată, iar ultimul punct din pâlnie și trei puncte deliberate repoziționate. Aceasta este variația din bara sticky.</p>
+        </div>
       </div>
     </div>
 
