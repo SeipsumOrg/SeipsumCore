@@ -306,6 +306,8 @@ display: block;
 .theme-toggle {
   width: 46px;
   height: 46px;
+  padding: 0;          /* anulează padding-ul global button — altfel butonul crește sub 46px */
+  line-height: 1;       /* emoji-ul nu mai împinge cutia sub margine */
   margin-left: 10px;
   background: transparent;
   border: 2px solid #000000; /* Match hamburger button border */
@@ -816,6 +818,7 @@ html.dark-theme .language-switch a {
         width: 40px;
         height: 40px;
         font-size: 18px;
+        padding: 0;      /* aceeași corecție și pe mobil */
       }
 
       /* logo: aceeaÈi Ã®nÄlÈime ca butoanele */
