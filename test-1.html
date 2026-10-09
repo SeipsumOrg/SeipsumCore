@@ -830,6 +830,17 @@ html.dark-theme .language-switch a {
     .logo-panel h3 { font-weight: 400; }
     .logo-panel p { font-weight: 300; }
   </style>
+
+   <!-- Add this RIGHT HERE (critical dark theme (SS) -->
+  <script>
+  (function() {
+    const theme = localStorage.getItem('theme') || 'light';
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark-theme');
+    }
+  })();
+</script>
+  
 </head>
 <body>
 
@@ -1108,27 +1119,7 @@ html.dark-theme .language-switch a {
   </g>
 </svg>
           <p>Primul model sugerat vreodată: împrăștiere nedefinită, comprimată într-o formă coerentă. De aici s-a dezvoltat direct logo-ul final v1.8.</p>
-        </div>
-        <div class="logo-panel">
-          <h3>v0.2 — origin: Orthogonal Mark</h3>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="40 440 820 240" role="img">
-  <g transform="translate(40,440)">
-    <rect width="820" height="240" fill="#fafafa" stroke="#e5e5e5"/>
-    <g transform="translate(140,120)">
-      <path d="M 0 0 L 80 0 L 80 -80" fill="none" stroke="#111" stroke-width="8"/>
-      <circle cx="80" cy="0" r="7" fill="#111"/>
-      <text x="40" y="140" text-anchor="middle" font-size="12" fill="#666">mark</text>
-    </g>
-    <g transform="translate(420,120)">
-      <path d="M 0 0 L 80 0 L 80 -80" fill="none" stroke="#111" stroke-width="8"/>
-      <circle cx="80" cy="0" r="7" fill="#111"/>
-      <text x="30" y="14" font-size="44" font-weight="300" letter-spacing="2" fill="#111">seipsum</text>
-      <text x="60" y="140" text-anchor="middle" font-size="12" fill="#666">horizontal lockup</text>
-    </g>
-  </g>
-</svg>
-          <p>Unghiul drept precis — referința OSS.</p>
-        </div>
+       
         <div class="logo-panel">
           <h3>v0.3 — origin: Layered Structure Mark</h3>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="40 790 820 240" role="img">
@@ -2191,7 +2182,7 @@ html.dark-theme .language-switch a {
                 <circle cx="-61.4" cy="-36.7" r="5.4"/>
                 <circle cx="-60.3" cy="4.5" r="5.7"/>
 <!-- v1.8.6: melt dots out-of-bounds deleted + gap fills. v1.8.7: 3 gap-fill dots moved to touch the white square edge. v1.8.8: 3 deliberate dots. v1.8.9: the 3 deliberate dots re-placed — top: between melt #1 and the big dot behind it; middle: touching square, exactly between melt #5 and #6; bottom: lower-left pocket, max size allowed by funnel + neighbors. -->
-                <circle cx="-56" cy="-50.2" r="6.0"/><circle cx="-52" cy="68" r="6.0"/><circle cx="-60" cy="28" r="3.5"/><circle cx="-60.1" cy="-60" r="3.0"/><circle cx="-53.8" cy="33.2" r="3.8"/><circle cx="-67" cy="64" r="4.8"/><circle cx="-65" cy="-50" r="4.0"/><circle cx="-57" cy="56" r="4.5"/>
+                <circle cx="-56" cy="-50.2" r="6.0"/><circle cx="-56" cy="62" r="6.0"/><circle cx="-60" cy="28" r="3.5"/><circle cx="-60.1" cy="-60" r="3.0"/><circle cx="-53.8" cy="33.2" r="3.8"/><circle cx="-67" cy="64" r="4.8"/><circle cx="-65" cy="-50" r="4.0"/><circle cx="-57" cy="56" r="4.5"/>
   </g>
   <rect x="-50" y="-70" width="140" height="140" fill="#111"/>
   <rect x="-45" y="-65" width="130" height="130" fill="none" stroke="#fff" stroke-width="10"/>
