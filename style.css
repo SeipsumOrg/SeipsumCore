@@ -140,6 +140,81 @@ body {
 }
 
 /* ========================= */
+/* SITE LOGO (v2.3) IN STICKY BAR */
+/* ========================= */
+
+/* The site-title anchor holds logo SVG + wordmark side by side */
+.site-title {
+  display: flex;
+  align-items: center;      /* logo and "Seipsum" share one baseline center */
+  gap: 10px;                /* space between logo and wordmark */
+  white-space: nowrap;      /* never wrap the wordmark under the logo */
+}
+
+.site-logo {
+  height: 46px;             /* matches the 46px hamburger / theme-toggle height */
+  width: auto;              /* keeps the 332×192 viewBox aspect ratio */
+  display: block;           /* removes inline-SVG baseline gap */
+  flex-shrink: 0;           /* logo never gets squeezed by the wordmark */
+  border-radius: 3px;       /* softens the box corners against the bar */
+}
+
+/* Mobile: smaller logo so the centered title fits narrow screens */
+@media (max-width: 768px) {
+  .site-logo {
+    height: 32px;
+  }
+}
+
+/* ========================= */
+/* MOBILE STICKY BAR — 40px ELEMENTS */
+/* ========================= */
+
+@media (max-width: 768px) {
+
+  /* Hamburger button: 46px → 40px */
+  .hamburger-btn {
+    width: 40px;
+    height: 40px;
+    gap: 4px;
+  }
+
+  .hamburger-btn span {
+    width: 18px;
+    height: 2px;
+  }
+
+  /* Theme toggle: 46px → 40px */
+  .theme-toggle {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;   /* emoji scaled to fit the smaller box */
+    line-height: 1;    /* keeps the emoji vertically centered */
+  }
+
+  /* Logo: 46px → 40px height (width follows automatically) */
+  .site-logo {
+    height: 40px;
+  }
+
+  /* Wordmark: slightly smaller so the centered title fits */
+  .site-title {
+    font-size: 28px;
+  }
+
+  /* A bit less bar padding to reclaim vertical space */
+  .site-header {
+    padding: 10px 12px;
+  }
+
+  /* Dropdown adjusted to the new button height */
+  .menu-dropdown {
+    max-height: calc(100vh - 40px);
+  }
+
+}
+
+/* ========================= */
 /* NAVIGATION     */
 /* ========================= */
 
