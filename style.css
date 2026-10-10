@@ -140,81 +140,6 @@ body {
 }
 
 /* ========================= */
-/* SITE LOGO (v2.3) IN STICKY BAR */
-/* ========================= */
-
-/* The site-title anchor holds logo SVG + wordmark side by side */
-.site-title {
-  display: flex;
-  align-items: center;      /* logo and "Seipsum" share one baseline center */
-  gap: 10px;                /* space between logo and wordmark */
-  white-space: nowrap;      /* never wrap the wordmark under the logo */
-}
-
-.site-logo {
-  height: 46px;             /* matches the 46px hamburger / theme-toggle height */
-  width: auto;              /* keeps the 332×192 viewBox aspect ratio */
-  display: block;           /* removes inline-SVG baseline gap */
-  flex-shrink: 0;           /* logo never gets squeezed by the wordmark */
-  border-radius: 3px;       /* softens the box corners against the bar */
-}
-
-/* Mobile: smaller logo so the centered title fits narrow screens */
-@media (max-width: 768px) {
-  .site-logo {
-    height: 32px;
-  }
-}
-
-/* ========================= */
-/* MOBILE STICKY BAR — 40px ELEMENTS */
-/* ========================= */
-
-@media (max-width: 768px) {
-
-  /* Hamburger button: 46px → 40px */
-  .hamburger-btn {
-    width: 40px;
-    height: 40px;
-    gap: 4px;
-  }
-
-  .hamburger-btn span {
-    width: 18px;
-    height: 2px;
-  }
-
-  /* Theme toggle: 46px → 40px */
-  .theme-toggle {
-    width: 40px;
-    height: 40px;
-    font-size: 18px;   /* emoji scaled to fit the smaller box */
-    line-height: 1;    /* keeps the emoji vertically centered */
-  }
-
-  /* Logo: 46px → 40px height (width follows automatically) */
-  .site-logo {
-    height: 40px;
-  }
-
-  /* Wordmark: slightly smaller so the centered title fits */
-  .site-title {
-    font-size: 28px;
-  }
-
-  /* A bit less bar padding to reclaim vertical space */
-  .site-header {
-    padding: 10px 12px;
-  }
-
-  /* Dropdown adjusted to the new button height */
-  .menu-dropdown {
-    max-height: calc(100vh - 40px);
-  }
-
-}
-
-/* ========================= */
 /* NAVIGATION     */
 /* ========================= */
 
@@ -367,6 +292,8 @@ display: block;
   transition: all 0.25s ease;
   font-size: 20px;
   color: #000000; /* Black moon in light mode */
+  padding: 0;
+  line-height: 1;
 }
 
 .theme-toggle:hover {
@@ -497,7 +424,7 @@ display: block;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 
-  flex-wrap: wrap;        /* Allows images to wrap to next line */
+  flex-wrap: wrap;        /* Allows images to wrap to next row */
   gap: 25px;             /* Space between images */
   margin: 20px 0;
   align-items: flex-start; /* Prevents stretching */
@@ -1090,4 +1017,78 @@ html.dark-theme .language-switch a {
   max-width: 700px;
   margin: 12px auto 0;
   font-weight: 500;
+}
+
+/* ========================================================= */
+   /* BARA STICKY — logo + titlu aliniate cu butoanele
+      (system from test-1: common center line of the buttons)
+      MUST STAY LAST IN THE FILE so nothing overrides it. */
+/* ========================================================= */
+
+.site-header {
+  align-items: flex-start;   /* top-align the columns: hamburger and
+                                theme-toggle start on the same line */
+}
+
+.site-title {
+  display: flex;
+  align-items: center;       /* logo and wordmark share one center line */
+  gap: 12px;
+  white-space: nowrap;       /* never wrap the wordmark under the logo */
+  top: 38px;                 /* header padding (15px) + half of 46px button */
+  transform: translate(-50%, -50%);  /* center on the button line, not the bar */
+  font-size: 46px;
+  line-height: 46px;         /* title row height = button height */
+}
+
+.site-logo {
+  display: block;            /* removes inline-SVG baseline gap */
+  height: 46px;              /* same height as hamburger and theme-toggle */
+  width: auto;               /* keeps the 332×192 viewBox aspect ratio */
+  flex: 0 0 auto;            /* never squeezed by the wordmark */
+  border-radius: 3px;        /* softens the box corners against the bar */
+}
+
+/* ========================================================= */
+   /* MOBILE BAR — all main elements at 40px */
+/* ========================================================= */
+
+@media (max-width: 768px) {
+
+  .hamburger-btn {
+    width: 40px;
+    height: 40px;
+    gap: 4px;
+  }
+
+  .hamburger-btn span {
+    width: 18px;
+    height: 2px;
+  }
+
+  .theme-toggle {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    line-height: 1;
+    padding: 0;
+  }
+
+  .site-logo {
+    height: 40px;
+  }
+
+  /* title pinned to the mobile button line:
+     header padding 15px + half of 40px = 35px */
+  .site-title {
+    font-size: 40px;
+    line-height: 40px;
+    top: 35px;
+    gap: 8px;
+  }
+
+  .menu-dropdown {
+    max-height: calc(100vh - 40px);
+  }
+
 }
