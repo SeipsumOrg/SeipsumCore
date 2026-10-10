@@ -1075,14 +1075,14 @@ html.dark-theme .language-switch a {
   }
 
   .site-logo {
-    height: 40px;
+    height: 32px;
   }
 
   /* title pinned to the mobile button line:
      header padding 15px + half of 40px = 35px */
   .site-title {
-    font-size: 40px;
-    line-height: 40px;
+    font-size: 32px;
+    line-height: 32px;
     top: 35px;
     gap: 8px;
   }
