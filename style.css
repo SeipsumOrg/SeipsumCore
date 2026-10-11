@@ -1092,3 +1092,31 @@ html.dark-theme .language-switch a {
   }
 
 }
+
+/* ========================================================= */
+   /* MOBILE: sections run wide — minimal side gap */
+/* ========================================================= */
+
+@media (max-width: 768px) {
+
+  /* 1. Kill the container's side padding
+        (15px → 0, sections expand edge-ward) */
+  .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* 2. Shrink the section's own side margins
+        (10px → 5px) */
+  .section {
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+
+  /* 3. Keep the TTS bar consistent with the sections */
+  #tts-bar {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+}
