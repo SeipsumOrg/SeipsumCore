@@ -1055,3 +1055,15 @@ html.dark-theme .language-switch a {
   }
 
 }
+
+/* Word lists — Single Word / Dyad / Triad page */
+.word-list {
+  columns: 3;
+  column-gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .word-list {
+    columns: 1;
+  }
+}
