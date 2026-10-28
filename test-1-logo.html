@@ -120,12 +120,30 @@ body {
   margin-left: auto;  /* Pushes the entire group to the right */
 }
 
-/* Left-side container: stacks hamburger + word button vertically */
 .left-section {
-  display: flex;
-  flex-direction: column;    /* Stack vertically */
-  align-items: flex-start;   /* Align to the extreme left */
-  gap: 10px;                 /* Vertical spacing */
+  display: grid;
+  grid-template-columns: auto auto;  /* Two columns: one for each word button */
+  gap: 10px;
+  justify-content: start;    /* Keep everything to the left */
+  align-items: start;
+}
+
+/* Hamburger button: row 1, column 1 */
+.left-section .menu-wrapper:nth-child(1) {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+/* "Pages" button: row 2, column 1 */
+.left-section .menu-wrapper:nth-child(2) {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+/* "Access" button: row 2, column 2 (to the right of "Pages") */
+.left-section .menu-wrapper:nth-child(3) {
+  grid-column: 2;
+  grid-row: 2;
 }
 
 /* Word button — plain text, like language switch */
@@ -911,6 +929,15 @@ html.dark-theme .language-switch a {
           <a href="semnal-vs-zgomot-in-gandire.html">5. Semnal vs. Zgomot în Gândire</a>
         </div>
       </div>
+
+       <div class="menu-wrapper">
+        <a href="#" class="word-btn js-menu-toggle">▼ Access</a>
+        <div class="menu-dropdown js-menu-dropdown">
+          <a href="contact-en.html">Contact</a>
+          <a href="faq-en.html">FAQ</a>
+          <a href="landing-en.html">Landing</a>
+        </div>
+       </div>
 
     </div>
 
