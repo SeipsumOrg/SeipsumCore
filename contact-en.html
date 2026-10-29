@@ -361,37 +361,91 @@ Seipsum</a>
     <!-- CONTACT 2: THE RESONANCE FORM -->
     <!-- ===================== -->
 
-    <section class="section">
-      <h2>The Resonance Form</h2>
-      <br>
-      <p>To request a session, please complete the information below:</p>
-      <br>
-      <!-- COPY VERBATIM: the form markup from index-en.html#contact-form — the draft below matches the visible fields (email, situation description, degree of perceived complexity, consent, submit) but the real IDs/classes/handler are on the index page; do not publish this draft without replacing it with the live form block -->
-      <form id="resonance-form" class="contact-form" action="#" method="POST">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
+  <section class="section">
 
-        <label for="situation">Situation description</label>
-        <textarea id="situation" name="situation" required></textarea>
+  <h2>The Resonance Form/h2>
 
-        <label>Degree of perceived complexity</label>
-        <input type="radio" id="complexity-low" name="complexity" value="Low" required>
-        <label for="complexity-low">Low</label>
-        <input type="radio" id="complexity-average" name="complexity" value="Average">
-        <label for="complexity-average">Average</label>
-        <input type="radio" id="complexity-high" name="complexity" value="High">
-        <label for="complexity-high">High</label>
+  <p>
+    To request a session, please complete the information below:
+  </p>
+ <form action="https://formspree.io/f/mwvjpewn" method="POST">
+  <!-- EMAIL -->
+  <label>Email</label>
+  <input type="email" name="email" required>
+  <!-- SITUATION -->
+  <label>Situation description</label>
+  <textarea name="message" required></textarea>
 
-        <label class="consent">
-          <input type="checkbox" name="consent" required>
-          I have read and agree to <a href="terms-of-use-en.html">Terms of Use</a> as well as <a href="privacy-policy-en.html">Privacy Policy</a>, to the processing of data transmitted through this form.
-        </label>
+  <!-- COMPLEXITY -->
+  <label>Degree of perceived complexity</label>
+  <select name="complexity" required>
+    <option value="low">Low</option>
+    <option value=“average”>Average</option>
+    <option value=“high”>High</option>
+  </select>
 
-        <button type="submit">Save Time | Gain Value | Structure Cognition</button>
-      </form>
+   <!-- GDPR CONSENT -->
+  <div style="margin-top:12px;">
+   <label class="consent">
+    <input type="checkbox" name="consent" required>
+      I have read and agree to
+      <a href="privacy-policy.html" target="_blank">Terms of Use</a>
+      as well as
+      <a href="terms-of-use.html" target="_blank">Privacy Policy</a>,
+      to the processing of data transmitted through this form.
+    </label>
+  </div>
+
+  <!-- SUBMIT -->
+  <button type="submit">
+    Send request
+  </button>
+</form>
+       
+  <div class="card">
+    <h3>Save Time | Gain Value | Structure Cognition</h3>
+  </div>
       <br>
       <p><em>Seipsum reorganises the situation you bring — it does not provide advice, opinions, or predefined solutions. What the form asks for is the situation itself, at whatever level of clarity it currently has.</em></p>
-    </section>
+  
+      <p>
+     <a href="index-en.html#FAQ">
+         → Access FAQ
+        </a>
+      </p>
+   
+    <p>
+     <a href="index-en.html#results">
+         → Seipsum Services Results
+        </a>
+      </p>
+
+   <p>
+   <a href="index-en.html#testimonials">
+         → Testimonials
+         </a>
+      </p>
+
+  <p>
+   <a href="index-en.html#Seipsum Operations">
+         → Seipsum Operations
+         </a>
+      </p>
+
+    <p>
+   <a href="index-en.html#Session Practical Details">
+         → Session Practical Details
+         </a>
+      </p>
+
+  <p>
+   <a href="index-en.html#seipsum workings">
+         → Seipsum in Practice
+         </a>
+      </p>
+    </div>
+  
+  </section>
 
     <!-- ===================== -->
     <!-- CONTACT 3: WHAT TO BRING -->
