@@ -361,37 +361,99 @@ Seipsum</a>
     <!-- CONTACT 2: FORMULARUL DE REZONANȚĂ -->
     <!-- ===================== -->
 
-    <section class="section">
-      <h2>Formularul de Rezonanță</h2>
-      <br>
-      <p>Pentru a cere o sesiune, te rugăm să completezi informațiile de mai jos:</p>
-      <br>
-      <!-- COPY VERBATIM: marcajul formularului din index.html#contact-form — schița de mai jos corespunde câmpurilor vizibile (email, descrierea situației, gradul de complexitate perceput, consimțământ, trimitere), dar ID-urile/clasele/handler-ul reale sunt pe pagina index; nu publica această schiță fără a o înlocui cu blocul formularului live -->
-      <form id="resonance-form" class="contact-form" action="#" method="POST">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
+    <section id="contact-form" class="section contact-form">
 
-        <label for="situation">Descrierea situației</label>
-        <textarea id="situation" name="situation" required></textarea>
+  <h2>Formular de Rezonanță Utilizator-Seipsum</h2> 
+  <p>
+    Pentru solicitarea unei sesiuni, te rog completează informațiile de mai jos:
+  </p>
+ <form action="https://formspree.io/f/mwvjpewn" method="POST">
+  <!-- EMAIL -->
+  <label>Email</label>
+  <input type="email" name="email" required>
+  <!-- SITUAȚIE -->
+  <label>Descriere situație</label>
+  <textarea name="message" required></textarea>
+  <!-- COMPLEXITATE -->
+  <label>Grad de complexitate perceput</label>
+  <select name="complexity" required>
+    <option value="scazut">Scăzut</option>
+    <option value="mediu">Mediu</option>
+    <option value="ridicat">Ridicat</option>
+  </select>
 
-        <label>Grad de complexitate perceput</label>
-        <input type="radio" id="complexity-low" name="complexity" value="Low" required>
-        <label for="complexity-low">Scăzut</label>
-        <input type="radio" id="complexity-average" name="complexity" value="Average">
-        <label for="complexity-average">Mediu</label>
-        <input type="radio" id="complexity-high" name="complexity" value="High">
-        <label for="complexity-high">Ridicat</label>
+  <!-- GDPR CONSENT -->
+  <div style="margin-top:12px;">
+   <label class="consent">
+    <input type="checkbox" name="consent" required>
 
-        <label class="consent">
-          <input type="checkbox" name="consent" required>
-          Am citit și sunt de acord cu <a href="terms-of-use.html">Termenii de Utilizare</a> precum și cu <a href="privacy-policy.html">Politica de Confidențialitate</a>, cu privire la prelucrarea datelor transmise prin acest formular.
-        </label>
+      Am citit și sunt de acord cu
+      <a href="privacy-policy.html" target="_blank">Terms of Use</a>
+      și cu
+      <a href="terms-of-use.html" target="_blank">Privacy Policy</a>,
+      precum și cu procesarea datelor transmise prin acest formular.
+    </label>
+  </div>
 
-        <button type="submit">Economisește Timp | Câștigă Valoare | Structurează Cogniția</button>
-      </form>
+  <!-- SUBMIT -->
+  <button type="submit">
+    Trimite solicitarea
+  </button>
+
+</form>
+
+  <br>
+
+  <div class="card">
+      
+    <h3>Economisește Timp | Câștigă Valoare | Structurează Cogniția</h3>
+      
+   </div>
+      
+<div class="card">
+
+      
       <br>
       <p><em>Seipsum reorganizează situația pe care o aduci — nu oferă sfaturi, opinii sau soluții predefinite. Ceea ce cere formularul este situația însăși, la orice nivel de claritate se află acum.</em></p>
-    </section>
+
+    <p>
+     <a href="index.html#FAQ">
+         → Accesează FAQ (Întrebări Frecvente)
+        </a>
+      </p>
+
+   <p>
+     <a href="index.html#rezultate">
+         → Rezultate Servicii Seipsum
+        </a>
+      </p>
+   
+   <p>
+   <a href="index.html#testimonials">
+         → Testimoniale
+         </a>
+      </p>
+    
+  <p>
+   <a href="index.html#Operatiuni Seipsum">
+         → Operațiuni Seipsum
+         </a>
+      </p>
+   
+    <p>
+   <a href="index.html#Sesiune detalii practice">
+         → Sesiune Detalii Practice
+         </a>
+      </p>
+  
+  <p>
+   <a href="index.html#Seipsum în Practică">
+         → Seipsum în Practică
+         </a>
+      </p>
+    </div>
+    
+</section>
 
     <!-- ===================== -->
     <!-- CONTACT 3: CE SĂ ADUCI -->
